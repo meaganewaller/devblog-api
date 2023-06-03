@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
-  scope :api do
-    resources :posts
-  end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+# == Route Map
+#
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :posts, only: %i[index show]
+    end
+  end
 end

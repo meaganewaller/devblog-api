@@ -60,6 +60,8 @@ Rails.application.configure do
     Bullet.rails_logger = true
   end
 
+  config.hosts << "localhost:5173"
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

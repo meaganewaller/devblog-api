@@ -5,6 +5,10 @@ ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
+gem "active_model_serializers"
+gem "activerecord-postgresql-adapter"
+gem "bleib", "0.0.8"
+gem "good_job"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
@@ -13,7 +17,9 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem "jbuilder"
+gem "jb"
+gem "jwt"
+gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -46,19 +52,20 @@ gem "fast_blank", platform: :mri
 # gem "knock_knock"
 gem "oj"
 gem "polist"
+gem "dotenv-rails", groups: [:development, :test]
 
 gem "notion-ruby-client", "~> 1.1.0"
 gem "notion_to_md"
 gem "hashdiff"
 gem "amazing_print", group: [:development, :test]
-gem "pagy"
+gem "pagy", "~> 5.0"
+gem 'counter_culture', '~> 3.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "annotate"
   gem "database_cleaner"
   gem "debug", platforms: %i[mri mingw x64_mingw]
-  gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "factory_trace"
   gem "hirb"

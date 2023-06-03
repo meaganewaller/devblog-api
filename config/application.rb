@@ -5,7 +5,7 @@ require "rails"
 require "active_model/railtie"
 require "active_job/railtie"
 require "active_record/railtie"
-# require "active_storage/engine"
+require "active_storage/engine"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 # require "action_mailbox/engine"
@@ -17,6 +17,11 @@ require "action_view/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+# Load dotenv only in development or test environment
+if ['development', 'test'].include? ENV['RAILS_ENV']
+  Dotenv::Railtie.load
+end
 
 module Blog
   class Application < Rails::Application
@@ -35,6 +40,14 @@ module Blog
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.active_record.verify_foreign_keys_for_fixtures = false
+    config.active_record.partial_inserts = true
+
+    config.i18n.default_locale = :en
+    config.time_zone = 'Eastern Time (US & Canada)'
+    config.active_record.default_timezone = :local
+
 
     config.eager_load_paths << Rails.root.join("lib")
   end
