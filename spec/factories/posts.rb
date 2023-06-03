@@ -43,6 +43,12 @@ FactoryBot.define do
       published_date { 2.days.ago }
     end
 
+    trait :with_reactions do
+      after :create do |post|
+        create_list :reaction, 3, post: post
+      end
+    end
+
     title { Faker::Lorem.sentence }
     notion_id { Faker::Internet.uuid }
     description { Faker::Lorem.paragraph }

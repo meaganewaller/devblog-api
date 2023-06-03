@@ -18,7 +18,31 @@
 #
 FactoryBot.define do
   factory :reaction do
-    post { nil }
-    value { 1 }
+    post
+    kind { Reaction.kinds.keys.sample }
+
+    trait :like do
+      kind { :like }
+    end
+
+    trait :love do
+      kind { :love }
+    end
+
+    trait :haha do
+      kind { :haha }
+    end
+
+    trait :wow do
+      kind { :wow }
+    end
+
+    trait :til do
+      kind { :til }
+    end
+
+    trait :sparkle do
+      kind { :sparkle }
+    end
   end
 end

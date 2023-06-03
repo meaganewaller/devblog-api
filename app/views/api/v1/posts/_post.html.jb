@@ -14,7 +14,8 @@ if reactions
   json[:reactions] = post
     .reactions
     .group_by { |reaction| reaction.kind }
-    .map { |kind, record| { "#{kind}" => record.count } }
+    .map { |kind, reactions| [kind, reactions.count] }
+    .to_h
 end
 
 json
