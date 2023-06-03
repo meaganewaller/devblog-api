@@ -1,0 +1,20 @@
+json = {
+  id: post.id,
+  title: post.title,
+  content: post.content,
+  description: post.description,
+  tags: post.tags,
+  published_date: post.published_date,
+  notion_created_at: post.notion_created_at,
+  notion_updated_at: post.notion_updated_at,
+  to_param: post.to_param
+}
+
+if reactions
+  json[:reactions] = post
+    .reactions
+    .group_by { |reaction| reaction.kind }
+    .map { |kind, record| { "#{kind}" => record.count } }
+end
+
+json

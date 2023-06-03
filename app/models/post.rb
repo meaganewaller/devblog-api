@@ -35,6 +35,15 @@ class Post < ApplicationRecord
   validates :notion_id, presence: true
   validates :notion_slug, presence: true, uniqueness: true
 
+  has_many :reactions, dependent: :destroy, inverse_of: :post
+  has_many :likes, -> { where(kind: :like) }, class_name: 'Reaction'
+  has_many :loves, -> { where(kind: :love) }, class_name: 'Reaction'
+  has_many :tils, -> { where(kind: :til) }, class_name: 'Reaction'
+  has_many :wows, -> { where(kind: :wow) }, class_name: 'Reaction'
+  has_many :sparkles, -> { where(kind: :sparkle) }, class_name: 'Reaction'
+  has_many :hahas, -> { where(kind: :haha) }, class_name: 'Reaction'
+
+
   scope :published, -> { where(published: true) }
 
   friendly_id :notion_slug, use: :slugged
