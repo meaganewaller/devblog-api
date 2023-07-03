@@ -3,6 +3,7 @@ json = {
   title: post.title,
   content: post.content,
   description: post.description,
+  cover_image: "http://via.placeholder.com/600x300",
   tags: post.tags,
   published_date: post.published_date,
   notion_created_at: post.notion_created_at,
