@@ -3,6 +3,7 @@
 # Table name: posts
 #
 #  id                :uuid             not null, primary key
+#  category          :string
 #  content           :text
 #  description       :string           not null
 #  language          :string

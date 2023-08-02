@@ -8,11 +8,12 @@ class PostFetcherJob < ApplicationJob
       all_posts.concat(page.results)
     end
 
-unless all_posts.empty?
-    all_posts.each do |post|
+    unless all_posts.empty?
+      all_posts.each do |post|
         next if Post.exists?(notion_id: post.id)
         notion_converter = NotionToMd::Converter.new(page_id: post.id)
         content = notion_converter.convert
+
 
         Post.create(
           notion_id: post.id,
@@ -22,11 +23,18 @@ unless all_posts.empty?
           published: post.properties.Published.checkbox,
           notion_slug: post.properties.Slug.rich_text.first.plain_text,
           tags: get_tags(post.properties.Tags),
+          category: get_category(post.properties.Category),
           content: content,
           notion_created_at: post.properties.Created.created_time.to_datetime,
           notion_updated_at: post.last_edited_time.to_datetime,
         )
       end
+    end
+  end
+
+  def get_category(category)
+    if category.has_key?("select")
+      category["select"].name
     end
   end
 
@@ -40,7 +48,7 @@ unless all_posts.empty?
     if description.has_key?("rich_text")
       description.rich_text.reduce("") { |desc, txt|  desc + txt.plain_text }
     else
-      "Still need a description"
+      "-- Stills need a description --"
     end
   end
 end
