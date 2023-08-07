@@ -3,7 +3,6 @@
 # Table name: posts
 #
 #  id                :uuid             not null, primary key
-#  category          :string
 #  content           :text
 #  description       :string           not null
 #  language          :string
@@ -13,14 +12,17 @@
 #  published         :boolean          default(FALSE), not null
 #  published_date    :date
 #  slug              :string           not null
+#  status            :integer          default("inbox")
 #  tags              :string           default([]), is an Array
 #  title             :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  category_id       :uuid
 #  notion_id         :string           not null
 #
 # Indexes
 #
+#  index_posts_on_category_id  (category_id)
 #  index_posts_on_notion_slug  (notion_slug) UNIQUE
 #  index_posts_on_published    (published)
 #  index_posts_on_slug         (slug) UNIQUE

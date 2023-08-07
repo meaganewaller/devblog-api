@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_02_041235) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_06_212547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "posts_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "notion_id"
+    t.string "slug"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -42,7 +53,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_041235) do
     t.string "notion_slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "category"
+    t.integer "status", default: 0
+    t.uuid "category_id"
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["notion_slug"], name: "index_posts_on_notion_slug", unique: true
     t.index ["published"], name: "index_posts_on_published"
     t.index ["slug"], name: "index_posts_on_slug", unique: true

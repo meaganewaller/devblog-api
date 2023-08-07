@@ -1,7 +1,7 @@
 json = {
   id: post.id,
   title: post.title,
-  category: post.category,
+  category: post.category.title,
   content: post.content,
   description: post.description,
   cover_image: "http://via.placeholder.com/600x300",

@@ -3,6 +3,8 @@ module Api
     class PostsController < ApplicationController
       def index
         @posts = Post.published
+        @posts = @posts.filter_by_category(params[:category]) if params[:category].present?
+        @posts = @posts.filter_by_tag(params[:tag]) if params[:tag].present?
       end
 
       def show
