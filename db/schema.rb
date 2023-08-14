@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_023635) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_142241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_023635) do
     t.datetime "updated_at", null: false
     t.string "notion_id"
     t.string "slug"
+    t.index ["notion_id"], name: "index_categories_on_notion_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
@@ -55,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_023635) do
     t.integer "status", default: 0
     t.uuid "category_id"
     t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["notion_id"], name: "index_posts_on_notion_id"
     t.index ["notion_slug"], name: "index_posts_on_notion_slug", unique: true
     t.index ["published"], name: "index_posts_on_published"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
@@ -67,6 +69,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_023635) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_reactions_on_post_id"
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.text "auth_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "reactions", "posts"

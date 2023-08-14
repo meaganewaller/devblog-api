@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  index_categories_on_slug  (slug) UNIQUE
+#  index_categories_on_notion_id  (notion_id)
+#  index_categories_on_slug       (slug) UNIQUE
 #
 require 'rails_helper'
 
@@ -31,37 +32,6 @@ RSpec.describe Category, type: :model do
     it "should use title for slugged parameter" do
       category = create(:category)
       expect(category.slug).to eq(category.title.parameterize)
-    end
-  end
-
-  describe "counter cache" do
-    it "updates posts_count when posts are created" do
-      category = create(:category)
-      expect(category.posts_count).to eq(0)
-
-      create(:post, category: category)
-      category.reload
-      expect(category.posts_count).to eq(1)
-    end
-
-    it "updates posts_count when posts are destroyed" do
-      category = create(:category)
-      post = create(:post, category: category)
-      expect(category.posts_count).to eq(1)
-
-      post.destroy
-      category.reload
-      expect(category.posts_count).to eq(0)
-    end
-
-    it "updates posts_count when posts are updated" do
-      category = create(:category)
-      post = create(:post, category: category)
-      expect(category.posts_count).to eq(1)
-
-      post.update(title: "Updated Title")
-      category.reload
-      expect(category.posts_count).to eq(1)
     end
   end
 end

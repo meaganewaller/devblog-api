@@ -52,14 +52,9 @@ RSpec.describe PostFetcherJob, type: :job do
       allow(NotionAdapter).to receive(:fetch_posts).and_return([
         attributes_for(:post, title: "Post Title", notion_id: "post-id-1").merge(category_notion_id: existing_category.notion_id)
       ])
-      allow(NotionToMd::Converter).to receive(:new) {
-        double(convert: "Post converted")
-      }
-      expect {
-        described_class.perform_now
-      }.to change { existing_category.posts.count }.by(1)
-      expect(existing_category.reload.posts_count).to eql 1
-      expect(existing_category.posts.first.title).to eql "Post Title"
+      allow(NotionToMd::Converter).to receive(:new) { double(convert: "Post converted") }
+      described_class.perform_now
+      expect(existing_category.reload.posts.first.title).to eql "Post Title"
     end
 
   end

@@ -23,6 +23,7 @@
 # Indexes
 #
 #  index_posts_on_category_id  (category_id)
+#  index_posts_on_notion_id    (notion_id)
 #  index_posts_on_notion_slug  (notion_slug) UNIQUE
 #  index_posts_on_published    (published)
 #  index_posts_on_slug         (slug) UNIQUE
@@ -31,7 +32,7 @@
 class Post < ApplicationRecord
   extend FriendlyId
 
-  belongs_to :category, inverse_of: :posts, counter_cache: true, required: false
+  belongs_to :category, inverse_of: :posts, required: false
 
   validates :description, presence: true
   validates :notion_created_at, presence: true
@@ -63,12 +64,4 @@ class Post < ApplicationRecord
 
   friendly_id :notion_slug, use: :slugged
 
-  after_save :update_counter_cache
-  after_destroy :update_counter_cache
-
-  private
-
-  def update_counter_cache
-    category.update_posts_count
-  end
 end

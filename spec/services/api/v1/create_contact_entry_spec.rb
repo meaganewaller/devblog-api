@@ -1,8 +1,18 @@
-module Api
-  module V1
-    class CreateContactEntry
-      def self.call(params)
-        properties = {
+require "rails_helper"
+
+RSpec.describe Api::V1::CreateContactEntry do
+  describe ".call" do
+    it "creates a Notion page" do
+      params = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Hello",
+        message: "Hello, World!"
+      }
+
+      expect_any_instance_of(Notion::Client).to receive(:create_page).with(
+        parent: {database_id: ENV["NOTION_CONTACT_FORM_DATABASE_ID"]},
+        properties: {
           Name: {
             title: [
               {
@@ -24,8 +34,8 @@ module Api
               }
             ]
           }
-        }
-        children = [
+        },
+        children: [
           {
             object: "block",
             type: "heading_1",
@@ -51,13 +61,9 @@ module Api
             }
           }
         ]
-        client = Notion::Client.new
-        client.create_page(
-          parent: {database_id: ENV["NOTION_CONTACT_FORM_DATABASE_ID"]},
-          properties:,
-          children:
-        )
-      end
+      )
+
+      described_class.call(params)
     end
   end
 end

@@ -78,6 +78,7 @@ group :development, :test do
   gem "pry-rescue"
   gem "pry-doc", require: false
   gem "pry-stack_explorer", require: false
+  gem "rerun"
   gem "rspec-rails"
   gem "shoulda-matchers"
   gem "awesome_rails_console"

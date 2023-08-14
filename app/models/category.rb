@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  index_categories_on_slug  (slug) UNIQUE
+#  index_categories_on_notion_id  (notion_id)
+#  index_categories_on_slug       (slug) UNIQUE
 #
 class Category < ApplicationRecord
   extend FriendlyId
@@ -25,10 +26,4 @@ class Category < ApplicationRecord
   friendly_id :title, use: :slugged
 
   scope :with_published_posts, -> { joins(:posts).where(posts: { published: true }).distinct }
-
-  def update_posts_count
-    published_posts_count = posts.published.count
-    self.posts_count = published_posts_count
-    self.save
-  end
 end

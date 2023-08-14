@@ -337,6 +337,8 @@ GEM
     regexp_parser (2.8.0)
     reline (0.3.4)
       io-console (~> 0.5)
+    rerun (0.14.0)
+      listen (~> 3.0)
     rexml (3.2.5)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
@@ -509,6 +511,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 7.0.4, >= 7.0.4.3)
   rails-healthcheck
+  rerun
   rspec-rails
   rubocop-config-prettier
   rubocop-performance

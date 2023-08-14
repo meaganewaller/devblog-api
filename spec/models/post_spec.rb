@@ -23,6 +23,7 @@
 # Indexes
 #
 #  index_posts_on_category_id  (category_id)
+#  index_posts_on_notion_id    (notion_id)
 #  index_posts_on_notion_slug  (notion_slug) UNIQUE
 #  index_posts_on_published    (published)
 #  index_posts_on_slug         (slug) UNIQUE
@@ -49,7 +50,7 @@ RSpec.describe Post, type: :model do
   end
 
   describe "associations" do
-    it { should belong_to(:category).inverse_of(:posts).counter_cache(true).optional }
+    it { should belong_to(:category).inverse_of(:posts).optional }
     it { should have_many(:reactions).dependent(:destroy).inverse_of(:post) }
   end
 

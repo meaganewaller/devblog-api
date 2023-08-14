@@ -1,4 +1,3 @@
-require_relative "../../../services/create_contact_entry"
 module Api
   module V1
     class ContactController < ApplicationController
