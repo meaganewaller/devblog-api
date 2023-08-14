@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_06_212547) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_023635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
@@ -19,7 +19,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_212547) do
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "posts_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "notion_id"

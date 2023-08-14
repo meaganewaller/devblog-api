@@ -1,8 +1,8 @@
 json = {
+  id: category.id,
   title: category.title,
   description: category.description,
   slug: category.to_param,
-  posts_count: category.posts_count,
 }
 
 json

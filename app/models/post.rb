@@ -37,7 +37,7 @@ class Post < ApplicationRecord
   validates :notion_created_at, presence: true
   validates :notion_updated_at, presence: true
   validates :title, presence: true
-  validates :notion_id, presence: true
+  validates :notion_id, presence: true, uniqueness: true
   validates :notion_slug, presence: true, uniqueness: true
   enum :status, {
     inbox: 0,
@@ -62,4 +62,13 @@ class Post < ApplicationRecord
   scope :editing, -> { where(status: 5) }
 
   friendly_id :notion_slug, use: :slugged
+
+  after_save :update_counter_cache
+  after_destroy :update_counter_cache
+
+  private
+
+  def update_counter_cache
+    category.update_posts_count
+  end
 end

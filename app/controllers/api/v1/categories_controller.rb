@@ -2,7 +2,11 @@ module Api
   module V1
     class CategoriesController < ApplicationController
       def index
-        @categories = Category.all
+        if params[:published_only].present? && params[:published_only] == 'true'
+          @categories = Category.with_published_posts
+        else
+          @categories = Category.all
+        end
       end
 
       def show

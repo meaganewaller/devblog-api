@@ -1,3 +1,44 @@
-example_id                      | status | run_time        |
-------------------------------- | ------ | --------------- |
-./spec/models/post_spec.rb[1:1] | passed | 0.21467 seconds |
+example_id                                       | status | run_time        |
+------------------------------------------------ | ------ | --------------- |
+./spec/jobs/category_fetcher_job_spec.rb[1:1:1]  | passed | 0.26134 seconds |
+./spec/jobs/category_fetcher_job_spec.rb[1:1:2]  | passed | 0.01821 seconds |
+./spec/jobs/category_fetcher_job_spec.rb[1:1:3]  | passed | 0.01218 seconds |
+./spec/jobs/category_fetcher_job_spec.rb[1:1:4]  | passed | 0.00854 seconds |
+./spec/jobs/post_fetcher_job_spec.rb[1:1:1]      | passed | 0.0328 seconds  |
+./spec/jobs/post_fetcher_job_spec.rb[1:1:2]      | passed | 0.00246 seconds |
+./spec/jobs/post_fetcher_job_spec.rb[1:1:3]      | passed | 0.0255 seconds  |
+./spec/jobs/post_fetcher_job_spec.rb[1:1:4]      | passed | 0.0137 seconds  |
+./spec/jobs/post_fetcher_job_spec.rb[1:1:5]      | passed | 0.01764 seconds |
+./spec/models/category_spec.rb[1:1:1]            | passed | 0.00398 seconds |
+./spec/models/category_spec.rb[1:1:2]            | passed | 0.00458 seconds |
+./spec/models/category_spec.rb[1:1:3]            | passed | 0.00395 seconds |
+./spec/models/category_spec.rb[1:2:1]            | passed | 0.00119 seconds |
+./spec/models/category_spec.rb[1:3:1]            | passed | 0.00516 seconds |
+./spec/models/category_spec.rb[1:4:1]            | passed | 0.01293 seconds |
+./spec/models/category_spec.rb[1:4:2]            | passed | 0.02089 seconds |
+./spec/models/category_spec.rb[1:4:3]            | passed | 0.0411 seconds  |
+./spec/models/post_spec.rb[1:1:1]                | passed | 0.00574 seconds |
+./spec/models/post_spec.rb[1:1:2]                | passed | 0.00453 seconds |
+./spec/models/post_spec.rb[1:1:3]                | passed | 0.00507 seconds |
+./spec/models/post_spec.rb[1:1:4]                | passed | 0.00476 seconds |
+./spec/models/post_spec.rb[1:1:5]                | passed | 0.00644 seconds |
+./spec/models/post_spec.rb[1:1:6]                | passed | 0.00527 seconds |
+./spec/models/post_spec.rb[1:1:7]                | passed | 0.01534 seconds |
+./spec/models/post_spec.rb[1:2:1]                | passed | 0.00262 seconds |
+./spec/models/post_spec.rb[1:2:2]                | passed | 0.00107 seconds |
+./spec/models/post_spec.rb[1:3:1]                | passed | 0.00329 seconds |
+./spec/models/post_spec.rb[1:4:1]                | passed | 0.02959 seconds |
+./spec/models/post_spec.rb[1:4:2]                | passed | 0.03073 seconds |
+./spec/models/post_spec.rb[1:4:3]                | passed | 0.03091 seconds |
+./spec/models/post_spec.rb[1:5:1]                | passed | 0.0094 seconds  |
+./spec/models/reaction_spec.rb[1:1:1]            | passed | 0.00315 seconds |
+./spec/models/reaction_spec.rb[1:2:1]            | passed | 0.00186 seconds |
+./spec/models/reaction_spec.rb[1:3:1]            | passed | 0.00845 seconds |
+./spec/requests/api/v1/categories_spec.rb[1:1:1] | passed | 0.00472 seconds |
+./spec/requests/api/v1/categories_spec.rb[1:1:2] | passed | 0.01485 seconds |
+./spec/requests/api/v1/categories_spec.rb[1:2:1] | passed | 0.01144 seconds |
+./spec/requests/api/v1/posts_spec.rb[1:1:1]      | passed | 0.0043 seconds  |
+./spec/requests/api/v1/posts_spec.rb[1:1:2]      | passed | 0.05311 seconds |
+./spec/requests/api/v1/posts_spec.rb[1:1:3]      | passed | 0.07067 seconds |
+./spec/requests/api/v1/posts_spec.rb[1:1:4]      | passed | 0.0677 seconds  |
+./spec/requests/api/v1/posts_spec.rb[1:2:1]      | passed | 0.06314 seconds |

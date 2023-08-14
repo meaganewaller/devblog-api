@@ -4,7 +4,6 @@
 #
 #  id          :uuid             not null, primary key
 #  description :string
-#  posts_count :integer
 #  slug        :string
 #  title       :string
 #  created_at  :datetime         not null
@@ -24,4 +23,12 @@ class Category < ApplicationRecord
   validates :description, presence: true
 
   friendly_id :title, use: :slugged
+
+  scope :with_published_posts, -> { joins(:posts).where(posts: { published: true }).distinct }
+
+  def update_posts_count
+    published_posts_count = posts.published.count
+    self.posts_count = published_posts_count
+    self.save
+  end
 end

@@ -113,5 +113,6 @@ group :test do
   gem "simplecov"
   gem "simplecov-console"
   gem "test-prof"
+  gem "webmock"
   gem "zonebie"
 end

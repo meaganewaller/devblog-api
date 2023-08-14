@@ -4,17 +4,13 @@ class PostFetcherJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    client = Notion::Client.new
-    all_posts = []
-    client.database_query(database_id: ENV["NOTION_BLOG_DATABASE_ID"]) do |page|
-      all_posts.concat(page.results)
-    end
+    posts = NotionAdapter.fetch_posts
 
-    return if all_posts.empty?
+    return if posts.empty?
 
-    all_posts.each do |post|
-      found_post = Post.find_by(notion_id: post.id)
-      next if found_post && found_post.notion_updated_at == post.last_edited_time.to_datetime
+    posts.each do |post|
+      found_post = Post.find_by(notion_id: post[:notion_id])
+      next if found_post && found_post.notion_updated_at > post[:notion_updated_at].to_datetime
 
       update_post(found_post, post) if found_post
       create_post(post)
@@ -24,56 +20,54 @@ class PostFetcherJob < ApplicationJob
   private
 
   def update_post(found_post, post)
-    notion_converter = NotionToMd::Converter.new(page_id: post.id)
+    notion_converter = NotionToMd::Converter.new(page_id: post[:notion_id])
     content = notion_converter.convert
-    properties = post.properties
 
-    found_post.update(
-      title: properties.Title.title.first.plain_text,
-      description: get_description(properties.Description),
-      published: properties.Published.checkbox,
-      published_date: properties.Published.checkbox ? properties.Date.date.start : nil,
-      notion_slug: properties.Slug&.rich_text&.first&.plain_text,
-      notion_created_at: properties.Created.created_time.to_datetime,
-      notion_updated_at: post.last_edited_time.to_datetime,
-      notion_id: post.id,
-      tags: get_tags(properties["Tag Names"]),
-      category_id: get_category(properties["Category"]),
-      status: get_status(properties.Status),
-      content:,
-    )
-
-    if found_post.save
-      puts "Post #{post.id} saved"
-    else
-      puts "Post #{post.id} not saved\n\n#{found_post.errors.full_messages}"
+    begin
+      found_post.update!(
+        title: post[:title],
+        description: post[:description],
+        published: post[:published],
+        published_date: post[:published_date],
+        notion_slug: post[:notion_slug],
+        notion_created_at: post[:notion_created_at],
+        notion_updated_at: post[:notion_updated_at],
+        notion_id: post[:notion_id],
+        tags: post[:tags],
+        category_id: post[:category_id],
+        status: get_status(post[:status]),
+        content: content,
+      )
+    rescue ActiveRecord::RecordInvalid => e
+      Rails.logger.error("Validation error: #{e.message}")
+    rescue StandardError => e
+      Rails.logger.error("An error occurred during update: #{e.message}")
     end
   end
 
   def create_post(post)
-    notion_converter = NotionToMd::Converter.new(page_id: post.id)
+    notion_converter = NotionToMd::Converter.new(page_id: post[:notion_id])
     content = notion_converter.convert
-    properties = post.properties
 
-    new_post = Post.create(
-      notion_id: post.id,
-      title: properties.Title.title.first.plain_text,
-      description: get_description(properties.Description),
-      published: properties.Published.checkbox,
-      published_date: properties.Published.checkbox ? properties.Date.date.start : nil,
-      notion_slug: properties.Slug&.rich_text&.first&.plain_text,
-      notion_created_at: properties.Created.created_time.to_datetime,
-      notion_updated_at: post.last_edited_time.to_datetime,
-      tags: get_tags(properties["Tag Names"]),
-      category_id: get_category(properties["Category"]),
-      status: get_status(properties.Status),
-      content:,
-    )
-
-    if new_post.save
-      puts "Post #{post.id} saved"
-    else
-      puts "Post #{post.id} not saved\n\n#{new_post.errors.full_messages}"
+    begin
+      Post.create!(
+        notion_id: post[:notion_id],
+        title: post[:title],
+        description: post[:description],
+        published: post[:published],
+        published_date: post[:published_date],
+        notion_slug: post[:notion_slug],
+        notion_created_at: post[:notion_created_at],
+        notion_updated_at: post[:notion_updated_at],
+        tags: post[:tags],
+        category_id: get_category_id(post[:category_notion_id]),
+        status: get_status(post[:status]),
+        content: content,
+      )
+    rescue ActiveRecord::RecordInvalid => e
+      Rails.logger.error("Validation error: #{e.message}")
+    rescue StandardError => e
+      Rails.logger.error("An error occurred during update: #{e.message}")
     end
   end
 
@@ -86,27 +80,11 @@ class PostFetcherJob < ApplicationJob
       "Drafting" => "drafting",
       "Editing" => "editing",
       "Published" => "published"
-    }[status.status.name]
+    }[status]
   end
 
-  def get_category(category)
-    return unless category.key?("relation")
-
-    Category.find_by(notion_id: category.relation[0]&.id)&.id
-  end
-
-  def get_tags(tags)
-    return unless tags.key?("rollup")
-    return unless tags["rollup"].key?("array")
-
-    tags["rollup"].array.map(&:title).flatten.map(&:plain_text)
-  end
-
-  def get_description(description)
-    if description["rich_text"]&.any?
-      description.rich_text.reduce("") { |desc, txt|  desc + txt.plain_text }
-    else
-      "-- Still need a description --"
-    end
+  def get_category_id(category_notion_id)
+    return unless category_notion_id
+    Category.find_by(notion_id: category_notion_id)&.id
   end
 end

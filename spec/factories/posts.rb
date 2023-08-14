@@ -28,14 +28,31 @@
 #  index_posts_on_slug         (slug) UNIQUE
 #  index_posts_on_tags         (tags) USING gin
 #
+
 FactoryBot.define do
   factory :post do
-    trait :published do
-      published { true }
+    sequence(:title) { |n| Faker::Lorem.sentence(random_words_to_add: 4) + n.to_s }
+    notion_id   { Faker::Internet.uuid }
+    description { Faker::Lorem.paragraph }
+    sequence(:notion_slug) { |n| "#{Faker::Internet.slug}-#{n}" }
+    notion_created_at { Faker::Date.backward(days: 14) }
+    notion_updated_at { Faker::Date.backward(days: 14) }
+    tags { Faker::Lorem.words(number: 3) }
+    content { Faker::Markdown.sandwich(sentences: 5) }
+    published { false }
+    status { "inbox" }
+
+    # Association with a category
+    association :category
+
+    trait :drafting do
+      status { "drafting" }
     end
 
-    trait :draft do
-      published { false }
+    trait :published do
+      published { true }
+      published_date { Date.today }
+      status { "published" }
     end
 
     trait :in_the_future do
@@ -52,14 +69,8 @@ FactoryBot.define do
       end
     end
 
-    title { Faker::Lorem.sentence }
-    notion_id { Faker::Internet.uuid }
-    description { Faker::Lorem.paragraph }
-    notion_slug { Faker::Internet.slug }
-    slug { Faker::Internet.slug }
-    notion_created_at { Faker::Date.backward(days: 14) }
-    notion_updated_at { Faker::Date.backward(days: 14) }
-    tags { Faker::Lorem.words.split(" ") }
-    content { Faker::Markdown.sandwich(sentences: 5) }
+
+    factory :drafting_post, traits: [:drafting]
+    factory :published_post, traits: [:published]
   end
 end

@@ -4,7 +4,6 @@
 #
 #  id          :uuid             not null, primary key
 #  description :string
-#  posts_count :integer
 #  slug        :string
 #  title       :string
 #  created_at  :datetime         not null
@@ -17,8 +16,9 @@
 #
 FactoryBot.define do
   factory :category do
-    title { "MyString" }
-    description { "MyString" }
-    post_count { 1 }
+    title { Faker::Lorem.sentences(number: 1) }
+    description { Faker::Lorem.sentences(number: 3) }
+    posts_count { 0 }
+    notion_id { Faker::Internet.uuid }
   end
 end
