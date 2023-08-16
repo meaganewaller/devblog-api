@@ -1,7 +1,7 @@
 namespace :server do
   desc %Q{ ›› Run Rails while monitoring /app, /config }
   task start: :environment do
-    sh %{ rerun --dir config,app rails s -p 5000 }
+    sh %{ rerun --dir config,app bin/rails s -p 5000 }
   end
 
   desc %Q{ ›› Get the PID of the server }
