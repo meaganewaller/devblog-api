@@ -4,8 +4,11 @@
 #
 #  id                :uuid             not null, primary key
 #  content           :text
+#  cover_image       :string
 #  description       :string           not null
 #  language          :string
+#  meta_description  :string
+#  meta_keywords     :text             default([]), is an Array
 #  notion_created_at :date             not null
 #  notion_slug       :string           not null
 #  notion_updated_at :date             not null

@@ -44,8 +44,11 @@ class NotionAdapter
         notion_created_at: post.properties.Created.created_time.to_datetime,
         notion_updated_at: post.last_edited_time.to_datetime,
         tags: post.properties.Tags.multi_select.map(&:name),
-        category_notion_id: post.properties["Content Pillar"].relation[0]&.id,
+        category_notion_id: post.properties["Category"].relation[0]&.id,
         status: post.properties.Status.status.name,
+        cover_image: post.properties["Cover Image"]&.files.first,
+        meta_description: post.properties["Meta Description"].rich_text&.reduce("") { |acc, curr| acc + curr.plain_text },
+        meta_keywords: post.properties["Meta Keywords"].multi_select.map { |kw| kw["name"] },
       }
     end
   end

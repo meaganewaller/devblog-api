@@ -63,6 +63,9 @@ class PostFetcherJob < ApplicationJob
         category_id: get_category_id(post[:category_notion_id]),
         status: get_status(post[:status]),
         content: content,
+        cover_image: get_cover_image(post[:cover_image]),
+        meta_description: post[:meta_description],
+        meta_keywords: post[:meta_keywords],
       )
     rescue ActiveRecord::RecordInvalid => e
       Rails.logger.error("Validation error: #{e.message}")
@@ -86,5 +89,14 @@ class PostFetcherJob < ApplicationJob
   def get_category_id(category_notion_id)
     return unless category_notion_id
     Category.find_by(notion_id: category_notion_id)&.id
+  end
+
+  def get_cover_image(cover_image)
+    return unless cover_image
+    if cover_image.key?("file")
+      return cover_image["file"]["url"]
+    else
+      return cover_image["external"]["url"]
+    end
   end
 end

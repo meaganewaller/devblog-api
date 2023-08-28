@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_142241) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_28_143114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
@@ -55,6 +55,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_142241) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
     t.uuid "category_id"
+    t.string "meta_description"
+    t.text "meta_keywords", default: [], array: true
+    t.string "cover_image"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["notion_id"], name: "index_posts_on_notion_id"
     t.index ["notion_slug"], name: "index_posts_on_notion_slug", unique: true
