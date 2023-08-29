@@ -11,9 +11,9 @@ class NotionAdapter
     @client = client
   end
 
-  def fetch_records(database_id)
+  def fetch_records(database_id, filter = {})
     records = []
-    @client.database_query(database_id: database_id) do |page|
+    @client.database_query(database_id: database_id, filter: filter) do |page|
       records.concat(page.results)
     end
     records
@@ -32,7 +32,8 @@ class NotionAdapter
   end
 
   def fetch_posts
-    posts = fetch_records(ENV["NOTION_BLOG_DATABASE_ID"])
+    posts = fetch_records(ENV["NOTION_BLOG_DATABASE_ID"], { property: "Type", select: { equals: "Post" } })
+    binding.pry
     posts.map do |post|
       {
         notion_id: post.fetch(:id),
@@ -44,9 +45,9 @@ class NotionAdapter
         notion_created_at: post.properties.Created.created_time.to_datetime,
         notion_updated_at: post.last_edited_time.to_datetime,
         tags: post.properties.Tags.multi_select.map(&:name),
-        category_notion_id: post.properties["Category"].relation[0]&.id,
+        category_notion_id: post.properties["Content Pillar"].relation[0]&.id,
         status: post.properties.Status.status.name,
-        cover_image: post.properties["Cover Image"]&.files.first,
+        cover_image: post.properties["Cover Image"]&.files&.first,
         meta_description: post.properties["Meta Description"].rich_text&.reduce("") { |acc, curr| acc + curr.plain_text },
         meta_keywords: post.properties["Meta Keywords"].multi_select.map { |kw| kw["name"] },
       }

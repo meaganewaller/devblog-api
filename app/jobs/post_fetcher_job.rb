@@ -7,10 +7,14 @@ class PostFetcherJob < ApplicationJob
     posts = NotionAdapter.fetch_posts
 
     return if posts.empty?
+    existing_posts = Post.where(notion_id: posts.map { |post| post[:notion_id] }).index_by(&:notion_id)
 
     posts.each do |post|
-      found_post = Post.find_by(notion_id: post[:notion_id])
-      next if found_post && found_post.notion_updated_at > post[:notion_updated_at].to_datetime
+      found_post = existing_posts[post[:notion_id]]
+      if skip?(found_post, post)
+        Rails.logger.info("Skipping #{post[:title]} because it's already up to date")
+        next
+      end
 
       update_post(found_post, post) if found_post
       create_post(post)
@@ -18,6 +22,10 @@ class PostFetcherJob < ApplicationJob
   end
 
   private
+
+  def skip?(found_post, post)
+    found_post && found_post.notion_updated_at >= post[:notion_updated_at].to_date
+  end
 
   def update_post(found_post, post)
     notion_converter = NotionToMd::Converter.new(page_id: post[:notion_id])
@@ -34,7 +42,7 @@ class PostFetcherJob < ApplicationJob
         notion_updated_at: post[:notion_updated_at],
         notion_id: post[:notion_id],
         tags: post[:tags],
-        category_id: post[:category_id],
+        category_id: get_category_id(post[:category_notion_id]),
         status: get_status(post[:status]),
         content: content,
       )
