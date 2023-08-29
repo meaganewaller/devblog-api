@@ -2,7 +2,7 @@ json = {
   id: category.id,
   title: category.title,
   description: category.description,
-  slug: category.to_param,
+  slug: category.to_param
 }
 
 json
