@@ -1,0 +1,23 @@
+json = {
+  id: project.to_param,
+  contributors: project.contributors,
+  creation_date: project.creation_date,
+  demo_screenshot_urls: project.demo_screenshot_urls,
+  description: project.description,
+  difficulty_level: project.difficulty_level,
+  documentation_url: project.documentation_url,
+  featured: project.featured,
+  framework: project.framework,
+  homepage_url: project.homepage_url,
+  language: project.language,
+  last_update: project.last_update,
+  license: project.license,
+  open_issues: project.open_issues,
+  pull_requests: project.pull_requests,
+  repository_url: project.repository_url,
+  status: project.status,
+  tags: project.tags,
+  title: project.title
+}
+
+json

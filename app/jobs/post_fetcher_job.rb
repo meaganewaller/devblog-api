@@ -28,9 +28,6 @@ class PostFetcherJob < ApplicationJob
   end
 
   def update_post(found_post, post)
-    notion_converter = NotionToMd::Converter.new(page_id: post[:notion_id])
-    content = notion_converter.convert
-
     begin
       found_post.update!(
         title: post[:title],
@@ -44,7 +41,7 @@ class PostFetcherJob < ApplicationJob
         tags: post[:tags],
         category_id: get_category_id(post[:category_notion_id]),
         status: get_status(post[:status]),
-        content: content,
+        content: post[:content],
       )
     rescue ActiveRecord::RecordInvalid => e
       Rails.logger.error("Validation error: #{e.message}")
@@ -54,9 +51,6 @@ class PostFetcherJob < ApplicationJob
   end
 
   def create_post(post)
-    notion_converter = NotionToMd::Converter.new(page_id: post[:notion_id])
-    content = notion_converter.convert
-
     begin
       Post.create!(
         notion_id: post[:notion_id],
@@ -70,7 +64,7 @@ class PostFetcherJob < ApplicationJob
         tags: post[:tags],
         category_id: get_category_id(post[:category_notion_id]),
         status: get_status(post[:status]),
-        content: content,
+        content: post[:content],
         cover_image: get_cover_image(post[:cover_image]),
         meta_description: post[:meta_description],
         meta_keywords: post[:meta_keywords],

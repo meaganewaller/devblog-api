@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_28_143114) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_170154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
@@ -66,20 +66,41 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_143114) do
     t.index ["tags"], name: "index_posts_on_tags", using: :gin
   end
 
+  create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "repository_url"
+    t.string "homepage_url"
+    t.text "tags", default: [], array: true
+    t.text "contributors", default: [], array: true
+    t.string "license"
+    t.date "creation_date"
+    t.date "last_update"
+    t.string "demo_screenshot_urls", default: [], array: true
+    t.boolean "featured", default: false
+    t.integer "status", default: 0
+    t.integer "open_issues", default: 0
+    t.integer "pull_requests", default: 0
+    t.string "language"
+    t.string "framework"
+    t.string "difficulty_level"
+    t.string "documentation_url"
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["featured"], name: "index_projects_on_featured"
+    t.index ["language"], name: "index_projects_on_language"
+    t.index ["slug"], name: "index_projects_on_slug", unique: true
+    t.index ["tags"], name: "index_projects_on_tags", using: :gin
+    t.index ["title"], name: "index_projects_on_title", unique: true
+  end
+
   create_table "reactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "post_id", null: false
     t.integer "kind", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_reactions_on_post_id"
-  end
-
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email"
-    t.string "password_digest"
-    t.text "auth_token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "reactions", "posts"

@@ -1,0 +1,3 @@
+@projects.map do |project|
+  render partial: "project", locals: { project: project }
+end

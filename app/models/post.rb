@@ -66,5 +66,4 @@ class Post < ApplicationRecord
   scope :editing, -> { where(status: 5) }
 
   friendly_id :notion_slug, use: :slugged
-
 end
