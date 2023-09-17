@@ -46,7 +46,7 @@ class NotionAdapter
         title: post.properties.Title.title.first.plain_text,
         description: post.properties.Summary&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text },
         published: post.properties.Published.checkbox,
-        published_date: post.properties.Published.checkbox ? post.properties.Date.date.start : nil,
+        published_date: post.properties.Published.checkbox ? post.properties.Date&.date&.start : nil,
         notion_slug: post.properties.Slug&.rich_text&.first&.plain_text,
         notion_created_at: post.properties.Created.created_time.to_datetime,
         notion_updated_at: post.last_edited_time.to_datetime,
