@@ -3,6 +3,7 @@
 # Table name: posts
 #
 #  id                :uuid             not null, primary key
+#  comment_count     :integer
 #  content           :text
 #  cover_image       :string
 #  description       :string           not null
@@ -14,6 +15,7 @@
 #  notion_updated_at :date             not null
 #  published         :boolean          default(FALSE), not null
 #  published_date    :date
+#  searchable        :tsvector
 #  slug              :string           not null
 #  status            :integer          default("inbox")
 #  tags              :string           default([]), is an Array
@@ -29,11 +31,13 @@
 #  index_posts_on_notion_id    (notion_id)
 #  index_posts_on_notion_slug  (notion_slug) UNIQUE
 #  index_posts_on_published    (published)
+#  index_posts_on_searchable   (searchable) USING gin
 #  index_posts_on_slug         (slug) UNIQUE
 #  index_posts_on_tags         (tags) USING gin
 #
 class Post < ApplicationRecord
   extend FriendlyId
+  include PgSearch::Model
 
   belongs_to :category, inverse_of: :posts, required: false
 
@@ -54,9 +58,16 @@ class Post < ApplicationRecord
   }
 
   has_many :reactions, dependent: :destroy, inverse_of: :post
-  scope :filter_by_category, -> (category) { joins(:category).where(categories: { slug: category }) }
-  scope :filter_by_tag, -> (tag) { where('? = ANY (tags)', tag) }
 
+  pg_search_scope :search_post, against: {
+    title: 'A',
+    description: 'B',
+    content: 'C'
+  }, using: { tsearch: { dictionary: 'english', tsvector_column: 'searchable' } }
+
+  default_scope { order(published_date: :desc) }
+  scope :filter_by_category, -> (category) { joins(:category).where('lower(categories.slug) = ?', category.downcase) }
+  scope :filter_by_tag, -> (tag) { where("LOWER(?) = ANY (SELECT LOWER(unnest(tags)))", tag.downcase) }
   scope :published, -> { where(published: true) }
   scope :drafting, -> { where(status: 4) }
   scope :needs_refinement, -> { where(status: 1) }

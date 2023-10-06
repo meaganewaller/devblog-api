@@ -3,6 +3,7 @@
 # Table name: posts
 #
 #  id                :uuid             not null, primary key
+#  comment_count     :integer
 #  content           :text
 #  cover_image       :string
 #  description       :string           not null
@@ -14,6 +15,7 @@
 #  notion_updated_at :date             not null
 #  published         :boolean          default(FALSE), not null
 #  published_date    :date
+#  searchable        :tsvector
 #  slug              :string           not null
 #  status            :integer          default("inbox")
 #  tags              :string           default([]), is an Array
@@ -29,6 +31,7 @@
 #  index_posts_on_notion_id    (notion_id)
 #  index_posts_on_notion_slug  (notion_slug) UNIQUE
 #  index_posts_on_published    (published)
+#  index_posts_on_searchable   (searchable) USING gin
 #  index_posts_on_slug         (slug) UNIQUE
 #  index_posts_on_tags         (tags) USING gin
 #

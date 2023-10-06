@@ -9,7 +9,7 @@ json = {
   published_date: post.published_date,
   notion_created_at: post.notion_created_at,
   notion_updated_at: post.notion_updated_at,
-  to_param: post.to_param
+  slug: post.to_param
 }
 
 if reactions

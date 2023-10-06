@@ -14,7 +14,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
 
       get api_v1_posts_path, as: :json
 
-      expect(json_response.count).to eq published_posts.count
+      expect(json_response['posts'].length).to eq published_posts.count
     end
 
     it "filters posts by category" do
@@ -25,20 +25,19 @@ RSpec.describe "Api::V1::Posts", type: :request do
       get "/api/v1/posts.json", params: { category: category.slug }
 
       expect(response).to have_http_status(:success)
-      expect(json_response.length).to eq(2)
+      expect(json_response['posts'].length).to eq(2)
     end
 
     it "filters posts by tag" do
-      tag = "ruby"
-      create_list(:post, 3, :published,tags: [tag])
+      tag = 'ruby'
+      create_list(:post, 3, :published, tags: [tag])
       create_list(:post, 2, :published)
 
-      get "/api/v1/posts.json", params: { tag: tag }
+      get '/api/v1/posts.json', params: { tag: }
 
       expect(response).to have_http_status(:success)
-      expect(json_response.length).to eq(3)
+      expect(json_response['posts'].length).to eq(3)
     end
-
   end
 
   describe 'GET /api/v1/posts/:slug' do

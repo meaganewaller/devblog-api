@@ -46,6 +46,7 @@ module Blog
 
     config.active_record.verify_foreign_keys_for_fixtures = false
     config.active_record.partial_inserts = true
+    config.active_record.schema_format = :sql
 
     config.i18n.default_locale = :en
     config.time_zone = 'Eastern Time (US & Canada)'

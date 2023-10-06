@@ -60,6 +60,7 @@ gem "hashdiff"
 gem "amazing_print", group: [:development, :test]
 gem "pagy", "~> 5.0"
 gem 'counter_culture', '~> 3.2'
+gem 'pg_search'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
