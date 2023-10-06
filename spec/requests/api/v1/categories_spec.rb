@@ -15,6 +15,18 @@ RSpec.describe "Api::V1::Categories", type: :request do
 
       expect(json_response.count).to eq categories.count
     end
+
+    context "when published_only flag set" do
+      it "responds only with published posts" do
+        categories = create_list(:category, 3)
+        create(:post, category: categories[1], published: true)
+
+        get "/api/v1/categories.json", params: { published_only: true }
+
+        expect(json_response.count).to eq(1)
+        expect(json_response[0]["title"]).to eq(categories[1].title)
+      end
+    end
   end
 
   describe 'GET /api/v1/categories/:slug' do
