@@ -1,3 +1,6 @@
-@projects.map do |project|
-  render partial: "project", locals: { project: project }
-end
+{
+  projects: @projects.map do |project|
+              render partial: "project", locals: { project: project }
+          end,
+            pagy: @pagy_metadata
+}

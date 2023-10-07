@@ -7,6 +7,10 @@ class NotionAdapter
     new.fetch_posts
   end
 
+  def self.fetch_projects
+    new.fetch_projects
+  end
+
   def initialize(client = Notion::Client.new)
     @client = client
   end
@@ -60,8 +64,31 @@ class NotionAdapter
         cover_image: post.properties["Cover Image"]&.files&.first || '', # Handle nil values gracefully
         meta_description: post.properties["Meta Description"]&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text } || '', # Handle nil values gracefully
         meta_keywords: post.properties["Meta Keywords"]&.multi_select&.map { |kw| kw["name"] } || [], # Handle nil values gracefully
-        content:,
+        content:
       }
+    end
+  end
+
+  def fetch_projects
+    projects = fetch_records(ENV["NOTION_PROJECT_DATABASE_ID"])
+    projects.map do |project|
+      content = blocks_children(project.send(:id))
+
+      {
+        notion_id: project.send(:id),
+        title: project.properties.Title&.title&.first&.plain_text || '', # Handle nil values gracefully
+        description: project.properties.Summary&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text } || '', # Handle nil values gracefully
+        notion_created_at: DateTime.parse(project.properties.Created.created_time),
+        notion_updated_at: DateTime.parse(project.last_edited_time),
+        tags: project.properties.Tags&.multi_select&.map(&:name) || [], # Handle nil values gracefully
+        # category_notion_id: project.properties["Content Pillar"]&.relation&.first&.id || '', # Handle nil values gracefully
+        status: project.properties.Status&.status&.name || '', # Handle nil values gracefully
+        # cover_image: project.properties["Cover Image"]&.files&.first || '', # Handle nil values gracefully
+        # meta_description: project.properties["Meta Description"]&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text } || '', # Handle nil values gracefully
+        # meta_keywords: project.properties["Meta Keywords"]&.multi_select&.map { |kw| kw["name"] } || [], # Handle nil values gracefully
+        content:
+      }
+
     end
   end
 
