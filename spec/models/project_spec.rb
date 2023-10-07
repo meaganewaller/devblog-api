@@ -15,8 +15,6 @@
 #  language             :string
 #  last_update          :date
 #  license              :string
-#  notion_created_at    :date             not null
-#  notion_updated_at    :date             not null
 #  open_issues          :integer          default(0)
 #  pull_requests        :integer          default(0)
 #  repository_url       :string
@@ -26,7 +24,6 @@
 #  title                :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  notion_id            :string           not null
 #
 # Indexes
 #
