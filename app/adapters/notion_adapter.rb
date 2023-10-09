@@ -1,4 +1,17 @@
 class NotionAdapter
+  DATABASE_IDS = {
+    category: ENV['NOTION_CATEGORY_DATABASE_ID'],
+    blog: ENV['NOTION_BLOG_DATABASE_ID'],
+    project: ENV['NOTION_PROJECT_DATABASE_ID']
+  }.freeze
+
+  PROPERTY_NAMES = {
+    title: 'Title',
+    summary: 'Summary',
+    date: 'Date',
+    cover_image: 'Cover Image'
+  }.freeze
+
   def self.fetch_categories
     new.fetch_categories
   end
@@ -15,91 +28,144 @@ class NotionAdapter
     @client = client
   end
 
-  def fetch_records(database_id, filter = nil)
-    records = []
-    if filter
-      @client.database_query(database_id: database_id, filter: filter) do |page|
-        records.concat(page.results)
-      end
-    else
-      @client.database_query(database_id: database_id) do |page|
-        records.concat(page.results)
-      end
-    end
-    records
-  end
-
   def fetch_categories
-    categories = fetch_records(ENV["NOTION_CATEGORY_DATABASE_ID"])
-    categories.map do |category|
-      {
-        notion_id: category.send(:id),
-        title: category.properties.Name.title.first.plain_text,
-        description: category.properties.Description.rich_text.first.plain_text,
-        last_edited_time: category.last_edited_time.to_datetime
-      }
+    fetch_records(DATABASE_IDS[:category]).map do |category|
+      transform_category(category)
     end
   end
 
-  # Updated fetch_posts method
   def fetch_posts
-    posts = fetch_records(ENV["NOTION_BLOG_DATABASE_ID"], { property: "Type", select: { equals: "Post" } })
-    posts.map do |post|
-      content = blocks_children(post.send(:id))
-      date_property = post.properties.Date&.date
-      published_date = date_property ? date_property.start : nil
-
-      {
-        notion_id: post.send(:id),
-        title: post.properties.Title&.title&.first&.plain_text || '', # Handle nil values gracefully
-        description: post.properties.Summary&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text } || '', # Handle nil values gracefully
-        published: post.properties.Published&.checkbox || false, # Handle nil values gracefully
-        published_date: published_date, # Use the extracted date
-        notion_slug: post.properties.Slug&.rich_text&.first&.plain_text || '', # Handle nil values gracefully
-        notion_created_at: DateTime.parse(post.properties.Created.created_time),
-        notion_updated_at: DateTime.parse(post.last_edited_time),
-        tags: post.properties.Tags&.multi_select&.map(&:name) || [], # Handle nil values gracefully
-        category_notion_id: post.properties["Content Pillar"]&.relation&.first&.id || '', # Handle nil values gracefully
-        status: post.properties.Status&.status&.name || '', # Handle nil values gracefully
-        cover_image: post.properties["Cover Image"]&.files&.first || '', # Handle nil values gracefully
-        meta_description: post.properties["Meta Description"]&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text } || '', # Handle nil values gracefully
-        meta_keywords: post.properties["Meta Keywords"]&.multi_select&.map { |kw| kw["name"] } || [], # Handle nil values gracefully
-        content:
-      }
+    fetch_records(
+      DATABASE_IDS[:blog],
+      blog_post_filters,
+      blog_post_sorts
+    ).map do |post|
+      transform_post(post)
     end
   end
 
   def fetch_projects
-    projects = fetch_records(ENV["NOTION_PROJECT_DATABASE_ID"])
-    projects.map do |project|
-      content = blocks_children(project.send(:id))
-
-      {
-        notion_id: project.send(:id),
-        title: project.properties.Title&.title&.first&.plain_text || '', # Handle nil values gracefully
-        description: project.properties.Summary&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text } || '', # Handle nil values gracefully
-        notion_created_at: DateTime.parse(project.properties.Created.created_time),
-        notion_updated_at: DateTime.parse(project.last_edited_time),
-        tags: project.properties.Tags&.multi_select&.map(&:name) || [], # Handle nil values gracefully
-        # category_notion_id: project.properties["Content Pillar"]&.relation&.first&.id || '', # Handle nil values gracefully
-        status: project.properties.Status&.status&.name || '', # Handle nil values gracefully
-        # cover_image: project.properties["Cover Image"]&.files&.first || '', # Handle nil values gracefully
-        # meta_description: project.properties["Meta Description"]&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text } || '', # Handle nil values gracefully
-        # meta_keywords: project.properties["Meta Keywords"]&.multi_select&.map { |kw| kw["name"] } || [], # Handle nil values gracefully
-        content:
-      }
-
+    fetch_records(DATABASE_IDS[:project]).map do |project|
+      transform_project(project)
     end
   end
 
   private
+
+  def blog_post_sorts
+    [
+      {
+        'property': 'Date',
+        'direction': 'descending'
+      }
+    ]
+  end
+
+  def blog_post_filters
+    {
+      'property': 'Type',
+      'select': {
+        'equals': 'Post'
+      }
+    }
+  end
+
+  def fetch_records(database_id, filter = nil, sorts = nil)
+    records = []
+    query_options = { database_id: }
+    query_options[:filter] = filter if filter
+    query_options[:sorts] = sorts if sorts
+
+    puts query_options
+
+    @client.database_query(query_options) do |page|
+      records.concat(page.results)
+    end
+    records
+  end
+
+  def transform_category(category)
+    properties = category.properties
+
+    {
+      notion_id: category.id,
+      title: from_title(properties[PROPERTY_NAMES[:title]]),
+      description: from_rich_text(properties[PROPERTY_NAMES[:summary]]),
+      cover_image: from_files(properties[PROPERTY_NAMES[:cover_image]]),
+      last_edited_time: category.last_edited_time.to_datetime
+    }
+
+  end
+
+  def transform_post(post)
+    properties = post.properties
+    published_date = extract_published_date(properties)
+    {
+      notion_id: post.id,
+      title: from_title(properties[PROPERTY_NAMES[:title]]),
+      description: from_rich_text(properties[PROPERTY_NAMES[:summary]]),
+      published: properties.Published&.checkbox || false,
+      published_date:,
+      notion_slug: from_rich_text(properties.Slug),
+      notion_created_at: DateTime.parse(properties.Created.created_time),
+      notion_updated_at: DateTime.parse(post.last_edited_time),
+      tags: extract_tags(properties),
+      status: extract_status(properties),
+      category_notion_id: extract_category_id(properties),
+      cover_image: from_files(properties[PROPERTY_NAMES[:cover_image]]),
+      meta_description: from_rich_text(properties['Meta Description']),
+      meta_keywords: from_rich_text(properties['Meta Keywords']),
+      content: blocks_children(post.id)
+    }
+  end
+
+  def extract_published_date(properties)
+    date_property = properties[PROPERTY_NAMES[:date]]&.date
+    date_property&.start
+  end
+
+  def extract_tags(properties)
+    properties.Tags&.multi_select&.map(&:name) || []
+  end
+
+  def extract_status(properties)
+    properties.Status&.status&.name || ''
+  end
+
+  def extract_category_id(properties)
+    properties['Content Pillar']&.relation&.first&.id || ''
+  end
+
+  def transform_project(project)
+    properties = project.properties
+    {
+      notion_id: project.id,
+      title: from_title(properties[PROPERTY_NAMES[:title]]),
+      description: from_rich_text(properties[PROPERTY_NAMES[:summary]]),
+      notion_created_at: DateTime.parse(properties.Created.created_time),
+      status: extract_status(properties),
+      cover_image: from_files(properties[PROPERTY_NAMES[:cover_imagee]])
+    }
+  end
+
+  def from_rich_text(property)
+    property&.rich_text&.reduce('') { |acc, curr| acc + curr.plain_text } || ''
+  end
+
+  def from_files(property)
+    property&.files&.first || ''
+  end
+
+  def from_title(property)
+    property&.title&.first&.plain_text
+  end
 
   def blocks_children(page_id)
     all_blocks = []
     @client.block_children(block_id: page_id) do |page|
       all_blocks.concat(page.results)
     end
-    all_blocks.reduce("") { |acc, curr| acc + to_md(curr) }
+    all_blocks.reduce('') { |acc, curr| acc + to_md(curr) }
   end
 
   def to_md(block)
@@ -111,7 +177,7 @@ class NotionAdapter
       # do nothing
     when /heading_(\d)/
       prefix = "\n\n#" * Regexp.last_match(1).to_i + ' '
-      block["#{block['type']}"]['rich_text'].map { _1['annotations']['bold'] = false } # unbold headings
+      block[block['type'].to_s]['rich_text'].map { _1['annotations']['bold'] = false } # unbold headings
       suffix = "\n\n"
     when 'callout'
       # do nothing
@@ -139,7 +205,7 @@ class NotionAdapter
     end
 
     # Only for types with rich_text, others should return in `case`
-    prefix + RichText.to_md(block["#{block['type']}"]['rich_text']) + suffix
+    prefix + RichText.to_md(block[block['type'].to_s]['rich_text']) + suffix
   rescue RuntimeError => e
     puts "#{e.message}: #{JSON.pretty_generate(to_h)}"
     "```json\n#{JSON.pretty_generate(to_h)}\n```"
@@ -151,7 +217,8 @@ class NotionAdapter
     ].each { attr_reader _1 }
 
     def self.to_md(obj)
-      return "" unless obj
+      return '' unless obj
+
       obj.is_a?(Array) ? obj.map { |item| new(item).to_md }.join : new(obj).to_md
     end
 
@@ -167,10 +234,10 @@ class NotionAdapter
 
       md = " <u>#{md}</u> "       if annotations['underline']
       md =   " `#{md}` "          if annotations['code']
-      md =  " **#{md}** "         if annotations['bold']
-      md =   " *#{md}* "          if annotations['italic']
-      md =  " ~~#{md}~~ "         if annotations['strikethrough']
-      md =   " [#{md}](#{href}) " if href
+      md = " **#{md}** " if annotations['bold']
+      md = " *#{md}* " if annotations['italic']
+      md = " ~~#{md}~~ " if annotations['strikethrough']
+      md = " [#{md}](#{href}) " if href
       md
     end
   end

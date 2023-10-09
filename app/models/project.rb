@@ -15,6 +15,8 @@
 #  language             :string
 #  last_update          :date
 #  license              :string
+#  notion_created_at    :datetime         not null
+#  notion_updated_at    :datetime         not null
 #  open_issues          :integer          default(0)
 #  pull_requests        :integer          default(0)
 #  repository_url       :string
@@ -24,6 +26,7 @@
 #  title                :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  notion_id            :string           not null
 #
 # Indexes
 #
@@ -35,7 +38,7 @@
 #
 class Project < ApplicationRecord
   extend FriendlyId
-  ALLOWED_DIFFICULTY_LEVELS = %w[ beginner intermediate advanced expert].freeze
+  ALLOWED_DIFFICULTY_LEVELS = %w[beginner intermediate advanced expert].freeze
 
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true
@@ -63,7 +66,7 @@ class Project < ApplicationRecord
     under_development: 10, # Being actively worked on, but not yet ready for release
     stable: 11, # Stable and suitable for production use
     unmaintained: 12, # The project is not being actively maintained, and users should be cautious when using it
-    feature_frozen: 13, # The project has reached a point where no new features will be added only bug fixes
+    feature_frozen: 13 # The project has reached a point where no new features will be added only bug fixes
   }
 
   friendly_id :title, use: :slugged
@@ -75,7 +78,8 @@ class Project < ApplicationRecord
 
     demo_screenshot_urls.each do |url|
       uri = URI.parse(url)
-      errors.add(:demo_screenshot_urls, "contains an invalid URL: #{url}") unless uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
+      errors.add(:demo_screenshot_urls, "contains an invalid URL: #{url}") unless
+      uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
     rescue URI::InvalidURIError
       errors.add(:demo_screenshot_urls, "contains an invalid URL: #{url}")
     end

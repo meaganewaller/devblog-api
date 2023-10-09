@@ -3,6 +3,7 @@
 # Table name: posts
 #
 #  id                :uuid             not null, primary key
+#  comment_count     :integer          default(0)
 #  content           :text
 #  cover_image       :string
 #  description       :string           not null

@@ -1,6 +1,6 @@
 json = {
-  id: project.to_param,
   contributors: project.contributors,
+  cover_image: "http//via.placeholder.com/800x600",
   creation_date: project.creation_date,
   demo_screenshot_urls: project.demo_screenshot_urls,
   description: project.description,
@@ -9,13 +9,17 @@ json = {
   featured: project.featured,
   framework: project.framework,
   homepage_url: project.homepage_url,
+  id: project.to_param,
   language: project.language,
   last_update: project.last_update,
   license: project.license,
+  notion_created_at: project.notion_created_at,
+  notion_updated_at: project.notion_updated_at,
   open_issues: project.open_issues,
   pull_requests: project.pull_requests,
   repository_url: project.repository_url,
   status: project.status,
+  slug: project.to_param,
   tags: project.tags,
   title: project.title
 }

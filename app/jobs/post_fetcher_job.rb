@@ -3,10 +3,11 @@
 class PostFetcherJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform
     posts = NotionAdapter.fetch_posts
 
     return if posts.empty?
+
     existing_posts = Post.where(notion_id: posts.map { |post| post[:notion_id] }).index_by(&:notion_id)
 
     posts.each do |post|
@@ -67,7 +68,7 @@ class PostFetcherJob < ApplicationJob
         content: post[:content],
         cover_image: get_cover_image(post[:cover_image]),
         meta_description: post[:meta_description],
-        meta_keywords: post[:meta_keywords],
+        meta_keywords: post[:meta_keywords]
       )
     rescue ActiveRecord::RecordInvalid => e
       Rails.logger.error("Validation error: #{e.message}")
@@ -94,7 +95,7 @@ class PostFetcherJob < ApplicationJob
   end
 
   def get_cover_image(cover_image)
-    return unless cover_image
+    return unless cover_image.blank?
     if cover_image.key?("file")
       return cover_image["file"]["url"]
     else

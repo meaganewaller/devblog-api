@@ -3,6 +3,7 @@
 # Table name: categories
 #
 #  id          :uuid             not null, primary key
+#  cover_image :string
 #  description :string
 #  slug        :string
 #  title       :string
