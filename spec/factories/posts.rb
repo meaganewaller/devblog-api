@@ -19,6 +19,7 @@
 #  status            :integer          default("inbox")
 #  tags              :string           default([]), is an Array
 #  title             :string           not null
+#  views_count       :integer          default(0), not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  category_id       :uuid

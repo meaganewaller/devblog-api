@@ -1,0 +1,7 @@
+json = {
+  viewable_type: view.viewable_type,
+  viewable_slug: view.viewable_slug,
+  session_id: view.session_id
+}
+
+json

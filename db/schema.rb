@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_08_212542) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_18_001308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
@@ -135,6 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_08_212542) do
     t.text "meta_keywords", default: [], array: true
     t.string "cover_image"
     t.integer "comment_count", default: 0
+    t.integer "views_count", default: 0, null: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["notion_id"], name: "index_posts_on_notion_id"
     t.index ["notion_slug"], name: "index_posts_on_notion_slug", unique: true
@@ -180,7 +181,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_08_212542) do
     t.integer "kind", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "session_id", null: false
     t.index ["post_id"], name: "index_reactions_on_post_id"
+    t.index ["session_id", "kind", "post_id"], name: "index_reactions_on_session_id_and_kind_and_post_id", unique: true
+  end
+
+  create_table "views", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "session_id", null: false
+    t.string "viewable_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "viewable_slug", null: false
+    t.index ["session_id"], name: "index_views_on_session_id"
+    t.index ["viewable_slug", "viewable_type", "session_id"], name: "index_views_on_viewable_slug_and_viewable_type_and_session_id", unique: true
+    t.index ["viewable_slug", "viewable_type"], name: "index_views_on_viewable_slug_and_viewable_type"
   end
 
   add_foreign_key "reactions", "posts"

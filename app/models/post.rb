@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -19,6 +21,7 @@
 #  status            :integer          default("inbox")
 #  tags              :string           default([]), is an Array
 #  title             :string           not null
+#  views_count       :integer          default(0), not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  category_id       :uuid
@@ -56,6 +59,7 @@ class Post < ApplicationRecord
   }
 
   has_many :reactions, dependent: :destroy, inverse_of: :post
+  has_many :views, as: :viewable, foreign_key: :slug, primary_key: :slug
 
   pg_search_scope :search_post, against: {
     title: 'A',
@@ -64,8 +68,8 @@ class Post < ApplicationRecord
   }, using: { tsearch: { dictionary: 'english', tsvector_column: 'searchable' } }
 
   default_scope { order(published_date: :desc) }
-  scope :filter_by_category, -> (category) { joins(:category).where('lower(categories.slug) = ?', category.downcase) }
-  scope :filter_by_tag, -> (tag) { where("LOWER(?) = ANY (SELECT LOWER(unnest(tags)))", tag.downcase) }
+  scope :filter_by_category, ->(category) { joins(:category).where('lower(categories.slug) = ?', category.downcase) }
+  scope :filter_by_tag, ->(tag) { where('LOWER(?) = ANY (SELECT LOWER(unnest(tags)))', tag.downcase) }
   scope :published, -> { where(published: true) }
   scope :drafting, -> { where(status: 4) }
   scope :needs_refinement, -> { where(status: 1) }

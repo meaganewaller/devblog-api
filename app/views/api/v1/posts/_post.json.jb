@@ -12,7 +12,8 @@ json = {
   published_date: post.published_date,
   slug: post.to_param,
   tags: post.tags,
-  title: post.title
+  title: post.title,
+  views: post.views_count
 }
 
 json[:category] = {}

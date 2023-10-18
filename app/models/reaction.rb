@@ -7,10 +7,12 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  post_id    :uuid             not null
+#  session_id :string           not null
 #
 # Indexes
 #
-#  index_reactions_on_post_id  (post_id)
+#  index_reactions_on_post_id                          (post_id)
+#  index_reactions_on_session_id_and_kind_and_post_id  (session_id,kind,post_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -25,7 +27,7 @@ class Reaction < ApplicationRecord
     til: 2,
     haha: 3,
     wow: 4,
-    sparkle: 5,
+    sparkle: 5
   }
 
   validates :kind, presence: true

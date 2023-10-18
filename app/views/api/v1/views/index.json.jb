@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+{
+  views: @views.map do |view|
+    render partial: "view", locals: { view: view }
+  end,
+}
