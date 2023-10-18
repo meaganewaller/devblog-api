@@ -59,7 +59,7 @@ class Post < ApplicationRecord
   }
 
   has_many :reactions, dependent: :destroy, inverse_of: :post
-  has_many :views, as: :viewable, foreign_key: :slug, primary_key: :slug
+  has_many :views, as: :viewable, foreign_key: :viewable_slug
 
   pg_search_scope :search_post, against: {
     title: 'A',

@@ -5,11 +5,11 @@ module Api
     class PostsController < ApiController
       def index
         if params[:recent]
-          @posts = Post.includes([:category]).published.limit(5)
+          @posts = Post.published.limit(5)
         else
-          @posts = Post.includes([:category]).published
+          @posts = Post.published
         end
-        @posts = @posts.filter_by_category(params[:category]) if params[:category].present?
+        @posts = @posts.include(:category).filter_by_category(params[:category]) if params[:category].present?
         @posts = @posts.filter_by_tag(params[:tag]) if params[:tag].present?
         @posts = @posts.search_post(params[:query]) if params[:query].present?
 

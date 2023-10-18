@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+{
+  reactions: @reactions.size,
+  likes: @reactions.like.size,
+  loves: @reactions.love.size,
+  tils: @reactions.til.size,
+  hahas: @reactions.haha.size,
+  wows: @reactions.wow.size,
+  sparkles: @reactions.sparkle.size,
+}

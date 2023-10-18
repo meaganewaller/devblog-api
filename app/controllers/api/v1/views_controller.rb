@@ -5,24 +5,20 @@ module Api
     class ViewsController < ApiController
       def index
         @views = View.where(viewable_type: params[:viewable_type])
-
-        if params[:viewable_slug].present?
-          @views = @views.where(viewable_slug: params[:viewable_slug])
-        end
-
-        if params[:session_id].present?
-          @views = @views.where(session_id: params[:session_id])
-        end
+        @views = @views.where(viewable_slug: params[:viewable_slug]) if params[:viewable_slug].present?
+        @views = @views.where(session_id: params[:session_id]) if params[:session_id].present?
       end
 
-
       def show
-        @view = View.find(params["id"])
+        @view = View.find(params['id'])
       end
 
       def create
         @existing_view = View.where(view_params)
-        unless @existing_view
+
+        if @existing_view
+          render json: { status: 'OK', data: { view: @existing_view } }, status: :ok
+        else
           @view = View.new(view_params)
           if @view.save
             render json: { status: 'SUCCESS', message: 'View created', data: @view }, status: :created
