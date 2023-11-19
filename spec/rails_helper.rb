@@ -7,7 +7,6 @@ end
 
 ENV["RAILS_ENV"] ||= "test"
 require "spec_helper"
-require "timecop"
 
 require_relative "../config/environment"
 # Prevent database truncation if the environment is production

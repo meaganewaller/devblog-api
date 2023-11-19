@@ -58,8 +58,8 @@ group :development, :test do
   gem "awesome_rails_console", "~> 0.4"
   gem "database_cleaner", "~> 2.0", require: false
   gem "debug", "~> 1.8", platforms: %i[mri mingw x64_mingw], require: false
-  gem "factory_bot", "~> 6.2"
-  gem "factory_bot_rails", "~> 6.2"
+  gem "factory_bot", "6.2"
+  gem "factory_bot_rails", "6.2"
   gem "factory_trace", "~> 1.0", require: false
   gem "faker", "~> 3.2.1"
   gem "isolator", "~> 0.9"

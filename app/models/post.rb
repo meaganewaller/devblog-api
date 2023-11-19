@@ -55,7 +55,7 @@ class Post < ApplicationRecord
     outlining: 3,
     drafting: 4,
     editing: 5,
-    published: 6
+    done: 6
   }
 
   has_many :reactions, dependent: :destroy, inverse_of: :post

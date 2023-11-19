@@ -64,7 +64,7 @@ RSpec.describe Post, type: :model do
   describe "enums" do
     it {
       should define_enum_for(:status).with_values(inbox: 0, needs_refinement: 1, ready_for_work: 2, outlining: 3,
-        drafting: 4, editing: 5, published: 6)
+        drafting: 4, editing: 5, done: 6)
     }
   end
 

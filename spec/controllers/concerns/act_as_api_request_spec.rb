@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-
-# spec/controllers/concerns/act_as_api_request_spec.rb
 require "rails_helper"
 
 RSpec.describe "ActAsApiRequest", type: :controller do

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Api::V1::Posts", type: :request do
+RSpec.describe "Api::V1::Posts", type: :request, vcr: false do
   describe "GET /api/v1/posts" do
     it "responds with ok status" do
       get api_v1_posts_path, as: :json
@@ -12,7 +12,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
 
     it "responds with posts" do
       published_posts = create_list(:post, 3, :published)
-      create_list(:post, 1, :drafting)
+      create(:post, :drafting)
 
       get api_v1_posts_path, as: :json
 
