@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Api
   module V1
     class PostReactionsController < ApiController
@@ -6,6 +7,7 @@ module Api
       def index
         post = Post.friendly.find(params[:post_id])
         @reactions = post.reactions
+        @user_reactions = @reactions.where(session_id: params[:session_id]) if params[:session_id]
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'Post not found' }, status: :not_found
       end
@@ -26,7 +28,7 @@ module Api
       private
 
       def reaction_params
-        params.require(:reaction).permit(:kind)
+        params.require(:reaction).permit(:kind, :session_id)
       end
     end
   end

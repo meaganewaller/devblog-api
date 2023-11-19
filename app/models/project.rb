@@ -41,6 +41,7 @@ class Project < ApplicationRecord
   ALLOWED_DIFFICULTY_LEVELS = %w[beginner intermediate advanced expert].freeze
 
   validates :title, presence: true, uniqueness: true
+  validates :notion_id, presence: true, uniqueness: true
   validates :description, presence: true
   validates :difficulty_level, inclusion: { in: ALLOWED_DIFFICULTY_LEVELS, allow_nil: true }
   validates :repository_url, format: { with: URI::DEFAULT_PARSER.make_regexp },

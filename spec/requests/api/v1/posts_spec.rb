@@ -17,6 +17,15 @@ RSpec.describe "Api::V1::Posts", type: :request do
       expect(json_response['posts'].length).to eq published_posts.count
     end
 
+    it "filters by recent" do
+      create_list(:post, 10, :published)
+
+      get '/api/v1/posts.json', params: { recent: true }
+
+      expect(response).to have_http_status(:success)
+      expect(json_response['posts'].length).to eq(5)
+    end
+
     it "filters posts by category" do
       category = create(:category)
       create_list(:post, 2, :published, category: category)

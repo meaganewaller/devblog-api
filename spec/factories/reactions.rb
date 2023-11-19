@@ -22,6 +22,7 @@ FactoryBot.define do
   factory :reaction do
     post
     kind { Reaction.kinds.keys.sample }
+    session_id { Faker::Internet.uuid }
 
     trait :like do
       kind { :like }

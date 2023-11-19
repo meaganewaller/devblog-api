@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notion.com/v1/databases/45bed0aa6f824a46bc1de73123b2d6cb/query
+    body:
+      encoding: UTF-8
+      string: '{"page_size":100}'
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Notion Ruby Client/1.1.0
+      Authorization:
+      - Bearer <NOTION_TOKEN>
+      Notion-Version:
+      - '2022-02-22'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 18 Nov 2023 23:49:04 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - 863d5a72-dfd1-47ff-9548-a228f93198ba
+      Etag:
+      - W/"1818-VA9sF08MNzmuOtbhTBl0KFjatEg"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=xlsH1dloAsvsGTwB3_8IclORUPEAYgMtukwtaB1gCj0-1700351344-0-AUG4EG5BjAJmxabiNostjhGUDJmQu5dBtCqngjlEXfH3aMu8LkB8PWWPLVUoOPdpXQNlrNxOBPq6VzBEPTvmebQ=;
+        path=/; expires=Sun, 19-Nov-23 00:19:04 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 82841b9b297225b5-MIA
+    body:
+      encoding: UTF-8
+      string: "{\"object\":\"list\",\"results\":[{\"object\":\"page\",\"id\":\"a4cfd8a4-46c8-4e9e-b8f3-bee029293406\",\"created_time\":\"2023-08-30T17:38:00.000Z\",\"last_edited_time\":\"2023-10-12T19:40:00.000Z\",\"created_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"last_edited_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"cover\":null,\"icon\":{\"type\":\"emoji\",\"emoji\":\"\U0001F6E0️\"},\"parent\":{\"type\":\"database_id\",\"database_id\":\"45bed0aa-6f82-4a46-bc1d-e73123b2d6cb\"},\"archived\":false,\"properties\":{\"Summary\":{\"id\":\"ANvT\",\"type\":\"rich_text\",\"rich_text\":[{\"type\":\"text\",\"text\":{\"content\":\"Making
+        my machine cute\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Making
+        my machine cute\",\"href\":null}]},\"Documentation URL\":{\"id\":\"Avk~\",\"type\":\"url\",\"url\":null},\"Language\":{\"id\":\"GG%3Do\",\"type\":\"multi_select\",\"multi_select\":[{\"id\":\"4dc6fafb-336f-42bf-a691-3a181da9d31f\",\"name\":\"Bash\",\"color\":\"green\"},{\"id\":\"87e58337-11ee-4d4e-958d-f7da5b259969\",\"name\":\"Lua\",\"color\":\"default\"}]},\"Homepage
+        URL\":{\"id\":\"HQ~%5D\",\"type\":\"url\",\"url\":\"https://dots.meaganwaller.com\"},\"Featured\":{\"id\":\"ITg%7D\",\"type\":\"checkbox\",\"checkbox\":true},\"Demo
+        Screenshot URLs\":{\"id\":\"%5DGia\",\"type\":\"files\",\"files\":[]},\"Created\":{\"id\":\"kZc%40\",\"type\":\"created_time\",\"created_time\":\"2023-08-30T17:38:00.000Z\"},\"Status\":{\"id\":\"oTTz\",\"type\":\"status\",\"status\":{\"id\":\"64f40886-8d2c-4fe3-a7d3-f60c06d33071\",\"name\":\"Not
+        started\",\"color\":\"default\"}},\"Repository URL\":{\"id\":\"z%3FNC\",\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/dotfiles\"},\"License\":{\"id\":\"%7BUtk\",\"type\":\"select\",\"select\":null},\"Tags\":{\"id\":\"%7B%7CH%3C\",\"type\":\"select\",\"select\":null},\"Title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"Dotfiles\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Dotfiles\",\"href\":null}]}},\"url\":\"https://www.notion.so/Dotfiles-a4cfd8a446c84e9eb8f3bee029293406\",\"public_url\":null},{\"object\":\"page\",\"id\":\"ba495a54-4ad8-4981-9049-e02ca2efa33d\",\"created_time\":\"2023-08-30T17:38:00.000Z\",\"last_edited_time\":\"2023-10-12T19:41:00.000Z\",\"created_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"last_edited_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"cover\":null,\"icon\":{\"type\":\"emoji\",\"emoji\":\"\U0001F517\"},\"parent\":{\"type\":\"database_id\",\"database_id\":\"45bed0aa-6f82-4a46-bc1d-e73123b2d6cb\"},\"archived\":false,\"properties\":{\"Summary\":{\"id\":\"ANvT\",\"type\":\"rich_text\",\"rich_text\":[{\"type\":\"text\",\"text\":{\"content\":\"Blogging
+        like it’s 1999.\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Blogging
+        like it’s 1999.\",\"href\":null}]},\"Documentation URL\":{\"id\":\"Avk~\",\"type\":\"url\",\"url\":null},\"Language\":{\"id\":\"GG%3Do\",\"type\":\"multi_select\",\"multi_select\":[{\"id\":\"5c42e0a5-9be3-497d-9cf4-84d80cffa03b\",\"name\":\"TypeScript\",\"color\":\"pink\"}]},\"Homepage
+        URL\":{\"id\":\"HQ~%5D\",\"type\":\"url\",\"url\":null},\"Featured\":{\"id\":\"ITg%7D\",\"type\":\"checkbox\",\"checkbox\":false},\"Demo
+        Screenshot URLs\":{\"id\":\"%5DGia\",\"type\":\"files\",\"files\":[]},\"Created\":{\"id\":\"kZc%40\",\"type\":\"created_time\",\"created_time\":\"2023-08-30T17:38:00.000Z\"},\"Status\":{\"id\":\"oTTz\",\"type\":\"status\",\"status\":{\"id\":\"64f40886-8d2c-4fe3-a7d3-f60c06d33071\",\"name\":\"Not
+        started\",\"color\":\"default\"}},\"Repository URL\":{\"id\":\"z%3FNC\",\"type\":\"url\",\"url\":null},\"License\":{\"id\":\"%7BUtk\",\"type\":\"select\",\"select\":null},\"Tags\":{\"id\":\"%7B%7CH%3C\",\"type\":\"select\",\"select\":null},\"Title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"Dev
+        Blog Webring\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Dev
+        Blog Webring\",\"href\":null}]}},\"url\":\"https://www.notion.so/Dev-Blog-Webring-ba495a544ad849819049e02ca2efa33d\",\"public_url\":null},{\"object\":\"page\",\"id\":\"bd48fb3d-efbf-4eec-9d60-2fcdd03ec5cc\",\"created_time\":\"2023-08-30T17:38:00.000Z\",\"last_edited_time\":\"2023-10-12T19:39:00.000Z\",\"created_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"last_edited_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"cover\":null,\"icon\":{\"type\":\"emoji\",\"emoji\":\"\U0001F5C2️\"},\"parent\":{\"type\":\"database_id\",\"database_id\":\"45bed0aa-6f82-4a46-bc1d-e73123b2d6cb\"},\"archived\":false,\"properties\":{\"Summary\":{\"id\":\"ANvT\",\"type\":\"rich_text\",\"rich_text\":[{\"type\":\"text\",\"text\":{\"content\":\"Powering
+        this blog right now\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Powering
+        this blog right now\",\"href\":null}]},\"Documentation URL\":{\"id\":\"Avk~\",\"type\":\"url\",\"url\":null},\"Language\":{\"id\":\"GG%3Do\",\"type\":\"multi_select\",\"multi_select\":[{\"id\":\"5c42e0a5-9be3-497d-9cf4-84d80cffa03b\",\"name\":\"TypeScript\",\"color\":\"pink\"}]},\"Homepage
+        URL\":{\"id\":\"HQ~%5D\",\"type\":\"url\",\"url\":\"https://meaganwaller.com\"},\"Featured\":{\"id\":\"ITg%7D\",\"type\":\"checkbox\",\"checkbox\":false},\"Demo
+        Screenshot URLs\":{\"id\":\"%5DGia\",\"type\":\"files\",\"files\":[]},\"Created\":{\"id\":\"kZc%40\",\"type\":\"created_time\",\"created_time\":\"2023-08-30T17:38:00.000Z\"},\"Status\":{\"id\":\"oTTz\",\"type\":\"status\",\"status\":{\"id\":\"64f40886-8d2c-4fe3-a7d3-f60c06d33071\",\"name\":\"Not
+        started\",\"color\":\"default\"}},\"Repository URL\":{\"id\":\"z%3FNC\",\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/devblog-web\"},\"License\":{\"id\":\"%7BUtk\",\"type\":\"select\",\"select\":{\"id\":\"b0806907-2dd7-47cf-a840-295ff9985d94\",\"name\":\"MIT\",\"color\":\"green\"}},\"Tags\":{\"id\":\"%7B%7CH%3C\",\"type\":\"select\",\"select\":null},\"Title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"Dev
+        Blog\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Dev
+        Blog\",\"href\":null}]}},\"url\":\"https://www.notion.so/Dev-Blog-bd48fb3defbf4eec9d602fcdd03ec5cc\",\"public_url\":null}],\"next_cursor\":null,\"has_more\":false,\"type\":\"page_or_database\",\"page_or_database\":{},\"request_id\":\"863d5a72-dfd1-47ff-9548-a228f93198ba\"}"
+  recorded_at: Sat, 18 Nov 2023 23:49:04 GMT
+recorded_with: VCR 6.2.0

@@ -76,8 +76,6 @@ class NotionAdapter
     query_options[:filter] = filter if filter
     query_options[:sorts] = sorts if sorts
 
-    puts query_options
-
     @client.database_query(query_options) do |page|
       records.concat(page.results)
     end

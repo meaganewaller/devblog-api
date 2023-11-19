@@ -29,3 +29,5 @@
 /config/master.key
 spec/failures.txt
 coverage/
+.env.*.local
+.env

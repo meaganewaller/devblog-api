@@ -73,6 +73,7 @@ group :development, :test do
   gem "ruby-prof", ">= 0.16.0", require: false
   gem "shoulda-matchers", "~> 5.3", require: false
   gem "stackprof", ">= 0.2.9", require: false
+  gem "vcr"
 end
 
 group :development do
@@ -91,6 +92,7 @@ group :development do
   gem "standard", "~> 1.22"
   gem "standard-rails", "~> 0.1", require: false
   gem "strong_migrations", "~> 1.4"
+  gem "timecop"
 end
 
 group :test do

@@ -38,6 +38,9 @@
 #
 FactoryBot.define do
   factory :project do
-    
+    title { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
+    difficulty_level { Project::ALLOWED_DIFFICULTY_LEVELS.sample }
+    notion_id { SecureRandom.uuid }
   end
 end

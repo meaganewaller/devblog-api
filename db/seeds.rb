@@ -49,7 +49,7 @@ end
   notion_created = Faker::Date.between(from: date, to: date + 10.days)
 
   Post.create!(
-    content: Faker::HTML.sandwich(sentences: 15, repeat: 2),
+    content: Faker::Markdown.sandwich(sentences: 15, repeat: 2),
     cover_image: 'http://placekitten.com/800/600',
     description: Faker::TvShows::Community.quotes,
     meta_description: Faker::TvShows::TwinPeaks.quote,

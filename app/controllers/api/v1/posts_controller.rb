@@ -9,7 +9,7 @@ module Api
         else
           @posts = Post.published
         end
-        @posts = @posts.include(:category).filter_by_category(params[:category]) if params[:category].present?
+        @posts = @posts.includes(:category).filter_by_category(params[:category]) if params[:category].present?
         @posts = @posts.filter_by_tag(params[:tag]) if params[:tag].present?
         @posts = @posts.search_post(params[:query]) if params[:query].present?
 
