@@ -2,7 +2,7 @@
 
 class NotionAdapter
   DATABASE_IDS = {
-    category: ENV.fetch("NOTION_CATEGORY_DATABASE_ID"),
+    category: ENV["NOTION_CATEGORY_DATABASE_ID"],
     blog: ENV["NOTION_BLOG_DATABASE_ID"],
     project: ENV["NOTION_PROJECT_DATABASE_ID"]
   }.freeze
