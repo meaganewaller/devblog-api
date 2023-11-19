@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
 # Backing up your data
 # Features:
@@ -11,23 +13,24 @@
 #   https://gist.github.com/hopsoft/56ba6f55fe48ad7f8b90
 #
 namespace :db do
-  desc %Q{ ›› Drop the db schema, Create a new DB, Migrate the DB, Populate the DB. (Development-mode Only) }
+  desc %{ ›› Drop the db schema, Create a new DB, Migrate the DB, Populate the DB. (Development-mode Only) }
   task wipe: :environment do
     # Safe guard #1
-    raise 'You cannot run this in production' if Rails.env.production?
+    raise "You cannot run this in production" if Rails.env.production?
+
     # 'skip_prod' is Safe guard #2
-    [ 'skip_prod', 'db:purge', 'db:create', 'db:migrate', 'db:seed' ]
+    ["skip_prod", "db:purge", "db:create", "db:migrate", "db:seed"]
   end
 
   desc "Dumps the database to backups"
   task dump: :environment do
-    dump_fmt = 'c'      # or 'p', 't', 'd'
+    dump_fmt = "c" # or 'p', 't', 'd'
     dump_sfx = suffix_for_format dump_fmt
     backup_dir = backup_directory true
     cmd = nil
-    with_config do |app, host, db, user|
-      file_name = Time.now.strftime("%Y%m%d%H%M%S") + "_" + db + '.' + dump_sfx
-      cmd = %{ pg_dump -F #{dump_fmt} -h #{host} -d #{db} -f #{backup_dir}/#{file_name} -v }
+    with_config do |_app, host, db, _user|
+      file_name = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{db}.#{dump_sfx}"
+      cmd = %( pg_dump -F #{dump_fmt} -h #{host} -d #{db} -f #{backup_dir}/#{file_name} -v )
     end
     puts cmd
     exec cmd
@@ -36,15 +39,15 @@ namespace :db do
   desc "Show the existing database backups"
   task list: :environment do
     backup_dir = backup_directory
-    puts "#{backup_dir}"
+    puts backup_dir
     exec "/bin/ls -lt #{backup_dir}"
   end
 
   desc "Restores the database from a backup using PATTERN"
-  task :restore, [:pat] => :environment do |task,args|
+  task :restore, [:pat] => :environment do |_task, args|
     if args.pat.present?
       cmd = nil
-      with_config do |app, host, db, user|
+      with_config do |_app, _host, _db, _user|
         backup_dir = backup_directory
         files = Dir.glob("#{backup_dir}/*#{args.pat}*")
         case files.size
@@ -60,7 +63,7 @@ namespace :db do
           end
         else
           puts "Too many files match the pattern '#{args.pat}':"
-          puts ' ' + files.join("\n ")
+          puts " #{files.join("\n ")}"
           puts "Try a more specific pattern"
         end
       end
@@ -71,17 +74,17 @@ namespace :db do
         exec cmd
       end
     else
-      puts 'Please pass a pattern to the task'
+      puts "Please pass a pattern to the task"
     end
   end
 
   namespace :indexes do
     desc "Prints a list of unindexed foreign keys so you can index them"
-    task :missing => :environment do
+    task missing: :environment do
       indexes = {}
       conn = ActiveRecord::Base.connection
       conn.tables.each do |table|
-        indexed_columns = conn.indexes(table).map { |i| i.columns }.flatten
+        indexed_columns = conn.indexes(table).map(&:columns).flatten
         conn.columns(table).each do |column|
           if column.name.match(/_id/) && !indexed_columns.include?(column.name)
             indexes[table] ||= []
@@ -91,37 +94,35 @@ namespace :db do
       end
       puts "Foreign Keys:"
       indexes.each do |table, columns|
-        puts columns.map { |c| "\s\sadd_index '#{table}', '#{c}'\n"}
+        puts(columns.map { |c| "\s\sadd_index '#{table}', '#{c}'\n" })
       end
     end
   end
 
   private
 
-  def suffix_for_format suffix
+  def suffix_for_format(suffix)
     case suffix
-    when 'c' then 'dump'
-    when 'p' then 'sql'
-    when 't' then 'tar'
-    when 'd' then 'dir'
-    else nil
+    when "c" then "dump"
+    when "p" then "sql"
+    when "t" then "tar"
+    when "d" then "dir"
     end
   end
 
-  def format_for_file file
+  def format_for_file(file)
     case file
-    when /\.dump$/ then 'c'
-    when /\.sql$/  then 'p'
-    when /\.dir$/  then 'd'
-    when /\.tar$/  then 't'
-    else nil
+    when /\.dump$/ then "c"
+    when /\.sql$/ then "p"
+    when /\.dir$/ then "d"
+    when /\.tar$/ then "t"
     end
   end
 
-  def backup_directory create=false
+  def backup_directory(create = false)
     backup_dir = File.join("db", "backups")
-    #backup_dir = File.join("#{Rails.root}", "db", "backups")
-    if create and not Dir.exists?(backup_dir)
+    # backup_dir = File.join("#{Rails.root}", "db", "backups")
+    if create && !Dir.exist?(backup_dir)
       puts "\n Creating #{backup_dir} ..\n"
       FileUtils.mkdir_p(backup_dir)
     end

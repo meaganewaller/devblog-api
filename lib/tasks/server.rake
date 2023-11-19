@@ -1,31 +1,33 @@
+# frozen_string_literal: true
+
 namespace :server do
-  desc %Q{ ›› Run Rails while monitoring /app, /config }
+  desc %( ›› Run Rails while monitoring /app, /config )
   task start: :environment do
-    sh %{ rerun --dir config,app bin/rails s -p 5000 }
+    sh %( rerun --dir config,app bin/rails s -p 5000 )
   end
 
-  desc %Q{ ›› Get the PID of the server }
+  desc %( ›› Get the PID of the server )
   task :pid do
-    sh %{ more ./tmp/pids/server.pid }
+    sh %( more ./tmp/pids/server.pid )
   end
 
-  desc %Q{ ›› Kill -9 [:pid] }
-  task :kill, [:pid] do |t, args|
+  desc %( ›› Kill -9 [:pid] )
+  task :kill, [:pid] do |_t, args|
     @pid = args[:pid]
-    sh %{ set -e }
-    sh %{ kill -9 #{@pid} }
-    sh %{ rm -rf ./tmp/pids/server.pid }
+    sh %( set -e )
+    sh %( kill -9 #{@pid} )
+    sh %( rm -rf ./tmp/pids/server.pid )
   end
 
-  desc %Q{ ›› Remove rails detached server }
+  desc %( ›› Remove rails detached server )
   task :remove_server do
-    sh %{ ps -aef | grep rails }
+    sh %( ps -aef | grep rails )
   end
 
-  desc %Q{ ›› Logger fix http://jerryclinesmith.me/blog/2014/01/16/logging-from-rake-tasks/ }
+  desc %( ›› Logger fix http://jerryclinesmith.me/blog/2014/01/16/logging-from-rake-tasks/ )
   task setup_logger: :environment do
-    logger           = Logger.new(STDOUT)
-    logger.level     = Logger::INFO
-    Rails.logger     = logger
+    logger = Logger.new($stdout)
+    logger.level = Logger::INFO
+    Rails.logger = logger
   end
 end

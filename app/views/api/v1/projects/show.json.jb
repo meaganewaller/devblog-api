@@ -1,1 +1,3 @@
-render partial: "project", locals: { project: @project }
+# frozen_string_literal: true
+
+render partial: "project", locals: {project: @project}

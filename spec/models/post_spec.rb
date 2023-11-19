@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -34,7 +36,7 @@
 #  index_posts_on_slug         (slug) UNIQUE
 #  index_posts_on_tags         (tags) USING gin
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Post, type: :model do
   describe "validations" do
@@ -60,13 +62,16 @@ RSpec.describe Post, type: :model do
   end
 
   describe "enums" do
-    it { should define_enum_for(:status).with_values(inbox: 0, needs_refinement: 1, ready_for_work: 2, outlining: 3, drafting: 4, editing: 5, published: 6) }
+    it {
+      should define_enum_for(:status).with_values(inbox: 0, needs_refinement: 1, ready_for_work: 2, outlining: 3,
+        drafting: 4, editing: 5, published: 6)
+    }
   end
 
   describe "scopes" do
     let!(:published_post) { create(:post, published: true) }
-    let!(:drafting_post) { create(:post, status: 'drafting') }
-    let!(:needs_refinement_post) { create(:post, status: 'needs_refinement') }
+    let!(:drafting_post) { create(:post, status: "drafting") }
+    let!(:needs_refinement_post) { create(:post, status: "needs_refinement") }
 
     it ".published should return only published posts" do
       expect(Post.published).to eq([published_post])
@@ -87,5 +92,4 @@ RSpec.describe Post, type: :model do
       expect(post.slug).to eq(post.notion_slug.parameterize)
     end
   end
-
 end

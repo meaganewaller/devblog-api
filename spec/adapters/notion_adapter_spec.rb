@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe NotionAdapter do
   describe "#fetch_categories" do
@@ -11,7 +13,7 @@ RSpec.describe NotionAdapter do
         title: an_instance_of(String),
         description: an_instance_of(String),
         cover_image: an_instance_of(String),
-        last_edited_time: an_instance_of(DateTime),
+        last_edited_time: an_instance_of(DateTime)
       ))
     end
 
@@ -25,7 +27,7 @@ RSpec.describe NotionAdapter do
         description: an_instance_of(String),
         cover_image: an_instance_of(String),
         status: an_instance_of(String),
-        notion_created_at: an_instance_of(DateTime),
+        notion_created_at: an_instance_of(DateTime)
       ))
     end
 
@@ -46,7 +48,7 @@ RSpec.describe NotionAdapter do
         notion_slug: an_instance_of(String),
         content: an_instance_of(String),
         meta_description: an_instance_of(String),
-        meta_keywords: an_instance_of(String),
+        meta_keywords: an_instance_of(String)
       ))
     end
   end

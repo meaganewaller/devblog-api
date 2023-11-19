@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: projects
@@ -43,12 +45,12 @@ class Project < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :notion_id, presence: true, uniqueness: true
   validates :description, presence: true
-  validates :difficulty_level, inclusion: { in: ALLOWED_DIFFICULTY_LEVELS, allow_nil: true }
-  validates :repository_url, format: { with: URI::DEFAULT_PARSER.make_regexp },
+  validates :difficulty_level, inclusion: {in: ALLOWED_DIFFICULTY_LEVELS, allow_nil: true}
+  validates :repository_url, format: {with: URI::DEFAULT_PARSER.make_regexp},
     if: ->(project) { project.repository_url.present? }
-  validates :homepage_url, format: { with: URI::DEFAULT_PARSER.make_regexp },
+  validates :homepage_url, format: {with: URI::DEFAULT_PARSER.make_regexp},
     if: ->(project) { project.homepage_url.present? }
-  validates :documentation_url, format: { with: URI::DEFAULT_PARSER.make_regexp },
+  validates :documentation_url, format: {with: URI::DEFAULT_PARSER.make_regexp},
     if: ->(project) { project.documentation_url.present? }
 
   validate :validate_demo_screenshot_urls
@@ -75,7 +77,7 @@ class Project < ApplicationRecord
   private
 
   def validate_demo_screenshot_urls
-    return unless demo_screenshot_urls.present?
+    return if demo_screenshot_urls.blank?
 
     demo_screenshot_urls.each do |url|
       uri = URI.parse(url)

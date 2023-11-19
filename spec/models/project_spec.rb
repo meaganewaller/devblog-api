@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: projects
@@ -36,7 +38,7 @@
 #  index_projects_on_tags      (tags) USING gin
 #  index_projects_on_title     (title) UNIQUE
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Project, type: :model do
   describe "validations" do
@@ -49,7 +51,10 @@ RSpec.describe Project, type: :model do
     it { should allow_value("https://example.com/documentation").for(:documentation_url) }
 
     describe "enums" do
-      it { should define_enum_for(:status).with_values([:active, :archived, :deprecated, :completed, :on_hold, :beta, :alpha, :experimental, :abandoned, :merged, :under_development, :stable, :unmaintained, :feature_frozen]) }
+      it {
+        should define_enum_for(:status).with_values(%i[active archived deprecated completed on_hold beta alpha experimental
+          abandoned merged under_development stable unmaintained feature_frozen])
+      }
     end
 
     describe "#validate_demo_screenshot_urls" do

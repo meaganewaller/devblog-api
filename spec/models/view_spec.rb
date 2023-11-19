@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: views
@@ -15,7 +17,7 @@
 #  index_views_on_viewable_slug_and_viewable_type                 (viewable_slug,viewable_type)
 #  index_views_on_viewable_slug_and_viewable_type_and_session_id  (viewable_slug,viewable_type,session_id) UNIQUE
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe View, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"

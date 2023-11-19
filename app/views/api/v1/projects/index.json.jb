@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 {
   projects: @projects.map do |project|
-              render partial: "project", locals: { project: project }
-          end,
-            pagy: @pagy_metadata
+              render partial: "project", locals: {project:}
+            end,
+  pagy: @pagy_metadata
 }

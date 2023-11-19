@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem "active_model_serializers"
 gem "activerecord-postgresql-adapter"
 gem "bleib", "~> 0.0"
 gem "good_job", "~> 3.15"
+gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.5"
@@ -35,20 +37,20 @@ gem "rack-cors"
 gem "rails-healthcheck", "~> 1.4"
 gem "silencer", "~> 2.0", require: false
 
+gem "dotenv", "~> 2.8", groups: %i[development test]
+gem "dotenv-rails", "~> 2.8", groups: %i[development test]
+gem "fast_blank", platform: :mri
 gem "friendly_id", "~> 5.5"
 gem "nanoid", "~> 2.0"
-gem "fast_blank", platform: :mri
 gem "polist", "~> 1.4", require: false
-gem "dotenv", "~> 2.8", groups: [:development, :test]
-gem "dotenv-rails", "~> 2.8", groups: [:development, :test]
 
+gem "hashdiff", "~> 1.0", require: false
 gem "notion-ruby-client", "~> 1.1", require: false
 gem "notion_to_md"
-gem "hashdiff", "~> 1.0", require: false
 
+gem "counter_culture", "~> 3.2"
 gem "pagy", "~> 5.0"
-gem 'counter_culture', '~> 3.2'
-gem 'pg_search', "~> 2.3"
+gem "pg_search", "~> 2.3"
 
 group :development, :test do
   gem "amazing_print", "~> 1.5", require: false

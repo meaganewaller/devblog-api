@@ -9,7 +9,7 @@ module Api
         @reactions = post.reactions
         @user_reactions = @reactions.where(session_id: params[:session_id]) if params[:session_id]
       rescue ActiveRecord::RecordNotFound
-        render json: { error: 'Post not found' }, status: :not_found
+        render json: {error: "Post not found"}, status: :not_found
       end
 
       def create
@@ -17,12 +17,12 @@ module Api
         @reaction = post.reactions.build(reaction_params)
 
         if @reaction.save
-          render json: { status: 'SUCCESS', message: 'Reaction created', data: @reaction }, status: :created
+          render json: {status: "SUCCESS", message: "Reaction created", data: @reaction}, status: :created
         else
-          render json: { errors: @reaction.errors.full_messages }, status: :unprocessable_entity
+          render json: {errors: @reaction.errors.full_messages}, status: :unprocessable_entity
         end
       rescue ActiveRecord::RecordNotFound
-        render json: { error: 'Post not found' }, status: :not_found
+        render json: {error: "Post not found"}, status: :not_found
       end
 
       private

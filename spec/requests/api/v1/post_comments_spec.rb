@@ -1,15 +1,17 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe 'POST /api/v1/post_comments' do
-  let!(:blog_post) { create(:post, title: 'Sample Title') }
+require "rails_helper"
 
-  scenario 'adding a post comment' do
-    post '/api/v1/post_comments', params: {
+RSpec.describe "POST /api/v1/post_comments" do
+  let!(:blog_post) { create(:post, title: "Sample Title") }
+
+  scenario "adding a post comment" do
+    post "/api/v1/post_comments", params: {
       discussion_comment: {
         discussion: {
-          title: 'Sample Title'
+          title: "Sample Title"
         },
-        action: 'created'
+        action: "created"
       }
     }, as: :json
 
@@ -20,14 +22,14 @@ RSpec.describe 'POST /api/v1/post_comments' do
     expect(blog_post.reload.comment_count).to eq(1)
   end
 
-  scenario 'deleting a post comment' do
+  scenario "deleting a post comment" do
     blog_post.increment!(:comment_count)
-    post '/api/v1/post_comments', params: {
+    post "/api/v1/post_comments", params: {
       discussion_comment: {
         discussion: {
-          title: 'Sample Title'
+          title: "Sample Title"
         },
-        action: 'deleted'
+        action: "deleted"
       }
     }, as: :json
 
@@ -38,13 +40,13 @@ RSpec.describe 'POST /api/v1/post_comments' do
     expect(blog_post.reload.comment_count).to eq(0)
   end
 
-  scenario 'comment for non-existent post' do
-    post '/api/v1/post_comments', params: {
+  scenario "comment for non-existent post" do
+    post "/api/v1/post_comments", params: {
       discussion_comment: {
         discussion: {
-          title: 'Non-existent Title'
+          title: "Non-existent Title"
         },
-        action: 'created'
+        action: "created"
       }
     }, as: :json
 

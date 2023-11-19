@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json = {
   comment_count: post.comment_count,
   content: post.content,
@@ -26,9 +28,8 @@ json[:category][:title] = post.category.title
 if reactions
   json[:reactions] = post
     .reactions
-    .group_by { |reaction| reaction.kind }
-    .map { |kind, reactions| [kind, reactions.count] }
-    .to_h
+    .group_by(&:kind)
+    .transform_values(&:count)
 end
 
 json

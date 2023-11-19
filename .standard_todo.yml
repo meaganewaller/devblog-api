@@ -1,0 +1,12 @@
+# Auto generated files with errors to ignore.
+# Remove from this list as you refactor files.
+---
+ignore:
+- app/adapters/notion_adapter.rb:
+  - Rails/EnvironmentVariableAccess
+- app/services/api/v1/create_contact_entry.rb:
+  - Rails/EnvironmentVariableAccess
+- db/migrate/20230830170154_create_projects.rb:
+  - Rails/ThreeStateBooleanColumn
+- db/migrate/20231007155127_create_good_jobs.rb:
+  - Rails/ThreeStateBooleanColumn

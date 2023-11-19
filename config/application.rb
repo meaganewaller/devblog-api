@@ -1,17 +1,19 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'rails'
+require_relative "boot"
+
+require "rails"
 # Pick the frameworks you want:
-require 'active_model/railtie'
-require 'active_job/railtie'
-require 'active_record/railtie'
-require 'active_storage/engine'
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+require "active_storage/engine"
+require "action_controller/railtie"
+require "action_mailer/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
-require 'action_view/railtie'
-require 'good_job/engine'
+require "action_view/railtie"
+require "good_job/engine"
 # require "action_cable/engine"
 # require "rails/test_unit/railtie"
 
@@ -20,15 +22,15 @@ require 'good_job/engine'
 Bundler.require(*Rails.groups)
 
 # Load dotenv only in development or test environment
-Dotenv::Railtie.load if %w[development test].include? ENV['RAILS_ENV']
+Dotenv::Railtie.load if %w[development test].include? ENV["RAILS_ENV"]
 
 module Blog
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.eager_load_paths << Rails.root.join('app', 'services')
-    config.eager_load_paths << Rails.root.join('lib')
-    config.eager_load_paths << Rails.root.join('lib', 'notion', 'api', 'endpoints')
+    config.eager_load_paths << Rails.root.join("app", "services")
+    config.eager_load_paths << Rails.root.join("lib")
+    config.eager_load_paths << Rails.root.join("lib", "notion", "api", "endpoints")
 
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash
@@ -54,7 +56,7 @@ module Blog
     config.active_job.queue_adapter = :good_job
 
     config.i18n.default_locale = :en
-    config.time_zone = 'Eastern Time (US & Canada)'
+    config.time_zone = "Eastern Time (US & Canada)"
     config.active_record.default_timezone = :local
   end
 end

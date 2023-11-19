@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: views
@@ -18,6 +20,6 @@
 class View < ApplicationRecord
   belongs_to :viewable, polymorphic: true, primary_key: :slug, foreign_key: :viewable_slug
 
-  validates :session_id, presence: true, uniqueness: { scope: %i[viewable_slug viewable_type] }
+  validates :session_id, presence: true, uniqueness: {scope: %i[viewable_slug viewable_type]}
   counter_culture :viewable
 end

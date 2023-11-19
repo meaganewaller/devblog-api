@@ -3,10 +3,11 @@
 class ProjectFetcherJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     projects = NotionAdapter.fetch_projects
 
     return if projects.empty?
+
     existing_projects = Project.where(notion_id: projects.map { |project| project[:notion_id] }).index_by(&:notion_id)
 
     projects.each do |project|
@@ -28,41 +29,37 @@ class ProjectFetcherJob < ApplicationJob
   end
 
   def update_project(found_project, project)
-    begin
-      found_project.update!(
-        title: project[:title],
-        description: project[:description],
-        notion_created_at: project[:notion_created_at],
-        notion_updated_at: project[:notion_updated_at],
-        notion_id: project[:notion_id],
-        tags: project[:tags],
-        status: get_status(project[:status]),
-        # content: project[:content],
-      )
-    rescue ActiveRecord::RecordInvalid => e
-      Rails.logger.error("Validation error: #{e.message}")
-    rescue StandardError => e
-      Rails.logger.error("An error occurred during update: #{e.message}")
-    end
+    found_project.update!(
+      title: project[:title],
+      description: project[:description],
+      notion_created_at: project[:notion_created_at],
+      notion_updated_at: project[:notion_updated_at],
+      notion_id: project[:notion_id],
+      tags: project[:tags],
+      status: get_status(project[:status])
+      # content: project[:content],
+    )
+  rescue ActiveRecord::RecordInvalid => e
+    Rails.logger.error("Validation error: #{e.message}")
+  rescue => e
+    Rails.logger.error("An error occurred during update: #{e.message}")
   end
 
   def create_project(project)
-    begin
-      Project.create!(
-        notion_id: project[:notion_id],
-        title: project[:title],
-        description: project[:description],
-        notion_created_at: project[:notion_created_at],
-        notion_updated_at: project[:notion_updated_at],
-        tags: project[:tags],
-        status: get_status(project[:status]),
-        # content: project[:content],
-      )
-    rescue ActiveRecord::RecordInvalid => e
-      Rails.logger.error("Validation error: #{e.message}")
-    rescue StandardError => e
-      Rails.logger.error("An error occurred during update: #{e.message}")
-    end
+    Project.create!(
+      notion_id: project[:notion_id],
+      title: project[:title],
+      description: project[:description],
+      notion_created_at: project[:notion_created_at],
+      notion_updated_at: project[:notion_updated_at],
+      tags: project[:tags],
+      status: get_status(project[:status])
+      # content: project[:content],
+    )
+  rescue ActiveRecord::RecordInvalid => e
+    Rails.logger.error("Validation error: #{e.message}")
+  rescue => e
+    Rails.logger.error("An error occurred during update: #{e.message}")
   end
 
   def get_status(status)
@@ -79,15 +76,14 @@ class ProjectFetcherJob < ApplicationJob
 
   def get_category_id(category_notion_id)
     return unless category_notion_id
+
     Category.find_by(notion_id: category_notion_id)&.id
   end
 
   def get_cover_image(cover_image)
     return unless cover_image
-    if cover_image.key?("file")
-      return cover_image["file"]["url"]
-    else
-      return cover_image["external"]["url"]
-    end
+    return cover_image["file"]["url"] if cover_image.key?("file")
+
+    cover_image["external"]["url"]
   end
 end

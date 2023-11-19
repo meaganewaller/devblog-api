@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class CreateContactEntry
@@ -32,7 +34,7 @@ module Api
             heading_1: {
               rich_text: [{
                 type: "text",
-                text: {content: "Email from " + params[:name]}
+                text: {content: "Email from #{params[:name]}"}
               }]
             }
           },
@@ -61,4 +63,3 @@ module Api
     end
   end
 end
-

@@ -1,19 +1,17 @@
 # frozen_string_literal: true
 
 json = {
-  reaction_count: @reactions.size,
+  reaction_count: @reactions.size
 }
 
 json[:content] = @reactions
-  .group_by { |reaction| reaction.kind }
-  .map { |kind, reactions| [kind, reactions.count] }
-  .to_h
+  .group_by(&:kind)
+  .transform_values(&:count)
 
 if @user_reactions
   json[:user_content] = @user_reactions
-    .group_by { |reaction| reaction.kind }
-    .map { |kind, reactions| [kind, reactions.count] }
-    .to_h
+    .group_by(&:kind)
+    .transform_values(&:count)
 end
 
 json

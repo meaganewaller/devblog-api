@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/BlockLength
+
 require "rails_helper"
 
 RSpec.describe Api::V1::CreateContactEntry do
@@ -39,10 +43,12 @@ RSpec.describe Api::V1::CreateContactEntry do
           {
             object: "block",
             type: "heading_1",
+            # rubocop:disable Naming/VariableNumber
             heading_1: {
+              # rubocop:enable Naming/VariableNumber
               rich_text: [{
                 type: "text",
-                text: {content: "Email from " + params[:name]}
+                text: {content: "Email from #{params[:name]}"}
               }]
             }
           },
@@ -67,3 +73,5 @@ RSpec.describe Api::V1::CreateContactEntry do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength

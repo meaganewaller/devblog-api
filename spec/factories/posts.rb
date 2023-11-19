@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -38,7 +40,7 @@
 FactoryBot.define do
   factory :post do
     sequence(:title) { |n| Faker::Lorem.sentence(random_words_to_add: 4) + n.to_s }
-    notion_id   { Faker::Internet.uuid }
+    notion_id { Faker::Internet.uuid }
     description { Faker::Lorem.paragraph }
     sequence(:notion_slug) { |n| "#{Faker::Internet.slug}-#{n}" }
     notion_created_at { Faker::Date.backward(days: 14) }
@@ -57,7 +59,7 @@ FactoryBot.define do
 
     trait :published do
       published { true }
-      published_date { Date.today }
+      published_date { Time.zone.today }
       status { "published" }
     end
 
@@ -71,10 +73,9 @@ FactoryBot.define do
 
     trait :with_reactions do
       after :create do |post|
-        create_list :reaction, 3, post: post
+        create_list :reaction, 3, post:
       end
     end
-
 
     factory :drafting_post, traits: [:drafting]
     factory :published_post, traits: [:published]

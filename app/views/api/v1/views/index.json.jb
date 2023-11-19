@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 {
-  views_count: @views.size,
+  views_count: @views.size
 }

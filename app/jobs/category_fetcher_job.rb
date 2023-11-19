@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CategoryFetcherJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     categories = NotionAdapter.fetch_categories
 
     return if categories.empty?
@@ -21,7 +23,7 @@ class CategoryFetcherJob < ApplicationJob
     found_category.update(
       title: category[:title],
       description: category[:description],
-      notion_id: category[:notion_id],
+      notion_id: category[:notion_id]
     )
   end
 
@@ -29,7 +31,7 @@ class CategoryFetcherJob < ApplicationJob
     Category.create(
       title: category[:title],
       description: category[:description],
-      notion_id: category[:notion_id],
+      notion_id: category[:notion_id]
     )
   end
 end

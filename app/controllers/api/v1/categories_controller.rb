@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class CategoriesController < ApiController
       def index
-        if params["published_only"].present? && params["published_only"] == 'true'
-          @categories = Category.with_published_posts
+        @categories = if params["published_only"].present? && params["published_only"] == "true"
+          Category.with_published_posts
         else
-          @categories = Category.all
+          Category.all
         end
       end
 

@@ -10,18 +10,18 @@ module Api
       end
 
       def show
-        @view = View.find(params['id'])
+        @view = View.find(params["id"])
       end
 
       def create
         @existing_view = View.where(view_params)
 
         if @existing_view
-          render json: { status: 'OK', data: { view: @existing_view } }, status: :ok
+          render json: {status: "OK", data: {view: @existing_view}}, status: :ok
         else
           @view = View.new(view_params)
           if @view.save
-            render json: { status: 'SUCCESS', message: 'View created', data: @view }, status: :created
+            render json: {status: "SUCCESS", message: "View created", data: @view}, status: :created
           else
             render json: @view.errors, status: :unprocessable_entity
           end

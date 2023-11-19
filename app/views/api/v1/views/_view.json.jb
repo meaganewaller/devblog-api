@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json = {
   viewable_type: view.viewable_type,
   viewable_slug: view.viewable_slug,

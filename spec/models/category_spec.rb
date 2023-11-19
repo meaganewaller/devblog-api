@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -16,7 +18,7 @@
 #  index_categories_on_notion_id  (notion_id)
 #  index_categories_on_slug       (slug) UNIQUE
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Category, type: :model do
   describe "validations" do
