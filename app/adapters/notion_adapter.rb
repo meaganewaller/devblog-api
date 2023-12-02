@@ -11,7 +11,8 @@ class NotionAdapter
     title: "Title",
     summary: "Summary",
     date: "Date",
-    cover_image: "Cover Image"
+    cover_image: "Cover Image",
+    last_edited_time: "Last edited time",
   }.freeze
 
   def self.fetch_categories
@@ -105,15 +106,12 @@ class NotionAdapter
       description: from_rich_text(properties[PROPERTY_NAMES[:summary]]),
       published: properties.Published&.checkbox || false,
       published_date:,
-      notion_slug: from_rich_text(properties.Slug),
       notion_created_at: DateTime.parse(properties.Created.created_time),
       notion_updated_at: DateTime.parse(post.last_edited_time),
       tags: extract_tags(properties),
-      status: extract_status(properties),
       category_notion_id: extract_category_id(properties),
       cover_image: from_files(properties[PROPERTY_NAMES[:cover_image]]),
       meta_description: from_rich_text(properties["Meta Description"]),
-      meta_keywords: from_rich_text(properties["Meta Keywords"]),
       content: blocks_children(post.id)
     }
   end
@@ -135,15 +133,39 @@ class NotionAdapter
     properties["Content Pillar"]&.relation&.first&.id || ""
   end
 
+  def extract_repository_names(repo_names)
+    names = repo_names&.rollup&.array || []
+
+    names.map! do |repo_name|
+      repo_name&.title&.map(&:plain_text)&.join(" ")
+    end
+  end
+
+  def extract_repository_links(repo_links)
+    links = repo_links&.rollup&.array || []
+
+    links.map! do |repo_link|
+      repo_link&.url
+    end
+  end
+
   def transform_project(project)
     properties = project.properties
+
+    repository_links = extract_repository_links(properties["Repository Links"])
+    repository_names = extract_repository_names(properties["Repository Names"])
+
     {
-      notion_id: project.id,
-      title: from_title(properties[PROPERTY_NAMES[:title]]),
+      content: blocks_children(project.id),
+      creation_date: DateTime.parse(properties['Creation Date']&.date&.start),
       description: from_rich_text(properties[PROPERTY_NAMES[:summary]]),
+      link: properties["Link"]&.url || "",
       notion_created_at: DateTime.parse(properties.Created.created_time),
-      status: extract_status(properties),
-      cover_image: from_files(properties[PROPERTY_NAMES[:cover_imagee]])
+      notion_id: project.id,
+      notion_updated_at: DateTime.parse(project.last_edited_time),
+      repository_links: repository_links.zip(repository_names).map { |website, name| { website: website, name: name } },
+      tags: properties.Tags&.multi_select&.map(&:name) || [],
+      title: from_title(properties[PROPERTY_NAMES[:title]])
     }
   end
 

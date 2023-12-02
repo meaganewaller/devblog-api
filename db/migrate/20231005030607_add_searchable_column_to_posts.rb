@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AddSearchableColumnToPosts < ActiveRecord::Migration[7.0]
+  disable_ddl_transaction!
   def change
     safety_assured do
       execute <<-SQL
@@ -12,9 +13,12 @@ class AddSearchableColumnToPosts < ActiveRecord::Migration[7.0]
     ) STORED;
       SQL
     end
+
+    add_index :posts, :searchable, using: :gin, algorithm: :concurrently
   end
 
   def down
     remove_column :posts, :searchable
+    remove_index :posts, :searchable
   end
 end

@@ -6,17 +6,16 @@
 #
 #  id          :uuid             not null, primary key
 #  cover_image :string
-#  description :string
-#  slug        :string
-#  title       :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  notion_id   :string
+#  description :string           not null
+#  slug        :string           not null
+#  title       :string           not null
+#  notion_id   :string           not null
 #
 # Indexes
 #
-#  index_categories_on_notion_id  (notion_id)
+#  index_categories_on_notion_id  (notion_id) UNIQUE
 #  index_categories_on_slug       (slug) UNIQUE
+#  index_categories_on_title      (title) UNIQUE
 #
 FactoryBot.define do
   factory :category do

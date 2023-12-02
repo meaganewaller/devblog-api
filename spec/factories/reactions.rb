@@ -14,7 +14,7 @@
 # Indexes
 #
 #  index_reactions_on_post_id                          (post_id)
-#  index_reactions_on_session_id_and_kind_and_post_id  (session_id,kind,post_id) UNIQUE
+#  index_reactions_on_post_id_and_session_id_and_kind  (post_id,session_id,kind) UNIQUE
 #
 # Foreign Keys
 #

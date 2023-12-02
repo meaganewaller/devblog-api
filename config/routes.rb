@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       end
       resources :categories, only: %i[index show]
       resources :projects, only: %i[index show]
+      resources :workspaces, only: %i[index show]
       resources :views, only: %i[index create]
       post "contact", to: "contact#create"
       resource :post_comments, only: %i[create]

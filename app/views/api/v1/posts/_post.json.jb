@@ -7,7 +7,6 @@ json = {
   description: post.description,
   id: post.id,
   meta_description: post.meta_description,
-  meta_keywords: post.meta_keywords,
   notion_created_at: post.notion_created_at,
   notion_updated_at: post.notion_updated_at,
   published: post.published,
@@ -19,11 +18,13 @@ json = {
 }
 
 json[:category] = {}
-json[:category][:id] = post.category.id
-json[:category][:slug] = post.category.slug
-json[:category][:description] = post.category.description
-json[:category][:cover_image] = post.category.cover_image
-json[:category][:title] = post.category.title
+if post.category
+  json[:category][:id] = post.category_id
+  json[:category][:slug] = post.category.slug
+  json[:category][:description] = post.category.description
+  json[:category][:cover_image] = post.category.cover_image
+  json[:category][:title] = post.category.title
+end
 
 if reactions
   json[:reactions] = post
