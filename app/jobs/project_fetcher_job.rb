@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'open-uri'
+
 class ProjectFetcherJob < ApplicationJob
   queue_as :default
 
@@ -29,6 +31,14 @@ class ProjectFetcherJob < ApplicationJob
   end
 
   def update_project(found_project, project)
+    image = project[:cover_image]
+    image_url = image.dig("file", "url") || image.dig("external", "url")
+    if image_url.present?
+      puts "Downloading #{image_url}"
+      file = URI.open(image_url)
+      found_project.cover_image.attach(io: file, filename: "#{project.title.downcase.gsub(' ','_')}_cover_image.png")
+    end
+
     found_project.update!(
       content: project[:content],
       description: project[:description],
@@ -39,6 +49,7 @@ class ProjectFetcherJob < ApplicationJob
       repository_links: project[:repository_links],
       tags: project[:tags],
       title: project[:title],
+      cover_image: image_url,
     )
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error("Validation error: #{e.message}")
@@ -47,6 +58,9 @@ class ProjectFetcherJob < ApplicationJob
   end
 
   def create_project(project)
+    image = project[:cover_image]
+    image_url = image.dig("file", "url") || image.dig("external", "url")
+
     Project.create!(
       content: project[:content],
       description: project[:description],
@@ -57,8 +71,8 @@ class ProjectFetcherJob < ApplicationJob
       repository_links: project[:repository_links],
       tags: project[:tags],
       title: project[:title],
+      cover_image: image_url,
     )
-
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error("Validation error: #{e.message}")
   rescue => e

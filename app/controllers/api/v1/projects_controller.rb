@@ -8,7 +8,7 @@ module Api
         @projects = @projects.filter_by_language(params[:language]) if params[:language].present?
         @projects = @projects.filter_by_tag(params[:tag]) if params[:tag].present?
 
-        @pagy, @projects = pagy(@projects, items: 25)
+        @pagy, @projects = pagy(@projects, items: params[:count] || 10)
         @pagy_metadata = pagy_metadata(@pagy)
       end
 

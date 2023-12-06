@@ -5,7 +5,6 @@ json = {
   content: post.content,
   cover_image: post.cover_image,
   description: post.description,
-  id: post.id,
   meta_description: post.meta_description,
   notion_created_at: post.notion_created_at,
   notion_updated_at: post.notion_updated_at,

@@ -6,6 +6,7 @@
 #
 #  id                :uuid             not null, primary key
 #  content           :text             not null
+#  cover_image       :string
 #  description       :text             not null
 #  featured          :boolean          default(FALSE)
 #  link              :string

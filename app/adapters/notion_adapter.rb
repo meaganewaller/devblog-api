@@ -15,16 +15,18 @@ class NotionAdapter
     last_edited_time: "Last edited time",
   }.freeze
 
-  def self.fetch_categories
-    new.fetch_categories
-  end
+  class << self
+    def fetch_categories
+      new.fetch_categories
+    end
 
-  def self.fetch_posts
-    new.fetch_posts
-  end
+    def fetch_posts
+      new.fetch_posts
+    end
 
-  def self.fetch_projects
-    new.fetch_projects
+    def fetch_projects
+      new.fetch_projects
+    end
   end
 
   def initialize(client = Notion::Client.new)
@@ -165,7 +167,8 @@ class NotionAdapter
       notion_updated_at: DateTime.parse(project.last_edited_time),
       repository_links: repository_links.zip(repository_names).map { |website, name| { website: website, name: name } },
       tags: properties.Tags&.multi_select&.map(&:name) || [],
-      title: from_title(properties[PROPERTY_NAMES[:title]])
+      title: from_title(properties[PROPERTY_NAMES[:title]]),
+      cover_image: from_files(properties[PROPERTY_NAMES[:cover_image]]),
     }
   end
 
