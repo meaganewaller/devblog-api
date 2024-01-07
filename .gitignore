@@ -30,4 +30,6 @@
 spec/failures.txt
 coverage/
 .env.*.local
+.env.local
 .env
+

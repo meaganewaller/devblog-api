@@ -8,8 +8,8 @@ Reaction.delete_all
 View.delete_all
 Post.delete_all
 
-GoodJob::Batch.enqueue(on_finish: PostFetcherJob) do
-  CategoryFetcherJob.perform_now
+GoodJob::Batch.enqueue(on_finish: CategoryFetcherJob) do
+  PostFetcherJob.perform_now
   ProjectFetcherJob.perform_now
 end
 
