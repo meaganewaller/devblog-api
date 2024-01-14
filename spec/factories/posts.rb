@@ -45,7 +45,6 @@ FactoryBot.define do
     sequence(:title) { |n| Faker::Lorem.sentence(random_words_to_add: 4) + n.to_s }
     notion_id { Faker::Internet.uuid }
     description { Faker::Lorem.paragraph }
-    sequence(:notion_slug) { |n| "#{Faker::Internet.slug}-#{n}" }
     notion_created_at { Faker::Date.backward(days: 14) }
     notion_updated_at { Faker::Date.backward(days: 14) }
     # tags { Faker::Lorem.words(number: 3) }

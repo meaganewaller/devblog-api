@@ -4,11 +4,11 @@ module Api
   module V1
     class CategoriesController < ApiController
       def index
-        @categories = if params["published_only"].present? && params["published_only"] == "true"
-          Category.with_published_posts
-        else
-          Category.all
-        end
+        @categories = if params['published_only'].present? && params['published_only'] == 'true'
+                        Category.with_published_posts
+                      else
+                        Category.all
+                      end
       end
 
       def show

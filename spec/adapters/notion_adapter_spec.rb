@@ -45,7 +45,6 @@ RSpec.describe NotionAdapter do
         notion_updated_at: an_instance_of(DateTime),
         tags: an_instance_of(Array),
         category_notion_id: an_instance_of(String),
-        notion_slug: an_instance_of(String),
         content: an_instance_of(String),
         meta_description: an_instance_of(String),
         meta_keywords: an_instance_of(String)

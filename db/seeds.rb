@@ -69,7 +69,6 @@ end
 #     title: Faker::TvShows::Seinfeld.quote,
 #     category_id: Category.pluck(:id).sample,
 #     notion_id: Faker::Internet.uuid,
-#     notion_slug: Faker::Internet.slug
 #   )
 # end
 #

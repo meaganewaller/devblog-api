@@ -47,15 +47,6 @@ RSpec.describe Post, type: :model do
     it { should validate_presence_of(:notion_updated_at) }
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:notion_id) }
-    it { should validate_presence_of(:notion_slug) }
-
-    it "validates notion_slug case-sensitively uniqueness" do
-      existing_post = create(:post)
-      new_post = build(:post, notion_slug: existing_post.notion_slug)
-
-      expect(new_post).not_to be_valid
-      expect(new_post.errors[:notion_slug]).to include("has already been taken")
-    end
   end
 
   describe "associations" do
@@ -85,13 +76,6 @@ RSpec.describe Post, type: :model do
 
     it ".needs_refinement should return posts with status 'needs_refinement'" do
       expect(Post.needs_refinement).to eq([needs_refinement_post])
-    end
-  end
-
-  describe "friendly_id" do
-    it "should use notion_slug for slugged parameter" do
-      post = create(:post)
-      expect(post.slug).to eq(post.notion_slug.parameterize)
     end
   end
 end
