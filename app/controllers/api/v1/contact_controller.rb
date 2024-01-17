@@ -5,6 +5,11 @@ module Api
     class ContactController < ApplicationController
       def create
         @contact = Api::V1::CreateContactEntry.call(contact_params)
+        if @contact
+          render json: { message: 'Contact created successfully' }, status: :created
+        else
+          render json: { message: 'Contact not created' }, status: :unprocessable_entity
+        end
       end
 
       private
