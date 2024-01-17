@@ -4,13 +4,12 @@ module Api
   module V1
     class CreateContactEntry
       def self.call(params)
-        puts "PARAMS ARE: #{params.inspect}"
         properties = {
           Name: {
             title: [
               {
                 text: {
-                  content: params['name']
+                  content: params[:name]
                 }
               }
             ]

@@ -9,6 +9,8 @@
 #  description :string           not null
 #  slug        :string           not null
 #  title       :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #  notion_id   :string           not null
 #
 # Indexes

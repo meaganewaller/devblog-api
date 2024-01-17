@@ -41,7 +41,6 @@
 
 FactoryBot.define do
   factory :post do
-    inbox
     sequence(:title) { |n| Faker::Lorem.sentence(random_words_to_add: 4) + n.to_s }
     notion_id { Faker::Internet.uuid }
     description { Faker::Lorem.paragraph }
@@ -56,12 +55,11 @@ FactoryBot.define do
 
     trait :with_reactions do
       after :create do |post|
-        create_list :reaction, 3, post: post
+        create_list :reaction, 3, post:
       end
     end
 
     trait :published do
-      done
       published { true }
       published_date { Faker::Date.backward(days: 14) }
     end

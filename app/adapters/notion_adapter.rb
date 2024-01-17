@@ -2,17 +2,17 @@
 
 class NotionAdapter
   DATABASE_IDS = {
-    category: ENV["NOTION_CATEGORY_DATABASE_ID"],
-    blog: ENV["NOTION_BLOG_DATABASE_ID"],
-    project: ENV["NOTION_PROJECT_DATABASE_ID"]
+    category: ENV['NOTION_CATEGORY_DATABASE_ID'],
+    blog: ENV['NOTION_BLOG_DATABASE_ID'],
+    project: ENV['NOTION_PROJECT_DATABASE_ID']
   }.freeze
 
   PROPERTY_NAMES = {
-    title: "Title",
-    summary: "Summary",
-    date: "Date",
-    cover_image: "Cover Image",
-    last_edited_time: "Last edited time",
+    title: 'Title',
+    summary: 'Summary',
+    date: 'Date',
+    cover_image: 'Cover Image',
+    last_edited_time: 'Last edited time'
   }.freeze
 
   class << self
@@ -60,24 +60,24 @@ class NotionAdapter
   def blog_post_sorts
     [
       {
-        property: "Date",
-        direction: "descending"
+        property: 'Date',
+        direction: 'descending'
       }
     ]
   end
 
   def blog_post_filters
     {
-      property: "Type",
+      property: 'Type',
       select: {
-        equals: "Post"
+        equals: 'Post'
       }
     }
   end
 
   def fetch_records(database_id, filter = nil, sorts = nil)
     records = []
-    query_options = {database_id:}
+    query_options = { database_id: }
     query_options[:filter] = filter if filter
     query_options[:sorts] = sorts if sorts
 
@@ -113,7 +113,7 @@ class NotionAdapter
       tags: extract_tags(properties),
       category_notion_id: extract_category_id(properties),
       cover_image: from_files(properties[PROPERTY_NAMES[:cover_image]]),
-      meta_description: from_rich_text(properties["Meta Description"]),
+      meta_description: from_rich_text(properties['Meta Description']),
       content: blocks_children(post.id)
     }
   end
@@ -128,18 +128,18 @@ class NotionAdapter
   end
 
   def extract_status(properties)
-    properties.Status&.status&.name || ""
+    properties.Status&.status&.name || ''
   end
 
   def extract_category_id(properties)
-    properties["Content Pillar"]&.relation&.first&.id || ""
+    properties['Content Pillar']&.relation&.first&.id || ''
   end
 
   def extract_repository_names(repo_names)
     names = repo_names&.rollup&.array || []
 
     names.map! do |repo_name|
-      repo_name&.title&.map(&:plain_text)&.join(" ")
+      repo_name&.title&.map(&:plain_text)&.join(' ')
     end
   end
 
@@ -154,30 +154,30 @@ class NotionAdapter
   def transform_project(project)
     properties = project.properties
 
-    repository_links = extract_repository_links(properties["Repository Links"])
-    repository_names = extract_repository_names(properties["Repository Names"])
+    repository_links = extract_repository_links(properties['Repository Links'])
+    repository_names = extract_repository_names(properties['Repository Names'])
 
     {
       content: blocks_children(project.id),
       creation_date: DateTime.parse(properties['Creation Date']&.date&.start),
       description: from_rich_text(properties[PROPERTY_NAMES[:summary]]),
-      link: properties["Link"]&.url || "",
+      link: properties['Link']&.url || '',
       notion_created_at: DateTime.parse(properties.Created.created_time),
       notion_id: project.id,
       notion_updated_at: DateTime.parse(project.last_edited_time),
-      repository_links: repository_links.zip(repository_names).map { |website, name| { website: website, name: name } },
+      repository_links: repository_links.zip(repository_names).map { |website, name| { website:, name: } },
       tags: properties.Tags&.multi_select&.map(&:name) || [],
       title: from_title(properties[PROPERTY_NAMES[:title]]),
-      cover_image: from_files(properties[PROPERTY_NAMES[:cover_image]]),
+      cover_image: from_files(properties[PROPERTY_NAMES[:cover_image]])
     }
   end
 
   def from_rich_text(property)
-    property&.rich_text&.reduce("") { |acc, curr| acc + curr.plain_text } || ""
+    property&.rich_text&.reduce('') { |acc, curr| acc + curr.plain_text } || ''
   end
 
   def from_files(property)
-    property&.files&.first || ""
+    property&.files&.first || ''
   end
 
   def from_title(property)
@@ -189,47 +189,47 @@ class NotionAdapter
     @client.block_children(block_id: page_id) do |page|
       all_blocks.concat(page.results)
     end
-    all_blocks.reduce("") { |acc, curr| acc + to_md(curr) }
+    all_blocks.reduce('') { |acc, curr| acc + to_md(curr) }
   end
 
   def to_md(block)
-    prefix = ""
-    suffix = ""
+    prefix = ''
+    suffix = ''
 
-    case block["type"]
-    when "paragraph"
+    case block['type']
+    when 'paragraph'
       # do nothing
     when /heading_(\d)/
       prefix = "#{"\n\n#" * Regexp.last_match(1).to_i} "
-      block[block["type"].to_s]["rich_text"].map { _1["annotations"]["bold"] = false } # unbold headings
+      block[block['type'].to_s]['rich_text'].map { _1['annotations']['bold'] = false } # unbold headings
       suffix = "\n\n"
-    when "callout"
+    when 'callout'
       # do nothing
-    when "quote"
-      prefix = "> "
-    when "bulleted_list_item"
-      prefix = "- "
-    when "numbered_list_item"
-      prefix = "1. "
-    when "to_do"
-      prefix = block.to_do["checked"] ? "- [x] " : "- [ ] "
-    when "toggle"
+    when 'quote'
+      prefix = '> '
+    when 'bulleted_list_item'
+      prefix = '- '
+    when 'numbered_list_item'
+      prefix = '1. '
+    when 'to_do'
+      prefix = block.to_do['checked'] ? '- [x] ' : '- [ ] '
+    when 'toggle'
       # do nothing
-    when "code"
-      prefix = "\n```#{block["code"]["language"].split.first}\n"
+    when 'code'
+      prefix = "\n```#{block['code']['language'].split.first}\n"
       suffix = "\n```\n"
-    when "image"
-      return "![#{RichText.to_md(block.image["caption"])}](#{block.image[block.image["type"]]["url"]})"
-    when "equation"
-      return "$$#{block.equation["expression"]}$$"
-    when "divider"
-      return "---"
+    when 'image'
+      return "![#{RichText.to_md(block.image['caption'])}](#{block.image[block.image['type']]['url']})"
+    when 'equation'
+      return "$$#{block.equation['expression']}$$"
+    when 'divider'
+      return '---'
     else
-      raise "Unable to convert the block"
+      raise 'Unable to convert the block'
     end
 
     # Only for types with rich_text, others should return in `case`
-    prefix + RichText.to_md(block[block["type"].to_s]["rich_text"]) + suffix
+    prefix + RichText.to_md(block[block['type'].to_s]['rich_text']) + suffix
   rescue RuntimeError => e
     puts "#{e.message}: #{JSON.pretty_generate(to_h)}"
     "```json\n#{JSON.pretty_generate(to_h)}\n```"
@@ -241,7 +241,7 @@ class NotionAdapter
     ].each { attr_reader _1 }
 
     def self.to_md(obj)
-      return "" unless obj
+      return '' unless obj
 
       obj.is_a?(Array) ? obj.map { |item| new(item).to_md }.join : new(obj).to_md
     end
@@ -254,13 +254,13 @@ class NotionAdapter
       md = plain_text
 
       # Shortcut for equation
-      return " $#{md}$ " if type == "equation"
+      return " $#{md}$ " if type == 'equation'
 
-      md = " <u>#{md}</u> " if annotations["underline"]
-      md = " `#{md}` " if annotations["code"]
-      md = " **#{md}** " if annotations["bold"]
-      md = " *#{md}* " if annotations["italic"]
-      md = " ~~#{md}~~ " if annotations["strikethrough"]
+      md = " <u>#{md}</u> " if annotations['underline']
+      md = " `#{md}` " if annotations['code']
+      md = " **#{md}** " if annotations['bold']
+      md = " *#{md}* " if annotations['italic']
+      md = " ~~#{md}~~ " if annotations['strikethrough']
       md = " [#{md}](#{href}) " if href
       md
     end

@@ -2,20 +2,20 @@
 
 # rubocop:disable Metrics/BlockLength
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Api::V1::CreateContactEntry do
-  describe ".call" do
-    it "creates a Notion page" do
+  describe '.call' do
+    it 'creates a Notion page' do
       params = {
-        name: "John Doe",
-        email: "john@example.com",
-        subject: "Hello",
-        message: "Hello, World!"
+        'name' => 'John Doe',
+        'email' => 'john@example.com',
+        'subject' => 'Hello',
+        'message' => 'Hello, World!'
       }
 
       expect_any_instance_of(Notion::Client).to receive(:create_page).with(
-        parent: {database_id: ENV["NOTION_CONTACT_FORM_DATABASE_ID"]},
+        parent: { database_id: ENV['NOTION_CONTACT_FORM_DATABASE_ID'] },
         properties: {
           Name: {
             title: [
@@ -41,24 +41,24 @@ RSpec.describe Api::V1::CreateContactEntry do
         },
         children: [
           {
-            object: "block",
-            type: "heading_1",
+            object: 'block',
+            type: 'heading_1',
             # rubocop:disable Naming/VariableNumber
             heading_1: {
               # rubocop:enable Naming/VariableNumber
               rich_text: [{
-                type: "text",
-                text: {content: "Email from #{params[:name]}"}
+                type: 'text',
+                text: { content: "Email from #{params[:name]}" }
               }]
             }
           },
           {
-            object: "block",
-            type: "paragraph",
+            object: 'block',
+            type: 'paragraph',
             paragraph: {
               rich_text: [
                 {
-                  type: "text",
+                  type: 'text',
                   text: {
                     content: params[:message]
                   }

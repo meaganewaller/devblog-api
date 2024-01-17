@@ -12,7 +12,8 @@ class CategoryFetcherJob < ApplicationJob
       found_category = Category.find_by(notion_id: category[:notion_id])
       next if found_category && found_category.updated_at > category[:last_edited_time].to_datetime
 
-      update_category(found_category, category) if found_category
+      return update_category(found_category, category) if found_category
+
       create_category(category)
     end
   end

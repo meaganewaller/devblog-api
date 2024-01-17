@@ -25,7 +25,7 @@ class PostFetcherJob < ApplicationJob
   private
 
   def skip?(found_post, post)
-    found_post && found_post.notion_updated_at >= post[:notion_updated_at].to_date
+    found_post && found_post.updated_at <= post[:notion_updated_at].to_date
   end
 
   def update_post(found_post, post)
@@ -39,11 +39,11 @@ class PostFetcherJob < ApplicationJob
       published_date: post[:published_date],
       tags: post[:tags],
       title: post[:title],
-      category_id: get_category_id(post[:category_notion_id]),
+      category_id: get_category_id(post[:category_notion_id])
     )
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error("Validation error: #{e.message}")
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("An error occurred during update: #{e.message}")
   end
 
@@ -60,11 +60,12 @@ class PostFetcherJob < ApplicationJob
       tags: post[:tags],
       title: post[:title],
       notion_id: post[:notion_id],
-      category_id: get_category_id(post[:category_notion_id]),
+      category_id: get_category_id(post[:category_notion_id])
     )
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error("Validation error: #{e.message}")
-  rescue => e
+  rescue StandardError => e
+    puts e.message
     Rails.logger.error("An error occurred during update: #{e.message}")
   end
 
@@ -75,13 +76,11 @@ class PostFetcherJob < ApplicationJob
   end
 
   def get_cover_image(cover_image)
-    return unless cover_image.blank? || cover_image.empty?
-    if cover_image["type"] == "external"
-      return cover_image["external"]["url"]
-    end
+    return if cover_image.blank? || cover_image.empty? || cover_image.nil?
+    return cover_image['external']['url'] if cover_image['type'] == 'external'
 
-    if cover_image["type"] == "file"
-      return cover_image["file"]["url"]
-    end
+    return unless cover_image['type'] == 'file'
+
+    cover_image['file']['url']
   end
 end

@@ -33,6 +33,7 @@ class Project < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :notion_id, presence: true, uniqueness: true
   validates :description, presence: true
+  validates :content, presence: true
 
   validate :repository_links_are_valid_urls
 
@@ -44,7 +45,7 @@ class Project < ApplicationRecord
     return if repository_links.blank?
 
     repository_links.each do |key, value|
-      if key == "url"
+      if key == 'url'
         uri = URI.parse(value)
         errors.add(:repository_links, "contains an invalid URL: #{value}") unless
         uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)

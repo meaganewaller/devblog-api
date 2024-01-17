@@ -1,0 +1,367 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notion.com/v1/databases/45bed0aa6f824a46bc1de73123b2d6cb/query
+    body:
+      encoding: UTF-8
+      string: '{"page_size":100}'
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Notion Ruby Client/1.2.2
+      Authorization:
+      - Bearer <NOTION_TOKEN>
+      Notion-Version:
+      - '2022-02-22'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 17 Jan 2024 01:58:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - 74d1174e-f432-4c11-9fb6-a96e41a664ee
+      Etag:
+      - W/"3c98-+4PdH5MfXhRUj7XSKJ+lXdXiDO0"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=FCTiPHNIjueGHWC4qi6.b2kVdFxO7xGsl9vLKP1h_qg-1705456739-1-Ad5qdo+jGJ7/UGTv+8gRdCiC2ccCa9ZD0EMkVup4NIc6JMkxaubX9m7S79bGUhJ7ksS7fYt89VEaSkOacN7BjPQ=;
+        path=/; expires=Wed, 17-Jan-24 02:28:59 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 846aff0a099b32e3-JAX
+    body:
+      encoding: UTF-8
+      string: "{\"object\":\"list\",\"results\":[{\"object\":\"page\",\"id\":\"b94cf3e3-3bde-4181-b86c-267a82503055\",\"created_time\":\"2023-12-06T01:49:00.000Z\",\"last_edited_time\":\"2023-12-06T01:56:00.000Z\",\"created_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"last_edited_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"cover\":null,\"icon\":{\"type\":\"emoji\",\"emoji\":\"\U0001F52D\"},\"parent\":{\"type\":\"database_id\",\"database_id\":\"45bed0aa-6f82-4a46-bc1d-e73123b2d6cb\"},\"archived\":false,\"properties\":{\"Summary\":{\"id\":\"ANvT\",\"type\":\"rich_text\",\"rich_text\":[{\"type\":\"text\",\"text\":{\"content\":\"rails
+        app using reality-tv scraped data\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"rails
+        app using reality-tv scraped data\",\"href\":null}]},\"ID\":{\"id\":\"Cji~\",\"type\":\"unique_id\",\"unique_id\":{\"prefix\":\"PROJ\",\"number\":5}},\"Link\":{\"id\":\"HQ~%5D\",\"type\":\"url\",\"url\":null},\"Featured\":{\"id\":\"ITg%7D\",\"type\":\"checkbox\",\"checkbox\":false},\"Last
+        edited time\":{\"id\":\"L%7CgO\",\"type\":\"last_edited_time\",\"last_edited_time\":\"2023-12-06T01:56:00.000Z\"},\"Repository
+        Names\":{\"id\":\"PG%60w\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"survivor-astrology\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"survivor-astrology\",\"href\":null}]},{\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"reality-scraper\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"reality-scraper\",\"href\":null}]}],\"function\":\"show_original\"}},\"Cover
+        Image\":{\"id\":\"R%5BR%3A\",\"type\":\"files\",\"files\":[{\"name\":\"6b9e29dca57967575f104453fd6d12db.jpg\",\"type\":\"file\",\"file\":{\"url\":\"https://prod-files-secure.s3.us-west-2.amazonaws.com/9cf7ee65-e546-4635-82d8-e305b1e4351f/0e58137a-f9ba-4e6b-8c16-bffc3929fdfc/6b9e29dca57967575f104453fd6d12db.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240117%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240117T015859Z&X-Amz-Expires=3600&X-Amz-Signature=4e786468db25d9ec39f041d62a3ae2a86316da15ef55df9dd63b9c6633c882f9&X-Amz-SignedHeaders=host&x-id=GetObject\",\"expiry_time\":\"2024-01-17T02:58:59.740Z\"}}]},\"Repository
+        Links\":{\"id\":\"YNTP\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/survivor-astrology\"},{\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/reality-scraper\"}],\"function\":\"show_original\"}},\"Creation
+        Date\":{\"id\":\"a%3ALR\",\"type\":\"date\",\"date\":{\"start\":\"2021-02-21\",\"end\":null,\"time_zone\":null}},\"Repositories\":{\"id\":\"h%3EmI\",\"type\":\"relation\",\"relation\":[{\"id\":\"4251d2a0-6b70-4a64-b6ed-51107f8d95a8\"},{\"id\":\"7c41ad04-52c7-4f0e-a107-041b0061822b\"}],\"has_more\":false},\"Created\":{\"id\":\"kZc%40\",\"type\":\"created_time\",\"created_time\":\"2023-12-06T01:49:00.000Z\"},\"Tags\":{\"id\":\"%7B%7CH%3C\",\"type\":\"select\",\"select\":null},\"Title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"Survivor
+        Astrology\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Survivor
+        Astrology\",\"href\":null}]}},\"url\":\"https://www.notion.so/Survivor-Astrology-b94cf3e33bde4181b86c267a82503055\",\"public_url\":null},{\"object\":\"page\",\"id\":\"b7f04049-4ad6-44ff-ab71-b23bf2efba1d\",\"created_time\":\"2023-12-04T23:57:00.000Z\",\"last_edited_time\":\"2023-12-04T23:59:00.000Z\",\"created_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"last_edited_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"cover\":null,\"icon\":{\"type\":\"emoji\",\"emoji\":\"\U0001F914\"},\"parent\":{\"type\":\"database_id\",\"database_id\":\"45bed0aa-6f82-4a46-bc1d-e73123b2d6cb\"},\"archived\":false,\"properties\":{\"Summary\":{\"id\":\"ANvT\",\"type\":\"rich_text\",\"rich_text\":[{\"type\":\"text\",\"text\":{\"content\":\"Built
+        for my talk at Ruby Conf 2023\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Built
+        for my talk at Ruby Conf 2023\",\"href\":null}]},\"ID\":{\"id\":\"Cji~\",\"type\":\"unique_id\",\"unique_id\":{\"prefix\":\"PROJ\",\"number\":4}},\"Link\":{\"id\":\"HQ~%5D\",\"type\":\"url\",\"url\":\"https://til.meaganwaller.com\"},\"Featured\":{\"id\":\"ITg%7D\",\"type\":\"checkbox\",\"checkbox\":false},\"Last
+        edited time\":{\"id\":\"L%7CgO\",\"type\":\"last_edited_time\",\"last_edited_time\":\"2023-12-04T23:59:00.000Z\"},\"Repository
+        Names\":{\"id\":\"PG%60w\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"til\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"til\",\"href\":null}]}],\"function\":\"show_original\"}},\"Cover
+        Image\":{\"id\":\"R%5BR%3A\",\"type\":\"files\",\"files\":[{\"name\":\"CleanShot
+        2023-11-10 at 23.54.43.gif\",\"type\":\"file\",\"file\":{\"url\":\"https://prod-files-secure.s3.us-west-2.amazonaws.com/9cf7ee65-e546-4635-82d8-e305b1e4351f/54f29f35-91bd-40aa-ab82-12e4c612ffee/CleanShot_2023-11-10_at_23.54.43.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240117%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240117T015859Z&X-Amz-Expires=3600&X-Amz-Signature=01c1e30e85e5c1ac8c9d15941f38231b70245fb8c73dbb230d550d842f2bc2f6&X-Amz-SignedHeaders=host&x-id=GetObject\",\"expiry_time\":\"2024-01-17T02:58:59.740Z\"}}]},\"Repository
+        Links\":{\"id\":\"YNTP\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/til\"}],\"function\":\"show_original\"}},\"Creation
+        Date\":{\"id\":\"a%3ALR\",\"type\":\"date\",\"date\":{\"start\":\"2023-11-15\",\"end\":null,\"time_zone\":null}},\"Repositories\":{\"id\":\"h%3EmI\",\"type\":\"relation\",\"relation\":[{\"id\":\"9a6be8a9-ac01-419a-9274-75b0b010a4e5\"}],\"has_more\":false},\"Created\":{\"id\":\"kZc%40\",\"type\":\"created_time\",\"created_time\":\"2023-12-04T23:57:00.000Z\"},\"Tags\":{\"id\":\"%7B%7CH%3C\",\"type\":\"select\",\"select\":null},\"Title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"TIL\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"TIL\",\"href\":null}]}},\"url\":\"https://www.notion.so/TIL-b7f040494ad644ffab71b23bf2efba1d\",\"public_url\":null},{\"object\":\"page\",\"id\":\"a4cfd8a4-46c8-4e9e-b8f3-bee029293406\",\"created_time\":\"2023-08-30T17:38:00.000Z\",\"last_edited_time\":\"2023-12-02T05:33:00.000Z\",\"created_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"last_edited_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"cover\":null,\"icon\":{\"type\":\"emoji\",\"emoji\":\"\U0001F6E0️\"},\"parent\":{\"type\":\"database_id\",\"database_id\":\"45bed0aa-6f82-4a46-bc1d-e73123b2d6cb\"},\"archived\":false,\"properties\":{\"Summary\":{\"id\":\"ANvT\",\"type\":\"rich_text\",\"rich_text\":[{\"type\":\"text\",\"text\":{\"content\":\"Making
+        my machine cute\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Making
+        my machine cute\",\"href\":null}]},\"ID\":{\"id\":\"Cji~\",\"type\":\"unique_id\",\"unique_id\":{\"prefix\":\"PROJ\",\"number\":1}},\"Link\":{\"id\":\"HQ~%5D\",\"type\":\"url\",\"url\":\"https://dots.meaganwaller.com\"},\"Featured\":{\"id\":\"ITg%7D\",\"type\":\"checkbox\",\"checkbox\":true},\"Last
+        edited time\":{\"id\":\"L%7CgO\",\"type\":\"last_edited_time\",\"last_edited_time\":\"2023-12-02T05:33:00.000Z\"},\"Repository
+        Names\":{\"id\":\"PG%60w\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"dotfiles\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"dotfiles\",\"href\":null}]}],\"function\":\"show_original\"}},\"Cover
+        Image\":{\"id\":\"R%5BR%3A\",\"type\":\"files\",\"files\":[{\"name\":\"dotfiles-min.png\",\"type\":\"file\",\"file\":{\"url\":\"https://prod-files-secure.s3.us-west-2.amazonaws.com/9cf7ee65-e546-4635-82d8-e305b1e4351f/ed9f2414-088c-457e-9621-0c08eafbbe06/dotfiles-min.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240117%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240117T015859Z&X-Amz-Expires=3600&X-Amz-Signature=27205685279ecdf4ed762754410944b23f8356de39289e26b20706b8542b8989&X-Amz-SignedHeaders=host&x-id=GetObject\",\"expiry_time\":\"2024-01-17T02:58:59.740Z\"}}]},\"Repository
+        Links\":{\"id\":\"YNTP\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/dotfiles\"}],\"function\":\"show_original\"}},\"Creation
+        Date\":{\"id\":\"a%3ALR\",\"type\":\"date\",\"date\":{\"start\":\"2014-03-20\",\"end\":null,\"time_zone\":null}},\"Repositories\":{\"id\":\"h%3EmI\",\"type\":\"relation\",\"relation\":[{\"id\":\"cd1f9885-693f-4d21-9ccb-ecfe2e4681d1\"}],\"has_more\":false},\"Created\":{\"id\":\"kZc%40\",\"type\":\"created_time\",\"created_time\":\"2023-08-30T17:38:00.000Z\"},\"Tags\":{\"id\":\"%7B%7CH%3C\",\"type\":\"select\",\"select\":null},\"Title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"Dotfiles\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Dotfiles\",\"href\":null}]}},\"url\":\"https://www.notion.so/Dotfiles-a4cfd8a446c84e9eb8f3bee029293406\",\"public_url\":null},{\"object\":\"page\",\"id\":\"ba495a54-4ad8-4981-9049-e02ca2efa33d\",\"created_time\":\"2023-08-30T17:38:00.000Z\",\"last_edited_time\":\"2023-12-02T05:34:00.000Z\",\"created_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"last_edited_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"cover\":null,\"icon\":{\"type\":\"emoji\",\"emoji\":\"\U0001F517\"},\"parent\":{\"type\":\"database_id\",\"database_id\":\"45bed0aa-6f82-4a46-bc1d-e73123b2d6cb\"},\"archived\":false,\"properties\":{\"Summary\":{\"id\":\"ANvT\",\"type\":\"rich_text\",\"rich_text\":[{\"type\":\"text\",\"text\":{\"content\":\"Blogging
+        like it’s 1999.\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Blogging
+        like it’s 1999.\",\"href\":null}]},\"ID\":{\"id\":\"Cji~\",\"type\":\"unique_id\",\"unique_id\":{\"prefix\":\"PROJ\",\"number\":2}},\"Link\":{\"id\":\"HQ~%5D\",\"type\":\"url\",\"url\":null},\"Featured\":{\"id\":\"ITg%7D\",\"type\":\"checkbox\",\"checkbox\":false},\"Last
+        edited time\":{\"id\":\"L%7CgO\",\"type\":\"last_edited_time\",\"last_edited_time\":\"2023-12-02T05:34:00.000Z\"},\"Repository
+        Names\":{\"id\":\"PG%60w\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"devblog-webring\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"devblog-webring\",\"href\":null}]}],\"function\":\"show_original\"}},\"Cover
+        Image\":{\"id\":\"R%5BR%3A\",\"type\":\"files\",\"files\":[{\"name\":\"https://images.unsplash.com/photo-1665686377065-08ba896d16fd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\"type\":\"external\",\"external\":{\"url\":\"https://images.unsplash.com/photo-1665686377065-08ba896d16fd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"}}]},\"Repository
+        Links\":{\"id\":\"YNTP\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/devblog-webring\"}],\"function\":\"show_original\"}},\"Creation
+        Date\":{\"id\":\"a%3ALR\",\"type\":\"date\",\"date\":{\"start\":\"2022-12-01\",\"end\":null,\"time_zone\":null}},\"Repositories\":{\"id\":\"h%3EmI\",\"type\":\"relation\",\"relation\":[{\"id\":\"4864ed73-52bf-4811-b92d-f02412c02fca\"}],\"has_more\":false},\"Created\":{\"id\":\"kZc%40\",\"type\":\"created_time\",\"created_time\":\"2023-08-30T17:38:00.000Z\"},\"Tags\":{\"id\":\"%7B%7CH%3C\",\"type\":\"select\",\"select\":null},\"Title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"Dev
+        Blog Webring\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Dev
+        Blog Webring\",\"href\":null}]}},\"url\":\"https://www.notion.so/Dev-Blog-Webring-ba495a544ad849819049e02ca2efa33d\",\"public_url\":null},{\"object\":\"page\",\"id\":\"bd48fb3d-efbf-4eec-9d60-2fcdd03ec5cc\",\"created_time\":\"2023-08-30T17:38:00.000Z\",\"last_edited_time\":\"2023-12-02T05:32:00.000Z\",\"created_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"last_edited_by\":{\"object\":\"user\",\"id\":\"e96d1887-af85-4405-adae-7996a198c0cc\"},\"cover\":null,\"icon\":{\"type\":\"emoji\",\"emoji\":\"\U0001F5C2️\"},\"parent\":{\"type\":\"database_id\",\"database_id\":\"45bed0aa-6f82-4a46-bc1d-e73123b2d6cb\"},\"archived\":false,\"properties\":{\"Summary\":{\"id\":\"ANvT\",\"type\":\"rich_text\",\"rich_text\":[{\"type\":\"text\",\"text\":{\"content\":\"Powering
+        this blog right now\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Powering
+        this blog right now\",\"href\":null}]},\"ID\":{\"id\":\"Cji~\",\"type\":\"unique_id\",\"unique_id\":{\"prefix\":\"PROJ\",\"number\":3}},\"Link\":{\"id\":\"HQ~%5D\",\"type\":\"url\",\"url\":\"https://meaganwaller.com\"},\"Featured\":{\"id\":\"ITg%7D\",\"type\":\"checkbox\",\"checkbox\":false},\"Last
+        edited time\":{\"id\":\"L%7CgO\",\"type\":\"last_edited_time\",\"last_edited_time\":\"2023-12-02T05:32:00.000Z\"},\"Repository
+        Names\":{\"id\":\"PG%60w\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"devblog-web\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"devblog-web\",\"href\":null}]},{\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"devblog-api\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"devblog-api\",\"href\":null}]}],\"function\":\"show_original\"}},\"Cover
+        Image\":{\"id\":\"R%5BR%3A\",\"type\":\"files\",\"files\":[{\"name\":\"https://images.unsplash.com/photo-1545239351-ef35f43d514b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\"type\":\"external\",\"external\":{\"url\":\"https://images.unsplash.com/photo-1545239351-ef35f43d514b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"}}]},\"Repository
+        Links\":{\"id\":\"YNTP\",\"type\":\"rollup\",\"rollup\":{\"type\":\"array\",\"array\":[{\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/devblog-web\"},{\"type\":\"url\",\"url\":\"https://github.com/meaganewaller/devblog-api\"}],\"function\":\"show_original\"}},\"Creation
+        Date\":{\"id\":\"a%3ALR\",\"type\":\"date\",\"date\":{\"start\":\"2022-11-01\",\"end\":null,\"time_zone\":null}},\"Repositories\":{\"id\":\"h%3EmI\",\"type\":\"relation\",\"relation\":[{\"id\":\"481e048b-9710-42cc-96ae-293d7358959e\"},{\"id\":\"606f314e-ba7b-4769-a08a-5a3fe7eecd23\"}],\"has_more\":false},\"Created\":{\"id\":\"kZc%40\",\"type\":\"created_time\",\"created_time\":\"2023-08-30T17:38:00.000Z\"},\"Tags\":{\"id\":\"%7B%7CH%3C\",\"type\":\"select\",\"select\":null},\"Title\":{\"id\":\"title\",\"type\":\"title\",\"title\":[{\"type\":\"text\",\"text\":{\"content\":\"Dev
+        Blog\",\"link\":null},\"annotations\":{\"bold\":false,\"italic\":false,\"strikethrough\":false,\"underline\":false,\"code\":false,\"color\":\"default\"},\"plain_text\":\"Dev
+        Blog\",\"href\":null}]}},\"url\":\"https://www.notion.so/Dev-Blog-bd48fb3defbf4eec9d602fcdd03ec5cc\",\"public_url\":null}],\"next_cursor\":null,\"has_more\":false,\"type\":\"page_or_database\",\"page_or_database\":{},\"request_id\":\"74d1174e-f432-4c11-9fb6-a96e41a664ee\"}"
+  recorded_at: Wed, 17 Jan 2024 01:58:59 GMT
+- request:
+    method: get
+    uri: https://api.notion.com/v1/blocks/b94cf3e3-3bde-4181-b86c-267a82503055/children?page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Notion Ruby Client/1.2.2
+      Authorization:
+      - Bearer <NOTION_TOKEN>
+      Notion-Version:
+      - '2022-02-22'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 17 Jan 2024 01:59:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - 78b7fb9c-1179-453f-9a53-269ea403d9b6
+      Etag:
+      - W/"345-ypzIqWQFjXLhyGJcflF/FwDNhhc"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=FRlI1l73PVpYiZJlEOz_eZYjg1FJuLrfRceWhSHN.74-1705456740-1-AXRqk5O2HSsP9FnGrhBM1dHH7rid69bCXde+ZMoN9FHS8JAnSJ8oKbHxUJ0zRU5GvDNrP1NqnZFUQL09S7FlQ8k=;
+        path=/; expires=Wed, 17-Jan-24 02:29:00 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 846aff102d3832ec-JAX
+    body:
+      encoding: UTF-8
+      string: '{"object":"list","results":[{"object":"block","id":"395d2dc5-73b0-46cf-bf27-932ad62ffc4e","parent":{"type":"page_id","page_id":"b94cf3e3-3bde-4181-b86c-267a82503055"},"created_time":"2023-12-06T01:55:00.000Z","last_edited_time":"2023-12-06T01:55:00.000Z","created_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"last_edited_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"rich_text":[{"type":"text","text":{"content":"Oh
+        yeah.","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Oh
+        yeah.","href":null}],"color":"default"}}],"next_cursor":null,"has_more":false,"type":"block","block":{},"request_id":"78b7fb9c-1179-453f-9a53-269ea403d9b6"}'
+  recorded_at: Wed, 17 Jan 2024 01:59:00 GMT
+- request:
+    method: get
+    uri: https://api.notion.com/v1/blocks/b7f04049-4ad6-44ff-ab71-b23bf2efba1d/children?page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Notion Ruby Client/1.2.2
+      Authorization:
+      - Bearer <NOTION_TOKEN>
+      Notion-Version:
+      - '2022-02-22'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 17 Jan 2024 01:59:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - 53b745bc-a017-45d6-a92a-766778ef6650
+      Etag:
+      - W/"90-I/60cioboBPC5cfH2kPV4AK5J/8"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=4d46gkiJ..o6toJN85oEEjCE9wXfWkkRUV0cuo1Uel8-1705456740-1-AYo3E+iWR+dTGervvNqXDUa8kG6IWW/hcPUos7ckNpa/WI6IDoW6YNgI8aUzVIDQleBWbAEkmOXbnz5TTrd09Y0=;
+        path=/; expires=Wed, 17-Jan-24 02:29:00 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 846aff1309f968ca-JAX
+    body:
+      encoding: UTF-8
+      string: '{"object":"list","results":[],"next_cursor":null,"has_more":false,"type":"block","block":{},"request_id":"53b745bc-a017-45d6-a92a-766778ef6650"}'
+  recorded_at: Wed, 17 Jan 2024 01:59:00 GMT
+- request:
+    method: get
+    uri: https://api.notion.com/v1/blocks/a4cfd8a4-46c8-4e9e-b8f3-bee029293406/children?page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Notion Ruby Client/1.2.2
+      Authorization:
+      - Bearer <NOTION_TOKEN>
+      Notion-Version:
+      - '2022-02-22'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 17 Jan 2024 01:59:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - 71168977-6e4e-437e-aa32-3ee6fcdd5c22
+      Etag:
+      - W/"533-oHQFCOq7E01FQ9LRmIkpc0bBPQQ"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=RZdSH3IxR8xfHE9sy6wjPYM.hrHzV7AZ3_QDRx3g2QI-1705456740-1-AcfzEYThaupiv8lSPnmeXHVyNc7iFPq5RbnAdANEPFrzKXRXDxTajE/AzA/ju9hmta9maQlET7uPrFSCylMQxtY=;
+        path=/; expires=Wed, 17-Jan-24 02:29:00 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 846aff163b2132e3-JAX
+    body:
+      encoding: UTF-8
+      string: '{"object":"list","results":[{"object":"block","id":"ff01eca7-5fc6-4c78-8e1d-60f7f498350b","parent":{"type":"page_id","page_id":"a4cfd8a4-46c8-4e9e-b8f3-bee029293406"},"created_time":"2023-10-12T19:40:00.000Z","last_edited_time":"2023-10-12T19:40:00.000Z","created_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"last_edited_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"rich_text":[{"type":"text","text":{"content":"My
+        dotfiles.","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"My
+        dotfiles.","href":null}],"color":"default"}},{"object":"block","id":"b3873434-2472-4745-9085-c74eff11c70a","parent":{"type":"page_id","page_id":"a4cfd8a4-46c8-4e9e-b8f3-bee029293406"},"created_time":"2023-10-12T19:40:00.000Z","last_edited_time":"2023-10-12T19:40:00.000Z","created_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"last_edited_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"rich_text":[],"color":"default"}}],"next_cursor":null,"has_more":false,"type":"block","block":{},"request_id":"71168977-6e4e-437e-aa32-3ee6fcdd5c22"}'
+  recorded_at: Wed, 17 Jan 2024 01:59:00 GMT
+- request:
+    method: get
+    uri: https://api.notion.com/v1/blocks/ba495a54-4ad8-4981-9049-e02ca2efa33d/children?page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Notion Ruby Client/1.2.2
+      Authorization:
+      - Bearer <NOTION_TOKEN>
+      Notion-Version:
+      - '2022-02-22'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 17 Jan 2024 01:59:01 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - b3fdddab-9aee-47c9-b760-a60d2e23d77c
+      Etag:
+      - W/"361-V0/q0WcBythB5AUnvgviEKlwKAg"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=dF1ypcd4XNg1os0_pD09EzzmXDMnKFJZrSu76MO9ZhM-1705456741-1-AdORMcR2Oq2OEKUoSWkbn40xNuWQutxih/X93oLH8Rt+7S3aSj0qxqA/99ixjyrla1xaoYUDh55ps1DlCleXSqU=;
+        path=/; expires=Wed, 17-Jan-24 02:29:01 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 846aff178e6a32ef-JAX
+    body:
+      encoding: UTF-8
+      string: '{"object":"list","results":[{"object":"block","id":"fe53d316-3f83-4d26-ae74-68506fec1ea4","parent":{"type":"page_id","page_id":"ba495a54-4ad8-4981-9049-e02ca2efa33d"},"created_time":"2023-10-12T19:41:00.000Z","last_edited_time":"2023-10-12T19:41:00.000Z","created_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"last_edited_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"rich_text":[{"type":"text","text":{"content":"Bringing
+        back webrings","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Bringing
+        back webrings","href":null}],"color":"default"}}],"next_cursor":null,"has_more":false,"type":"block","block":{},"request_id":"b3fdddab-9aee-47c9-b760-a60d2e23d77c"}'
+  recorded_at: Wed, 17 Jan 2024 01:59:01 GMT
+- request:
+    method: get
+    uri: https://api.notion.com/v1/blocks/bd48fb3d-efbf-4eec-9d60-2fcdd03ec5cc/children?page_size=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Notion Ruby Client/1.2.2
+      Authorization:
+      - Bearer <NOTION_TOKEN>
+      Notion-Version:
+      - '2022-02-22'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 17 Jan 2024 01:59:02 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - 6677a43d-df02-4a53-bf70-1c8c78fecfe1
+      Etag:
+      - W/"379-sIllXoJsMpvsXmRYC8aZT15fasw"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=iucvKkFCo7Ws4yJBcA8ZUSVVd37qivRfd.a48s6Yz6U-1705456742-1-Af1HNGVSDMo6QDPSys0ElbkDOL5/hM1fvoohgbs7IG5XtRmCfiOdQB6LepKONcATxOVUmJexCgaortHUjXMA7xc=;
+        path=/; expires=Wed, 17-Jan-24 02:29:02 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 846aff1c8fc732e1-JAX
+    body:
+      encoding: UTF-8
+      string: '{"object":"list","results":[{"object":"block","id":"03eacd95-46f4-4a9e-828b-a8e105a7722d","parent":{"type":"page_id","page_id":"bd48fb3d-efbf-4eec-9d60-2fcdd03ec5cc"},"created_time":"2023-10-12T19:39:00.000Z","last_edited_time":"2023-10-12T19:39:00.000Z","created_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"last_edited_by":{"object":"user","id":"e96d1887-af85-4405-adae-7996a198c0cc"},"has_children":false,"archived":false,"type":"paragraph","paragraph":{"rich_text":[{"type":"text","text":{"content":"The
+        frontend of my developer blog.","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"The
+        frontend of my developer blog.","href":null}],"color":"default"}}],"next_cursor":null,"has_more":false,"type":"block","block":{},"request_id":"6677a43d-df02-4a53-bf70-1c8c78fecfe1"}'
+  recorded_at: Wed, 17 Jan 2024 01:59:02 GMT
+recorded_with: VCR 6.2.0

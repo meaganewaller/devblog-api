@@ -38,10 +38,10 @@
 #
 #  fk_rails_...  (category_id => categories.id)
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:notion_created_at) }
     it { should validate_presence_of(:notion_updated_at) }
@@ -49,33 +49,16 @@ RSpec.describe Post, type: :model do
     it { should validate_presence_of(:notion_id) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:category).inverse_of(:posts).optional }
     it { should have_many(:reactions).dependent(:destroy).inverse_of(:post) }
   end
 
-  describe "enums" do
-    it {
-      should define_enum_for(:status).with_values(inbox: 0, needs_refinement: 1, ready_for_work: 2, outlining: 3,
-        drafting: 4, editing: 5, done: 6)
-    }
-  end
+  describe 'scopes' do
+    let!(:published_post) { create(:post, :published) }
 
-  describe "scopes" do
-    let!(:published_post) { create(:post, published: true) }
-    let!(:drafting_post) { create(:post, status: "drafting") }
-    let!(:needs_refinement_post) { create(:post, status: "needs_refinement") }
-
-    it ".published should return only published posts" do
+    it '.published should return only published posts' do
       expect(Post.published).to eq([published_post])
-    end
-
-    it ".drafting should return posts with status 'drafting'" do
-      expect(Post.drafting).to eq([drafting_post])
-    end
-
-    it ".needs_refinement should return posts with status 'needs_refinement'" do
-      expect(Post.needs_refinement).to eq([needs_refinement_post])
     end
   end
 end
