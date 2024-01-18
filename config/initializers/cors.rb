@@ -9,18 +9,19 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost:5100",
-      "127.0.0.1:5100",
-      "localhost:5000",
-      "127.0.0.1:5000",
-      %r{\Ahttp://192\.168\.0\.\d{1,3}(:\d+)?\z}
-    resource "*",
-      headers: :any,
-      methods: %i[get post put patch delete options head]
+    origins 'localhost:5100',
+            '127.0.0.1:5100',
+            'localhost:5000',
+            '127.0.0.1:5000',
+            %r{\Ahttp://192\.168\.0\.\d{1,3}(:\d+)?\z},
+            %r{\Ahttps://devblog-fviv7niv7n2tn-meaganewaller.vercel.app\z}
+    resource '*',
+             headers: :any,
+             methods: %i[get post put patch delete options head]
   end
 
   allow do
-    origins "*"
-    resource "/public/*", headers: :any, methods: :get
+    origins '*'
+    resource '/public/*', headers: :any, methods: :get
   end
 end
