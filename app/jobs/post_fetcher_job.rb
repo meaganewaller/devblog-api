@@ -8,6 +8,8 @@ class PostFetcherJob < ApplicationJob
 
     return if posts.empty?
 
+    binding.pry
+
     existing_posts = Post.where(notion_id: posts.map { |post| post[:notion_id] }).index_by(&:notion_id)
 
     posts.each do |post|
@@ -43,7 +45,7 @@ class PostFetcherJob < ApplicationJob
     )
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error("Validation error: #{e.message}")
-  rescue StandardError => e
+  rescue => e
     Rails.logger.error("An error occurred during update: #{e.message}")
   end
 
@@ -64,7 +66,7 @@ class PostFetcherJob < ApplicationJob
     )
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error("Validation error: #{e.message}")
-  rescue StandardError => e
+  rescue => e
     puts e.message
     Rails.logger.error("An error occurred during update: #{e.message}")
   end
@@ -77,10 +79,10 @@ class PostFetcherJob < ApplicationJob
 
   def get_cover_image(cover_image)
     return if cover_image.blank? || cover_image.empty? || cover_image.nil?
-    return cover_image['external']['url'] if cover_image['type'] == 'external'
+    return cover_image["external"]["url"] if cover_image["type"] == "external"
 
-    return unless cover_image['type'] == 'file'
+    return unless cover_image["type"] == "file"
 
-    cover_image['file']['url']
+    cover_image["file"]["url"]
   end
 end
