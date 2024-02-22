@@ -11,8 +11,6 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'localhost:5100',
             '127.0.0.1:5100',
-            'localhost:5000',
-            '127.0.0.1:5000',
             %r{\Ahttp://192\.168\.0\.\d{1,3}(:\d+)?\z},
             'https://devblog-web.vercel.app'
     resource '*',
