@@ -41,12 +41,10 @@ gem 'dotenv', '~> 2.8', groups: %i[development test]
 gem 'dotenv-rails', '~> 2.8', groups: %i[development test]
 gem 'fast_blank', platform: :mri
 gem 'friendly_id', '~> 5.5'
-gem 'nanoid', '~> 2.0'
-gem 'polist', '~> 1.4', require: false
 
 gem 'hashdiff', '~> 1.0', require: false
 gem 'notion-ruby-client', '~> 1.1', require: false
-gem 'notion_to_md'
+gem 'notion_to_md', '~> 2.4.1'
 
 gem 'counter_culture', '~> 3.2'
 gem 'pagy', '~> 5.0'
