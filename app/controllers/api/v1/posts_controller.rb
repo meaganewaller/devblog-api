@@ -6,18 +6,16 @@ module Api
       def index
         all_posts = Post.published.includes([:category])
         @posts = if params[:recent]
-          all_posts.limit(5)
-        else
-          all_posts
-        end
+                   all_posts.limit(5)
+                 else
+                   all_posts
+                 end
 
         @posts = @posts.includes([:category]).filter_by_category(params[:category]) if params[:category].present?
         @posts = @posts.filter_by_tag(params[:tag]) if params[:tag].present?
         @posts = @posts.search_post(params[:query]) if params[:query].present?
 
-        items = (params[:limit] || params[:recent]) ? 5 : 10
-
-        @pagy, @posts = pagy(@posts, items:)
+        @pagy, @posts = pagy(@posts, items: params[:limit].to_i || 10)
         @pagy_metadata = pagy_metadata(@pagy)
       end
 
