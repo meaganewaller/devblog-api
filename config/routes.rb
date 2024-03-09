@@ -10,13 +10,19 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :posts, only: %i[index show update] do
         resources :reactions, only: %i[index show create], controller: 'post_reactions'
+        resources :comments, only: %i[index create]
       end
       resources :categories, only: %i[index show]
-      resources :projects, only: %i[index show]
-      resources :workspaces, only: %i[index show]
+      resources :projects, only: %i[index show] do
+        resources :comments, only: %i[index create]
+      end
+      resources :workspaces, only: %i[index show] do
+        resources :comments, only: %i[index create]
+      end
       resources :views, only: %i[index create]
       post 'contact', to: 'contact#create'
-      resource :post_comments, only: %i[create]
+
+      resources :comments, only: %i[show update destroy]
     end
   end
 end

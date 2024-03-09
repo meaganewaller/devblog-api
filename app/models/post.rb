@@ -50,18 +50,19 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :notion_id, presence: true, uniqueness: true
 
+  has_many :comments, as: :commentable
   has_many :reactions, dependent: :destroy, inverse_of: :post
   has_many :views, as: :viewable, foreign_key: :viewable_slug
 
   pg_search_scope :search_post, against: {
-    title: "A",
-    description: "B",
-    content: "C"
-  }, using: {tsearch: {dictionary: "english", tsvector_column: "searchable"}}
+    title: 'A',
+    description: 'B',
+    content: 'C'
+  }, using: { tsearch: { dictionary: 'english', tsvector_column: 'searchable' } }
 
   default_scope { order(published_date: :desc) }
-  scope :filter_by_category, ->(category) { joins(:category).where("lower(categories.slug) = ?", category.downcase) }
-  scope :filter_by_tag, ->(tag) { where("LOWER(?) = ANY (SELECT LOWER(unnest(tags)))", tag.downcase) }
+  scope :filter_by_category, ->(category) { joins(:category).where('lower(categories.slug) = ?', category.downcase) }
+  scope :filter_by_tag, ->(tag) { where('LOWER(?) = ANY (SELECT LOWER(unnest(tags)))', tag.downcase) }
 
   scope :published, -> { where(published: true) }
 

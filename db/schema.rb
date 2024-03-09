@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_17_012449) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_08_212849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
@@ -55,6 +55,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_012449) do
     t.index ["notion_id"], name: "index_categories_on_notion_id", unique: true
     t.index ["slug"], name: "index_categories_on_slug", unique: true
     t.index ["title"], name: "index_categories_on_title", unique: true
+  end
+
+  create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "content", null: false
+    t.string "author_name", null: false
+    t.string "author_email", null: false
+    t.string "author_website"
+    t.boolean "notify_by_email", default: false, null: false
+    t.string "commentable_type", null: false
+    t.uuid "commentable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
