@@ -11,11 +11,15 @@ module Api
                    all_posts
                  end
 
-        @posts = @posts.includes([:category]).filter_by_category(params[:category]) if params[:category].present?
-        @posts = @posts.filter_by_tag(params[:tag]) if params[:tag].present?
-        @posts = @posts.search_post(params[:query]) if params[:query].present?
+        if params[:category].present? && !params[:recent]
+          @posts = @posts.includes([:category]).filter_by_category(params[:category])
+        end
+        @posts = @posts.filter_by_tag(params[:tag]) if params[:tag].present? && !params[:recent]
+        @posts = @posts.search_post(params[:query]) if params[:query].present? && !params[:recent]
 
-        @pagy, @posts = pagy(@posts, items: params[:limit].to_i || 10)
+        limit = params[:recent] ? 5 : params[:limit].to_i || 10
+
+        @pagy, @posts = pagy(@posts, items: limit)
         @pagy_metadata = pagy_metadata(@pagy)
       end
 
