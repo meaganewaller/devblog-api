@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 json = {
-  viewable_type: view.viewable_type,
-  viewable_slug: view.viewable_slug,
-  session_id: view.session_id
+  type: viewable_type,
+  slug: viewable_slug,
+  count: count
 }
 
 json

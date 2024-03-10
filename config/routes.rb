@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :comments, only: %i[index create]
       end
       resources :categories, only: %i[index show]
+      resources :tags, only: %i[index]
       resources :projects, only: %i[index show] do
         resources :comments, only: %i[index create]
       end
