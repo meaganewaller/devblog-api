@@ -8,3 +8,5 @@ datetime
 tsvector
 unnest
 Healthcheck
+env
+omniauth

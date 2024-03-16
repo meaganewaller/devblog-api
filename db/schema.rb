@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_08_212849) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_10_224541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
@@ -167,8 +167,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_212849) do
     t.string "tags", default: [], array: true
     t.string "notion_id", null: false
     t.text "content", null: false
-    t.date "notion_created_at", null: false
-    t.date "notion_updated_at", null: false
     t.uuid "category_id", null: false
     t.string "meta_description"
     t.string "cover_image"
@@ -177,8 +175,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_212849) do
     t.datetime "updated_at", null: false
     t.virtual "searchable", type: :tsvector, as: "((setweight(to_tsvector('english'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::\"char\") || setweight(to_tsvector('english'::regconfig, (COALESCE(description, ''::character varying))::text), 'B'::\"char\")) || setweight(to_tsvector('english'::regconfig, COALESCE(content, ''::text)), 'C'::\"char\"))", stored: true
     t.integer "views_count", default: 0, null: false
+    t.datetime "notion_created_at"
+    t.datetime "notion_updated_at"
     t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["notion_created_at"], name: "index_posts_on_notion_created_at"
     t.index ["notion_id"], name: "index_posts_on_notion_id", unique: true
+    t.index ["notion_updated_at"], name: "index_posts_on_notion_updated_at"
     t.index ["published"], name: "index_posts_on_published"
     t.index ["searchable"], name: "index_posts_on_searchable", using: :gin
     t.index ["slug"], name: "index_posts_on_slug", unique: true

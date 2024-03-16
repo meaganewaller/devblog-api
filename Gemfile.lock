@@ -88,7 +88,6 @@ GEM
       awesome_print
       pry-rails
       railties
-    base64 (0.2.0)
     bigdecimal (3.1.6)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
@@ -203,8 +202,8 @@ GEM
     jb (0.8.2)
     json (2.7.1)
     jsonapi-renderer (0.2.2)
-    jwt (2.8.0)
-      base64
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
     language_server-protocol (3.17.0.3)
     lint_roller (1.1.0)
     listen (3.8.0)
@@ -498,7 +497,7 @@ DEPENDENCIES
   image_processing (~> 1.12)
   isolator (~> 0.9)
   jb (~> 0.8)
-  jwt (~> 2.7)
+  jsonapi-serializer (~> 2.2.0)
   listen (~> 3.8)
   notion-ruby-client (~> 1.1)
   notion_to_md (~> 2.4.1)

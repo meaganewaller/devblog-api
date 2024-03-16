@@ -9,13 +9,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:5100',
-            '127.0.0.1:5100',
-            %r{\Ahttp://192\.168\.0\.\d{1,3}(:\d+)?\z},
-            'https://devblog-web.vercel.app'
+    origins ENV.fetch('CLIENT_ORIGIN_URL', nil)
     resource '*',
              headers: :any,
-             methods: %i[get post put patch delete options head]
+             methods: %i[get post put patch delete options head],
+             max_age: 86_400
   end
 
   allow do

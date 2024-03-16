@@ -20,7 +20,7 @@ gem 'puma', '>= 5.6.8', require: false
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jb', '~> 0.8'
-gem 'jwt', '~> 2.7', require: false
+gem 'jsonapi-serializer', '~> 2.2.0'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -37,11 +37,8 @@ gem 'rack-cors'
 gem 'rails-healthcheck', '~> 1.4'
 gem 'silencer', '~> 2.0', require: false
 
-gem 'dotenv', '~> 2.8', groups: %i[development test]
-gem 'dotenv-rails', '~> 2.8', groups: %i[development test]
 gem 'fast_blank', platform: :mri
 gem 'friendly_id', '~> 5.5'
-
 gem 'hashdiff', '~> 1.0', require: false
 gem 'notion-ruby-client', '~> 1.1', require: false
 gem 'notion_to_md', '~> 2.4.1'
@@ -57,6 +54,8 @@ group :development, :test do
   gem 'awesome_rails_console', '~> 0.4'
   gem 'database_cleaner', '~> 2.0', require: false
   gem 'debug', '~> 1.8', platforms: %i[mri mingw x64_mingw], require: false
+  gem 'dotenv', '~> 2.8'
+  gem 'dotenv-rails', '~> 2.8'
   gem 'factory_bot', '6.2'
   gem 'factory_bot_rails', '6.2'
   gem 'factory_trace', '~> 1.0', require: false

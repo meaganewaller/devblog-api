@@ -10,8 +10,8 @@
 #  cover_image       :string
 #  description       :string           not null
 #  meta_description  :string
-#  notion_created_at :date             not null
-#  notion_updated_at :date             not null
+#  notion_created_at :datetime
+#  notion_updated_at :datetime
 #  published         :boolean          default(FALSE), not null
 #  published_date    :date
 #  searchable        :tsvector
@@ -26,13 +26,15 @@
 #
 # Indexes
 #
-#  index_posts_on_category_id  (category_id)
-#  index_posts_on_notion_id    (notion_id) UNIQUE
-#  index_posts_on_published    (published)
-#  index_posts_on_searchable   (searchable) USING gin
-#  index_posts_on_slug         (slug) UNIQUE
-#  index_posts_on_tags         (tags) USING gin
-#  index_posts_on_title        (title) UNIQUE
+#  index_posts_on_category_id        (category_id)
+#  index_posts_on_notion_created_at  (notion_created_at)
+#  index_posts_on_notion_id          (notion_id) UNIQUE
+#  index_posts_on_notion_updated_at  (notion_updated_at)
+#  index_posts_on_published          (published)
+#  index_posts_on_searchable         (searchable) USING gin
+#  index_posts_on_slug               (slug) UNIQUE
+#  index_posts_on_tags               (tags) USING gin
+#  index_posts_on_title              (title) UNIQUE
 #
 # Foreign Keys
 #

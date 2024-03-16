@@ -6,9 +6,10 @@
 Rails.application.routes.draw do
   Healthcheck.routes(self)
   mount GoodJob::Engine => 'good_job'
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :posts, only: %i[index show update] do
+      resources :posts, only: %i[index show] do
         resources :reactions, only: %i[index show create], controller: 'post_reactions'
         resources :comments, only: %i[index create]
       end
