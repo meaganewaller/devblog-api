@@ -17,7 +17,13 @@ module Api
         @posts = @posts.filter_by_tag(params[:tag]) if params[:tag].present? && !params[:recent]
         @posts = @posts.search_post(params[:query]) if params[:query].present? && !params[:recent]
 
-        limit = params[:recent] ? 5 : params[:limit].to_i || 10
+        limit = if params[:limit].present?
+                  params[:limit].to_i
+                else
+                  10
+                end
+
+        limit = params[:recent] ? 5 : limit
 
         @pagy, @posts = pagy(@posts, items: limit)
         @pagy_metadata = pagy_metadata(@pagy)

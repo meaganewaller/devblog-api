@@ -11,19 +11,14 @@ Rails.application.configure do
     config.good_job.execution_mode = :async
     config.good_job.cron = {
       fetch_all_posts: {
-        cron: "0 0 * * *",
-        class: "PostFetcherJob",
-        description: "Fetch all posts from Notion blog database"
+        cron: '0 0 * * *',
+        class: 'PostFetcherJob',
+        description: 'Fetch all posts from Notion blog database'
       },
       fetch_all_categories: {
-        cron: "0 0 1 * *",
-        class: "CategoryFetcherJob",
-        description: "Fetch all categories from Notion category database"
-      },
-      fetch_all_projects: {
-        cron: "0 0 * * *",
-        class: "ProjectFetcherJob",
-        description: "Fetch all projects from Notion project database"
+        cron: '0 0 1 * *',
+        class: 'CategoryFetcherJob',
+        description: 'Fetch all categories from Notion category database'
       }
     }
 

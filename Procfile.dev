@@ -1,2 +1,2 @@
-api: bundle exec rerun 'bin/rails server -p 5000'
+api: bundle exec rerun 'bin/rails server'
 worker: bundle exec good_job start

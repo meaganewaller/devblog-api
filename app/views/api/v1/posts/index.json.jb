@@ -2,7 +2,7 @@
 
 {
   posts: @posts.map do |post|
-    render partial: "post", locals: {post:, reactions: false}
+    render partial: "post", locals: {post:}
   end,
   pagy: @pagy_metadata
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_10_224541) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_19_225911) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pgcrypto"
@@ -55,19 +55,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_10_224541) do
     t.index ["notion_id"], name: "index_categories_on_notion_id", unique: true
     t.index ["slug"], name: "index_categories_on_slug", unique: true
     t.index ["title"], name: "index_categories_on_title", unique: true
-  end
-
-  create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "content", null: false
-    t.string "author_name", null: false
-    t.string "author_email", null: false
-    t.string "author_website"
-    t.boolean "notify_by_email", default: false, null: false
-    t.string "commentable_type", null: false
-    t.uuid "commentable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -158,6 +145,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_10_224541) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
+  create_table "guestbook_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "body", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "session_id", null: false
+    t.boolean "approved", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.string "description", null: false
@@ -188,37 +185,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_10_224541) do
     t.index ["title"], name: "index_posts_on_title", unique: true
   end
 
-  create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title", null: false
-    t.string "link"
-    t.text "description", null: false
-    t.text "tags", default: [], array: true
-    t.boolean "featured", default: false
-    t.string "slug", null: false
-    t.json "repository_links", default: {}
-    t.string "notion_id", null: false
-    t.text "content", null: false
-    t.datetime "notion_created_at", precision: nil, null: false
-    t.datetime "notion_updated_at", precision: nil, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "cover_image"
-    t.index ["notion_id"], name: "index_projects_on_notion_id", unique: true
-    t.index ["slug"], name: "index_projects_on_slug", unique: true
-    t.index ["tags"], name: "index_projects_on_tags", using: :gin
-    t.index ["title"], name: "index_projects_on_title", unique: true
-  end
-
-  create_table "reactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "post_id", null: false
-    t.integer "kind", null: false
-    t.string "session_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id", "session_id", "kind"], name: "index_reactions_on_post_id_and_session_id_and_kind", unique: true
-    t.index ["post_id"], name: "index_reactions_on_post_id"
-  end
-
   create_table "views", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "session_id", null: false
     t.string "viewable_type", null: false
@@ -233,5 +199,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_10_224541) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "posts", "categories"
-  add_foreign_key "reactions", "posts"
 end

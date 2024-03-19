@@ -7,6 +7,6 @@ StrongMigrations.start_after = 20_230_601_000_000
 
 StrongMigrations.auto_analyze = true
 
-ActiveRecord::Base.dump_schema_after_migration =
+ActiveRecord.dump_schema_after_migration =
   Rails.env.development? &&
   `git status db/migrate/ --porcelain`.present?

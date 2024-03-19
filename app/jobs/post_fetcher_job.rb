@@ -27,8 +27,7 @@ class PostFetcherJob < ApplicationJob
 
   def skip?(found_post, post)
     Rails.logger.info "Found post is: #{found_post.inspect}"
-    Rails.logger.info "post is: #{post.inspect}"
-    found_post && found_post.notion_updated_at <= post[:notion_updated_at].to_date
+    found_post && found_post.notion_updated_at >= post[:notion_updated_at].to_datetime
   end
 
   def update_post(found_post, post)

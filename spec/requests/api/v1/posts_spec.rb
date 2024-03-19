@@ -10,6 +10,13 @@ RSpec.describe 'Api::V1::Posts', type: :request, vcr: false do
       expect(response).to have_http_status :ok
     end
 
+    it 'limits the number of posts' do
+      create_list(:post, 10, :published)
+      get api_v1_posts_path, params: { limit: 5 }, as: :json
+
+      expect(json_response['posts'].length).to eq 5
+    end
+
     it 'responds with posts' do
       published_posts = create_list(:post, 3, :published)
 
@@ -53,20 +60,10 @@ RSpec.describe 'Api::V1::Posts', type: :request, vcr: false do
   describe 'GET /api/v1/posts/:slug' do
     it 'responds with post' do
       post = create(:post, :published)
-      create_list(:reaction, 3, :love, post:)
-      create_list(:reaction, 2, :like, post:)
-      create_list(:reaction, 4, :sparkle, post:)
 
       get api_v1_post_path(post.slug), as: :json
 
       expect(json_response['title']).to eq post.title
-      expect(json_response['reactions']).to eq(
-        {
-          'love' => 3,
-          'like' => 2,
-          'sparkle' => 4
-        }
-      )
     end
   end
 end

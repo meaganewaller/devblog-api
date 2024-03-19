@@ -15,7 +15,7 @@ module ActAsApiRequest
 
     return if content_type.match(Regexp.union(allowed_types))
 
-    render json: {error: I18n.t("errors.invalid_content_type")}, status: :bad_request
+    render json: { error: I18n.t('errors.invalid_content_type') }, status: :bad_request
   end
 
   private

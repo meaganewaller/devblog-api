@@ -53,7 +53,6 @@ RSpec.describe Post, type: :model do
 
   describe 'associations' do
     it { should belong_to(:category).inverse_of(:posts).optional }
-    it { should have_many(:reactions).dependent(:destroy).inverse_of(:post) }
   end
 
   describe 'scopes' do

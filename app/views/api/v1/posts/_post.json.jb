@@ -25,11 +25,4 @@ if post.category
   json[:category][:title] = post.category.title
 end
 
-if reactions
-  json[:reactions] = post
-    .reactions
-    .group_by(&:kind)
-    .transform_values(&:count)
-end
-
 json

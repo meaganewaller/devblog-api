@@ -1,8 +1,0 @@
-# frozen_string_literal: true
-
-{
-  workspaces: @workspaces.map do |workspace|
-  render partial: "workspace", locals: { workspace: }
-  end,
-  pagy: @pagy_metadata
-}

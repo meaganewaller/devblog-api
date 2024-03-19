@@ -52,8 +52,6 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :notion_id, presence: true, uniqueness: true
 
-  has_many :comments, as: :commentable
-  has_many :reactions, dependent: :destroy, inverse_of: :post
   has_many :views, as: :viewable, foreign_key: :viewable_slug
 
   pg_search_scope :search_post, against: {
