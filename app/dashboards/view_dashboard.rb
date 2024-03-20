@@ -63,7 +63,7 @@ class ViewDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how views are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(view)
-  #   "View ##{view.id}"
-  # end
+  def display_resource(view)
+    "View ##{view.id}"
+  end
 end

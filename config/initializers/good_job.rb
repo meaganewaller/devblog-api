@@ -25,8 +25,9 @@ Rails.application.configure do
     GoodJob::Engine.middleware.use(Rack::Auth::Basic) do |username, password|
       return false if username.blank? || password.blank?
 
-      ActiveSupport::SecurityUtils.secure_compare(Rails.application.credentials.good_job_username, username) &&
-        ActiveSupport::SecurityUtils.secure_compare(Rails.application.credentials.good_job_password, password)
+      ENV['GOOD_JOB_USERNAME'].present? && ENV['GOOD_JOB_PASSWORD'].present? &&
+        ActiveSupport::SecurityUtils.secure_compare(ENV['GOOD_JOB_USERNAME'], username) &&
+        ActiveSupport::SecurityUtils.secure_compare(ENV['GOOD_JOB_PASSWORD'], password)
     end
   end
 end

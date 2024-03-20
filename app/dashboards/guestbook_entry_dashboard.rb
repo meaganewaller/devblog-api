@@ -69,7 +69,7 @@ class GuestbookEntryDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how guestbook entries are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(guestbook_entry)
-  #   "GuestbookEntry ##{guestbook_entry.id}"
-  # end
+  def display_resource(guestbook_entry)
+    "#{guestbook_entry.name}'s Entry"
+  end
 end

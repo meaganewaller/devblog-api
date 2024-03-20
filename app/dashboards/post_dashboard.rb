@@ -44,35 +44,13 @@ class PostDashboard < Administrate::BaseDashboard
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = %i[
-    id
-    category
-    comment_count
-    content
-    cover_image
-    description
-    meta_description
-    notion_created_at
-    notion_id
-    notion_updated_at
-    published
-    published_date
-    searchable
-    slug
-    tags
-    title
-    views
-    views_count
-    created_at
-    updated_at
-  ].freeze
+  SHOW_PAGE_ATTRIBUTES = ATTRIBUTE_TYPES.keys
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     category
-    comment_count
     content
     cover_image
     description
@@ -86,8 +64,6 @@ class PostDashboard < Administrate::BaseDashboard
     slug
     tags
     title
-    views
-    views_count
   ].freeze
 
   # COLLECTION_FILTERS
@@ -108,7 +84,7 @@ class PostDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how posts are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(post)
-  #   "Post ##{post.id}"
-  # end
+  def display_resource(post)
+    post.title
+  end
 end
