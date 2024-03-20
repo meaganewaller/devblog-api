@@ -15,4 +15,9 @@
 #
 class GuestbookEntry < ApplicationRecord
   scope :approved, -> { where(approved: true) }
+
+  validates :body, presence: true
+  validates :email, presence: true
+  validates :name, presence: true
+  validates :session_id, presence: true
 end

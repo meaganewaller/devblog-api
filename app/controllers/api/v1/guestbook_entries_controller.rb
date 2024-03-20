@@ -15,13 +15,9 @@ module Api
         @pagy_metadata = pagy_metadata(@pagy)
       end
 
-      def show
-        @entry = GuestbookEntry.find(params[:id])
-      end
-
       def create
         @entry = GuestbookEntry.new(guestbook_entry_params)
-        if @entry.save
+        if @entry.valid?
           render :show, status: :created
         else
           render json: @entry.errors, status: :unprocessable_entity

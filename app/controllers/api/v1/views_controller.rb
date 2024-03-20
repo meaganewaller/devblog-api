@@ -12,7 +12,7 @@ module Api
       end
 
       def create
-        render json: { status: 'OK', data: { view: @existing_view } }, status: :ok if @existing_view
+        return render json: { status: 'OK', data: { view: @existing_view } }, status: :ok if @existing_view
         @view = View.new(view_params)
 
         if @view.save

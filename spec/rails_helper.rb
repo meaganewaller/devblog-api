@@ -2,7 +2,15 @@
 
 if ENV["COVERAGE"]
   require "simplecov"
-  SimpleCov.start :rails
+  SimpleCov.start :rails do
+    add_group "Services", "app/services"
+    add_group "Adapters", "app/adapters"
+    add_group "Long files" do |src_file|
+      src_file.lines.count > 100
+    end
+    add_filter "/dashboards/"
+    add_filter "/controllers/admin/"
+  end
 end
 
 ENV["RAILS_ENV"] ||= "test"
