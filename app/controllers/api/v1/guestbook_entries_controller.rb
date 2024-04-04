@@ -18,6 +18,7 @@ module Api
       def create
         @entry = GuestbookEntry.new(guestbook_entry_params)
         if @entry.valid?
+          @entry.save
           render :show, status: :created
         else
           render json: @entry.errors, status: :unprocessable_entity
@@ -27,7 +28,7 @@ module Api
       private
 
       def guestbook_entry_params
-        params.require(:guestbook_entry).permit(:name, :email, :body, :session_id)
+        params.require(:guestbook_entry).permit(:name, :email, :body, :session_id, :website)
       end
     end
   end

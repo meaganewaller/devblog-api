@@ -4,7 +4,7 @@ module Api
   module V1
     class PostsController < ApiController
       def index
-        all_posts = Post.published.includes([:category])
+        all_posts = Post.published.includes([:category], [:image_attachment])
         @posts = if params[:recent]
                    all_posts.limit(5)
                  else

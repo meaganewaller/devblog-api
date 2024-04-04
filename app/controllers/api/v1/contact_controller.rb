@@ -3,6 +3,8 @@
 module Api
   module V1
     class ContactController < ApplicationController
+      skip_before_action :verify_authenticity_token, unless: -> { verified_request? }
+
       def create
         @contact = Api::V1::CreateContactEntry.call(contact_params)
         if @contact

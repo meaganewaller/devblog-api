@@ -4,29 +4,6 @@ module Api
   module V1
     class CreateContactEntry
       def self.call(params)
-        properties = {
-          Name: {
-            title: [
-              {
-                text: {
-                  content: params[:name]
-                }
-              }
-            ]
-          },
-          Email: {
-            email: params[:email]
-          },
-          Subject: {
-            rich_text: [
-              {
-                text: {
-                  content: params[:subject]
-                }
-              }
-            ]
-          }
-        }
         children = [
           {
             object: 'block',
@@ -53,12 +30,43 @@ module Api
             }
           }
         ]
+
+        properties = {
+          Name: {
+            title: [
+              {
+                text: {
+                  content: params[:name]
+                }
+              }
+            ]
+          },
+          Email: {
+            email: params[:email]
+          },
+          Subject: {
+            rich_text: [
+              {
+                text: {
+                  content: params[:subject]
+                }
+              }
+            ]
+          }
+        }
+
         client = Notion::Client.new
-        client.create_page(
-          parent: { database_id: ENV['NOTION_CONTACT_FORM_DATABASE_ID'] },
-          properties:,
-          children:
-        )
+        begin
+          client.create_page(
+            parent: { database_id: ENV['NOTION_CONTACT_FORM_DATABASE_ID'] },
+            properties:,
+            children:
+          )
+          true
+        rescue Notion::Api::Errors::NotionError => e
+          Rails.logger.error("Notion::Client::Error: #{e.message}")
+          false
+        end
       end
     end
   end

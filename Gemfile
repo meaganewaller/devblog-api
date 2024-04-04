@@ -8,9 +8,12 @@ ruby '3.2.2'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'active_model_serializers'
 gem 'activerecord-postgresql-adapter'
+gem 'activestorage'
 gem 'bleib', '~> 0.0'
 gem 'good_job', '~> 3.15'
 gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
+
+gem 'down'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.5'
@@ -30,7 +33,6 @@ gem 'administrate'
 gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem 'clearance'
 gem 'image_processing', '~> 1.12', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
@@ -62,6 +64,8 @@ group :development, :test do
   gem 'factory_bot_rails', '6.2'
   gem 'factory_trace', '~> 1.0', require: false
   gem 'faker', '~> 3.2.1'
+  gem 'hirb'
+  gem 'hirb-unicode-steakknife', require: 'hirb-unicode'
   gem 'isolator', '~> 0.9'
   gem 'parallel', '~> 1.23'
   gem 'parallel_tests', '~> 4.2'
@@ -69,7 +73,7 @@ group :development, :test do
   gem 'pry-doc', require: false
   gem 'pry-rails', '~> 0.3'
   gem 'pry-rescue', '~> 1.5'
-  gem 'pry-stack_explorer', require: false
+  gem 'pry-stack_explorer'
   gem 'rerun', '~> 0.14', require: false
   gem 'rspec-rails'
   gem 'ruby-prof', '>= 0.16.0', require: false
@@ -109,4 +113,7 @@ end
 
 group :console do
   gem 'gem_bench'
+end
+
+group :development, :test do
 end

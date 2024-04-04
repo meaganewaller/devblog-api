@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: GuestbookEntryDashboard
+  
+    &mdash; Documentation by YARD 0.9.36
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "GuestbookEntryDashboard";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (G)</a> &raquo;
+    
+    
+    <span class="title">GuestbookEntryDashboard</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: GuestbookEntryDashboard
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Administrate::BaseDashboard</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Administrate::BaseDashboard</li>
+          
+            <li class="next">GuestbookEntryDashboard</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/dashboards/guestbook_entry_dashboard.rb</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ATTRIBUTE_TYPES-constant" class="">ATTRIBUTE_TYPES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>ATTRIBUTE_TYPES a hash that describes the type of each of the model’s fields.</p>
+
+<p>Each different type represents an Administrate::Field object, which determines how the attribute is displayed on pages throughout the dashboard.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>id:</span> <span class='const'>Field</span><span class='op'>::</span><span class='const'>String</span><span class='comma'>,</span>
+  <span class='label'>approved:</span> <span class='const'>Field</span><span class='op'>::</span><span class='const'>Boolean</span><span class='comma'>,</span>
+  <span class='label'>body:</span> <span class='const'>Field</span><span class='op'>::</span><span class='const'>Text</span><span class='comma'>,</span>
+  <span class='label'>email:</span> <span class='const'>Field</span><span class='op'>::</span><span class='const'>String</span><span class='comma'>,</span>
+  <span class='label'>name:</span> <span class='const'>Field</span><span class='op'>::</span><span class='const'>String</span><span class='comma'>,</span>
+  <span class='label'>session_id:</span> <span class='const'>Field</span><span class='op'>::</span><span class='const'>String</span><span class='comma'>,</span>
+  <span class='label'>created_at:</span> <span class='const'>Field</span><span class='op'>::</span><span class='const'>DateTime</span><span class='comma'>,</span>
+  <span class='label'>updated_at:</span> <span class='const'>Field</span><span class='op'>::</span><span class='const'>DateTime</span>
+<span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="COLLECTION_ATTRIBUTES-constant" class="">COLLECTION_ATTRIBUTES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>COLLECTION_ATTRIBUTES an array of attributes that will be displayed on the model’s index page.</p>
+
+<p>By default, it’s limited to four items to reduce clutter on index pages. Feel free to add, remove, or rearrange items.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='words_sep'>
+  </span><span class='tstring_content'>approved</span><span class='words_sep'>
+  </span><span class='tstring_content'>body</span><span class='words_sep'>
+  </span><span class='tstring_content'>email</span><span class='words_sep'>
+  </span><span class='tstring_content'>name</span><span class='words_sep'>
+</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="SHOW_PAGE_ATTRIBUTES-constant" class="">SHOW_PAGE_ATTRIBUTES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>SHOW_PAGE_ATTRIBUTES an array of attributes that will be displayed on the model’s show page.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='words_sep'>
+  </span><span class='tstring_content'>id</span><span class='words_sep'>
+  </span><span class='tstring_content'>approved</span><span class='words_sep'>
+  </span><span class='tstring_content'>body</span><span class='words_sep'>
+  </span><span class='tstring_content'>email</span><span class='words_sep'>
+  </span><span class='tstring_content'>name</span><span class='words_sep'>
+  </span><span class='tstring_content'>session_id</span><span class='words_sep'>
+  </span><span class='tstring_content'>created_at</span><span class='words_sep'>
+  </span><span class='tstring_content'>updated_at</span><span class='words_sep'>
+</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="FORM_ATTRIBUTES-constant" class="">FORM_ATTRIBUTES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>FORM_ATTRIBUTES an array of attributes that will be displayed on the model’s form (<code>new</code> and <code>edit</code>) pages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='words_sep'>
+  </span><span class='tstring_content'>approved</span><span class='words_sep'>
+  </span><span class='tstring_content'>body</span><span class='words_sep'>
+  </span><span class='tstring_content'>email</span><span class='words_sep'>
+  </span><span class='tstring_content'>name</span><span class='words_sep'>
+  </span><span class='tstring_content'>session_id</span><span class='words_sep'>
+</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="COLLECTION_FILTERS-constant" class="">COLLECTION_FILTERS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>COLLECTION_FILTERS a hash that defines filters that can be used while searching via the search field of the dashboard.</p>
+
+<p>For example to add an option to search for open resources by typing “open:” in the search field:</p>
+
+<p>COLLECTION_FILTERS = { open: -&gt;(resources) { resources.where(open: true) } }.freeze</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display_resource-instance_method" title="#display_resource (instance method)">#<strong>display_resource</strong>(guestbook_entry)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Overwrite this method to customize how guestbook entries are displayed across all pages of the admin dashboard.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="display_resource-instance_method">
+  
+    #<strong>display_resource</strong>(guestbook_entry)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overwrite this method to customize how guestbook entries are displayed across all pages of the admin dashboard.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/dashboards/guestbook_entry_dashboard.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_display_resource'>display_resource</span><span class='lparen'>(</span><span class='id identifier rubyid_guestbook_entry'>guestbook_entry</span><span class='rparen'>)</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guestbook_entry'>guestbook_entry</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;s Entry</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Mon Mar 25 10:52:24 2024 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.36 (ruby-3.2.2).
+</div>
+
+    </div>
+  </body>
+</html>

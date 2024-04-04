@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 {
-entries: @entries.map do |entry|
-           render partial: 'guestbook_entry', locals: { entry: entry }
-         end,
-           pagy: @pagy_metadata
+  entries: @entries.map do |entry|
+    render partial: 'guestbook_entry', locals: { entry: entry }
+  end,
+  pagy: @pagy_metadata
 }

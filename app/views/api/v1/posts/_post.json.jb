@@ -3,7 +3,7 @@
 json = {
   comment_count: post.comment_count,
   content: post.content,
-  cover_image: post.cover_image,
+  image: post.image_url,
   description: post.description,
   meta_description: post.meta_description,
   notion_created_at: post.notion_created_at,

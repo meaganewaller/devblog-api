@@ -4,6 +4,7 @@
 #
 
 Rails.application.routes.draw do
+  default_url_options host: ENV['HOST_URL']
   Healthcheck.routes(self)
   mount GoodJob::Engine => 'good_job'
 

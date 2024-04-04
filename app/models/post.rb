@@ -53,6 +53,7 @@ class Post < ApplicationRecord
   validates :notion_id, presence: true, uniqueness: true
 
   has_many :views, as: :viewable, foreign_key: :viewable_slug
+  has_one_attached :image
 
   pg_search_scope :search_post, against: {
     title: 'A',
@@ -67,4 +68,8 @@ class Post < ApplicationRecord
   scope :published, -> { where(published: true) }
 
   friendly_id :title, use: :slugged
+
+  def image_url
+    Rails.application.routes.url_helpers.url_for(image) if image.attached?
+  end
 end

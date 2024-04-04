@@ -7,6 +7,7 @@
 #  body       :text             not null
 #  email      :string           not null
 #  name       :string           not null
+#  website    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  session_id :string           not null

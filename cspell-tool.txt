@@ -12,3 +12,6 @@ env
 omniauth
 pagy
 rollup
+curr
+callout
+unbold
