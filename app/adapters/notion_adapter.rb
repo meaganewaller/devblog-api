@@ -51,6 +51,8 @@ class NotionAdapter
       blog_post_filters,
       blog_post_sorts
     ).map do |post|
+      return nil unless post
+
       PostTransformer.transform(client, post)
     end
   end

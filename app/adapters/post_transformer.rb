@@ -2,7 +2,6 @@
 
 # This class is responsible for transforming post records from Notion.
 class PostTransformer < NotionTransformer
-  # rubocop:disable Metrics/MethodLength
   def transform
     {
       category_notion_id: extract_category_id,
@@ -19,7 +18,6 @@ class PostTransformer < NotionTransformer
       title: fetch_title
     }
   end
-  # rubocop:enable Metrics/MethodLength
 
   private
 
