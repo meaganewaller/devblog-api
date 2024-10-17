@@ -56,15 +56,15 @@ class Post < ApplicationRecord
   has_one_attached :image
 
   pg_search_scope :search_post, against: {
-    title: 'A',
-    tags: 'B',
-    content: 'C',
-    description: 'D'
-  }, using: { tsearch: { dictionary: 'english', tsvector_column: 'searchable' } }
+    title: "A",
+    tags: "B",
+    content: "C",
+    description: "D"
+  }, using: {tsearch: {dictionary: "english", tsvector_column: "searchable"}}
 
   default_scope { order(published_date: :desc) }
-  scope :filter_by_category, ->(category) { joins(:category).where('lower(categories.slug) = ?', category.downcase) }
-  scope :filter_by_tag, ->(tag) { where('LOWER(?) = ANY (SELECT LOWER(unnest(tags)))', tag.downcase) }
+  scope :filter_by_category, ->(category) { joins(:category).where("lower(categories.slug) = ?", category.downcase) }
+  scope :filter_by_tag, ->(tag) { where("LOWER(?) = ANY (SELECT LOWER(unnest(tags)))", tag.downcase) }
 
   scope :published, -> { where(published: true) }
 

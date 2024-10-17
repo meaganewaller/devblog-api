@@ -3,7 +3,7 @@
 # This class is responsible for transforming category records from Notion.
 class CategoryTransformer < NotionTransformer
   CATEGORY_PROPERTY_NAMES = {
-    description: 'Content'
+    description: "Content"
   }.freeze
   # Transforms a category record from the Notion database.
   def transform

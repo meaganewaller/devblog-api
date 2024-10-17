@@ -10,22 +10,22 @@ module Api
 
         children = [
           {
-            object: 'block',
-            type: 'heading_1',
+            object: "block",
+            type: "heading_1",
             heading_1: {
               rich_text: [{
-                type: 'text',
-                text: { content: "Email from #{params[:name]}" }
+                type: "text",
+                text: {content: "Email from #{params[:name]}"}
               }]
             }
           },
           {
-            object: 'block',
-            type: 'paragraph',
+            object: "block",
+            type: "paragraph",
             paragraph: {
               rich_text: [
                 {
-                  type: 'text',
+                  type: "text",
                   text: {
                     content: params[:message]
                   }
@@ -62,7 +62,7 @@ module Api
         client = Notion::Client.new
         begin
           client.create_page(
-            parent: { database_id: ENV['NOTION_CONTACT_FORM_DATABASE_ID'] },
+            parent: {database_id: ENV["NOTION_CONTACT_FORM_DATABASE_ID"]},
             properties:,
             children:
           )

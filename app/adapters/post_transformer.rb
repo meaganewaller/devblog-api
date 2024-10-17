@@ -30,11 +30,11 @@ class PostTransformer < NotionTransformer
   end
 
   def fetch_description
-    from_rich_text(properties[PROPERTY_NAMES[:summary]]) || 'Description not available.'
+    from_rich_text(properties[PROPERTY_NAMES[:summary]]) || "Description not available."
   end
 
   def fetch_meta_description
-    from_rich_text(properties['Meta Description'])
+    from_rich_text(properties["Meta Description"])
   end
 
   def parse_notion_created_at
@@ -47,7 +47,7 @@ class PostTransformer < NotionTransformer
 
   def fetch_published
     status = properties.Status&.status
-    return status.name == 'Done' if status
+    return status.name == "Done" if status
 
     false
   end
@@ -66,6 +66,6 @@ class PostTransformer < NotionTransformer
   end
 
   def extract_category_id
-    properties['🌱 Content Pillar']&.relation&.first&.id || ''
+    properties["🌱 Content Pillar"]&.relation&.first&.id || ""
   end
 end
