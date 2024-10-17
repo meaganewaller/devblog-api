@@ -20,7 +20,7 @@ class CategoryFetcherJob < ApplicationJob
     if existing_category && !skip?(existing_category, fetched_category)
       update_category(existing_category, fetched_category)
     elsif !existing_category
-      create_post(fetched_category)
+      create_category(fetched_category)
     end
   end
 
@@ -34,7 +34,7 @@ class CategoryFetcherJob < ApplicationJob
     existing_category.update!(category_params(fetched_category))
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error("Validation error: #{e.message}")
-  rescue StandardError => e
+  rescue => e
     Rails.logger.error("An error occurred during update: #{e.message}")
   end
 
@@ -42,7 +42,7 @@ class CategoryFetcherJob < ApplicationJob
     Category.create!(category_params(category))
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error("Validation error: #{e.message}")
-  rescue StandardError => e
+  rescue => e
     Rails.logger.error("An error occurred during update: #{e.message}")
   end
 
@@ -57,10 +57,10 @@ class CategoryFetcherJob < ApplicationJob
 
   def get_cover_image(cover_image)
     return if cover_image.blank? || cover_image.empty? || cover_image.nil?
-    return cover_image['external']['url'] if cover_image['type'] == 'external'
+    return cover_image["external"]["url"] if cover_image["type"] == "external"
 
-    return unless cover_image['type'] == 'file'
+    return unless cover_image["type"] == "file"
 
-    cover_image['file']['url']
+    cover_image["file"]["url"]
   end
 end

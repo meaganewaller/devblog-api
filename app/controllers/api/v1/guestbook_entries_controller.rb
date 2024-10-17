@@ -7,10 +7,10 @@ module Api
       def index
         @entries = GuestbookEntry.approved
         limit = if params[:limit].present?
-                  params[:limit].to_i
-                else
-                  10
-                end
+          params[:limit].to_i
+        else
+          10
+        end
         @pagy, @entries = pagy(@entries, items: limit)
         @pagy_metadata = pagy_metadata(@pagy)
       end

@@ -4,6 +4,10 @@ module Api
   module V1
     class CreateContactEntry
       def self.call(params)
+        params = params.to_h.with_indifferent_access
+
+        return false if params[:email].blank? || params[:name].blank? || params[:message].blank?
+
         children = [
           {
             object: 'block',

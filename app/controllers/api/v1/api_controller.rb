@@ -9,7 +9,7 @@ module Api
       private
 
       def verified_request?
-        if request.content_type == 'application/json' && request.original_url.include?(ENV.fetch('CLIENT_ORIGIN_URL'))
+        if request.content_type == "application/json" && request.original_url.include?(ENV.fetch("CLIENT_ORIGIN_URL"))
           true
         else
           super()

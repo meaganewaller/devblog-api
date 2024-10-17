@@ -7,8 +7,8 @@ class NotionAdapter
 
   # @return [Hash] the IDs of the Notion databases
   DATABASE_IDS = {
-    blog: ENV['NOTION_BLOG_DATABASE_ID'],
-    category: ENV['NOTION_CATEGORY_DATABASE_ID']
+    blog: ENV["NOTION_BLOG_DATABASE_ID"],
+    category: ENV["NOTION_CATEGORY_DATABASE_ID"]
   }.freeze
 
   class << self
@@ -63,8 +63,8 @@ class NotionAdapter
   def blog_post_sorts
     [
       {
-        property: 'Date',
-        direction: 'descending'
+        property: "Publication Date",
+        direction: "descending"
       }
     ]
   end
@@ -72,17 +72,23 @@ class NotionAdapter
   # @return [Hash] the filters for blog posts
   def blog_post_filters
     {
-      'and': [
+      and: [
         {
-          property: 'Type',
+          property: "Format",
           select: {
-            equals: 'Post'
+            equals: "Article"
           }
         },
         {
-          property: 'Published',
-          checkbox: {
-            equals: true
+          property: "Status",
+          status: {
+            equals: "Done"
+          }
+        },
+        {
+          property: "Publication Date",
+          date: {
+            is_not_empty: true
           }
         }
       ]
@@ -97,13 +103,15 @@ class NotionAdapter
   # @return [Array]    an array of records
   def fetch_records(database_id, filter = nil, sorts = nil)
     records = []
-    query_options = { database_id: }
+    query_options = {database_id:}
     query_options[:filter] = filter if filter
     query_options[:sorts] = sorts if sorts
 
     client.database_query(query_options) do |page|
       records.concat(page.results)
     end
+
+    Rails.logger.info("Fetched #{records.size} records from the Notion database")
     records
   end
 end

@@ -2,7 +2,7 @@
 
 {
   entries: @entries.map do |entry|
-    render partial: 'guestbook_entry', locals: { entry: entry }
+    render partial: "guestbook_entry", locals: {entry: entry}
   end,
   pagy: @pagy_metadata
 }

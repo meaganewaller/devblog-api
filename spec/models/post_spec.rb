@@ -40,26 +40,26 @@
 #
 #  fk_rails_...  (category_id => categories.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Post, type: :model do
-  describe 'validations' do
-    it { should validate_presence_of(:description) }
-    it { should validate_presence_of(:notion_created_at) }
-    it { should validate_presence_of(:notion_updated_at) }
-    it { should validate_presence_of(:title) }
-    it { should validate_presence_of(:notion_id) }
+  describe "validations" do
+    it { is_expected.to validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:notion_created_at) }
+    it { is_expected.to validate_presence_of(:notion_updated_at) }
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:notion_id) }
   end
 
-  describe 'associations' do
-    it { should belong_to(:category).inverse_of(:posts).optional }
+  describe "associations" do
+    it { is_expected.to belong_to(:category).inverse_of(:posts).optional }
   end
 
-  describe 'scopes' do
+  describe "scopes" do
     let!(:published_post) { create(:post, :published) }
 
-    it '.published should return only published posts' do
-      expect(Post.published).to eq([published_post])
+    it ".published should return only published posts" do
+      expect(described_class.published).to eq([published_post])
     end
   end
 end

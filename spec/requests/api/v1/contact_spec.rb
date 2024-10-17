@@ -13,9 +13,8 @@ RSpec.describe 'Api::V1::Contact', type: :request, vcr: false do
       expect(response).to have_http_status :created
     end
 
-    it 'responds with unprocessable_entity status', vcr: false do
-      allow(Notion::Client).to receive(:new) { double(create_page: false) }
-      contact_params = { name: 'John Doe', email: 'john.doe@test.com', subject: 'Hello', message: 'Hello, World!' }
+    it 'responds with unprocessable_entity status' do
+      contact_params = { name: 'John Doe', email: '', subject: 'Hello', message: 'Hello, World!' }
 
       post api_v1_contact_path, params: { contact: contact_params }, as: :json
 

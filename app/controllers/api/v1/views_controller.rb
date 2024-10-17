@@ -12,14 +12,14 @@ module Api
       end
 
       def create
-        return render json: { status: 'OK', data: { view: @existing_view } }, status: :ok if @existing_view
+        return render json: {status: "OK", data: {view: @existing_view}}, status: :ok if @existing_view
         @view = View.new(view_params)
 
         if @view.save
-          render json: { status: 'SUCCESS', message: 'View created', data: @view }, status: :created
+          render json: {status: "SUCCESS", message: "View created", data: @view}, status: :created
         else
-          render json: { status: :unprocessable_entity, message: 'Error',  data: @view.errors },
-                 status: :unprocessable_entity
+          render json: {status: :unprocessable_entity, message: "Error", data: @view.errors},
+            status: :unprocessable_entity
         end
       end
 

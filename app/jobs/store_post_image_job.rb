@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'open-uri'
+require "open-uri"
 
 # This job is used to download image from url and store it in ActiveStorage
 class StorePostImageJob < ApplicationJob
@@ -22,7 +22,7 @@ class StorePostImageJob < ApplicationJob
   private
 
   def get_content_type(image_url)
-    ext_name = File.extname(image_url).delete('.')
+    ext_name = File.extname(image_url).delete(".")
 
     "image/#{ext_name}"
   end

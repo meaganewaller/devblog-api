@@ -10,3 +10,7 @@ ignore:
   - Rails/ThreeStateBooleanColumn
 - db/migrate/20231007155127_create_good_jobs.rb:
   - Rails/ThreeStateBooleanColumn
+- app/controllers/admin/application_controller.rb:
+  - Rails/EnvironmentVariableAccess
+- app/controllers/api/v1/api_controller.rb:
+  - Rails/EnvironmentVariableAccess

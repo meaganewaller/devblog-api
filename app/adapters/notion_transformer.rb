@@ -1,4 +1,3 @@
-require 'pp'
 # frozen_string_literal: true
 
 # This class is responsible for transforming records from Notion.
@@ -8,11 +7,11 @@ class NotionTransformer
   PROPERTY_NAMES = {
     author: 'Author',
     cover_image: 'Cover Image',
-    date: 'Date',
+    date: 'Publication Date',
     last_edited_time: 'Last edited time',
     meta_description: 'Meta Description',
     published: 'Published',
-    summary: 'Summary',
+    summary: 'Description',
     title: 'Name'
   }.freeze
 
@@ -100,7 +99,7 @@ class NotionTransformer
       puts 'Table row block below'
       pp block
     when 'quote'
-      return "> #{RichText.to_md(block.quote['rich_text']).gsub(/\n/, "  \n> ")}"
+      return "> #{RichText.to_md(block.quote['rich_text']).gsub("\n", "  \n> ")}"
     when 'bulleted_list_item'
       prefix = '- '
     when 'numbered_list_item'
@@ -156,7 +155,7 @@ class NotionTransformer
     end
 
     def initialize(data)
-      ATTRIBUTES.each { instance_variable_set("@#{_1}", data[_1]) }
+      ATTRIBUTES.each { instance_variable_set(:"@#{_1}", data[_1]) }
     end
 
     def to_md

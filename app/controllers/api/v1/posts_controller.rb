@@ -6,10 +6,10 @@ module Api
       def index
         all_posts = Post.published.includes([:category], [:image_attachment])
         @posts = if params[:recent]
-                   all_posts.limit(5)
-                 else
-                   all_posts
-                 end
+          all_posts.limit(5)
+        else
+          all_posts
+        end
 
         if params[:category].present? && !params[:recent]
           @posts = @posts.includes([:category]).filter_by_category(params[:category])
@@ -18,10 +18,10 @@ module Api
         @posts = @posts.search_post(params[:query]) if params[:query].present? && !params[:recent]
 
         limit = if params[:limit].present?
-                  params[:limit].to_i
-                else
-                  10
-                end
+          params[:limit].to_i
+        else
+          10
+        end
 
         limit = params[:recent] ? 5 : limit
 

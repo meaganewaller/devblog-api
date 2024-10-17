@@ -13,7 +13,7 @@ class ViewDashboard < Administrate::BaseDashboard
     viewable: Field::Polymorphic,
     viewable_slug: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

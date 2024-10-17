@@ -18,8 +18,8 @@ class GuestbookEntry < ApplicationRecord
   scope :approved, -> { where(approved: true) }
 
   validates :body, presence: true
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}
   validates :name, presence: true
   validates :session_id, presence: true
-  validates :website, format: { with: URI::DEFAULT_PARSER.make_regexp }
+  validates :website, format: {with: URI::DEFAULT_PARSER.make_regexp}
 end

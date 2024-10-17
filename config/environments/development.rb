@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/integer/time'
+require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -21,10 +21,10 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  if Rails.root.join("tmp/caching-dev.txt").exist?
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -37,7 +37,7 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'http://localhost', port: 5000 }
+  config.action_mailer.default_url_options = {host: "http://localhost", port: 5000}
 
   config.action_mailer.perform_caching = false
 
@@ -63,8 +63,8 @@ Rails.application.configure do
     Bullet.rails_logger = true
   end
 
-  config.hosts << 'localhost:5173'
-  config.hosts << 'lvh.me:5000'
+  config.hosts << "localhost:5173"
+  config.hosts << "lvh.me:5000"
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

@@ -4,9 +4,9 @@
 #
 
 Rails.application.routes.draw do
-  default_url_options host: ENV['HOST_URL']
+  default_url_options host: ENV["HOST_URL"]
   Healthcheck.routes(self)
-  mount GoodJob::Engine => 'good_job'
+  mount GoodJob::Engine => "good_job"
 
   namespace :admin do
     %i[
@@ -18,16 +18,16 @@ Rails.application.routes.draw do
       resources name, only: %i[index show new create edit update destroy]
     end
 
-    root to: 'posts#index'
+    root to: "posts#index"
   end
 
-  namespace :api, defaults: { format: :json } do
+  namespace :api, defaults: {format: :json} do
     namespace :v1 do
       resources :posts, only: %i[index show]
       resources :categories, only: %i[index show]
       resources :guestbook_entries, only: %i[index create destroy], path: :guestbook
       resources :views, only: %i[index create]
-      post 'contact', to: 'contact#create'
+      post "contact", to: "contact#create"
     end
   end
 end

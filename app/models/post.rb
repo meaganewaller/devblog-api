@@ -57,8 +57,9 @@ class Post < ApplicationRecord
 
   pg_search_scope :search_post, against: {
     title: 'A',
-    description: 'B',
-    content: 'C'
+    tags: 'B',
+    content: 'C',
+    description: 'D'
   }, using: { tsearch: { dictionary: 'english', tsvector_column: 'searchable' } }
 
   default_scope { order(published_date: :desc) }

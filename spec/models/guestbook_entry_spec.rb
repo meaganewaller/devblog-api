@@ -12,7 +12,7 @@
 #  updated_at :datetime         not null
 #  session_id :string           not null
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe GuestbookEntry, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"

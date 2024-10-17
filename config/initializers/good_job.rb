@@ -11,23 +11,23 @@ Rails.application.configure do
     config.good_job.execution_mode = :async
     config.good_job.cron = {
       fetch_all_posts: {
-        cron: '0 0 * * *',
-        class: 'PostFetcherJob',
-        description: 'Fetch all posts from Notion blog database'
+        cron: "0 0 * * *",
+        class: "PostFetcherJob",
+        description: "Fetch all posts from Notion blog database"
       },
       fetch_all_categories: {
-        cron: '0 0 1 * *',
-        class: 'CategoryFetcherJob',
-        description: 'Fetch all categories from Notion category database'
+        cron: "0 0 1 * *",
+        class: "CategoryFetcherJob",
+        description: "Fetch all categories from Notion category database"
       }
     }
 
     GoodJob::Engine.middleware.use(Rack::Auth::Basic) do |username, password|
       return false if username.blank? || password.blank?
 
-      ENV['GOOD_JOB_USERNAME'].present? && ENV['GOOD_JOB_PASSWORD'].present? &&
-        ActiveSupport::SecurityUtils.secure_compare(ENV['GOOD_JOB_USERNAME'], username) &&
-        ActiveSupport::SecurityUtils.secure_compare(ENV['GOOD_JOB_PASSWORD'], password)
+      ENV["GOOD_JOB_USERNAME"].present? && ENV["GOOD_JOB_PASSWORD"].present? &&
+        ActiveSupport::SecurityUtils.secure_compare(ENV["GOOD_JOB_USERNAME"], username) &&
+        ActiveSupport::SecurityUtils.secure_compare(ENV["GOOD_JOB_PASSWORD"], password)
     end
   end
 end

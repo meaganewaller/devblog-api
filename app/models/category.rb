@@ -29,5 +29,5 @@ class Category < ApplicationRecord
 
   friendly_id :title, use: :slugged
 
-  scope :with_published_posts, -> { joins(:posts).where(posts: { published: true }).distinct }
+  scope :with_published_posts, -> { joins(:posts).where(posts: {published: true}).distinct }
 end

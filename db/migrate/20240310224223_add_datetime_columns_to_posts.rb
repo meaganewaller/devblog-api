@@ -8,7 +8,7 @@ class AddDatetimeColumnsToPosts < ActiveRecord::Migration[7.0]
     # Update the new columns with data from the old columns
     Post.find_each do |post|
       post.update_columns(new_notion_created_at: post.notion_created_at.to_datetime,
-                          new_notion_updated_at: post.notion_updated_at.to_datetime)
+        new_notion_updated_at: post.notion_updated_at.to_datetime)
     end
 
     # Optionally, add index for the new columns if needed

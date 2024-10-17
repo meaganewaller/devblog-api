@@ -16,7 +16,7 @@ class CategoryDashboard < Administrate::BaseDashboard
     slug: Field::String,
     title: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -73,6 +73,6 @@ class CategoryDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(category)
-    "#{category.title}"
+    category.title.to_s
   end
 end

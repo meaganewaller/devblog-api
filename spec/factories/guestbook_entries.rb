@@ -14,10 +14,11 @@
 #
 FactoryBot.define do
   factory :guestbook_entry do
-    body { "MyText" }
-    name { "MyString" }
-    email { "MyString" }
-    session_id { "MyString" }
+    body { Faker::Lorem.paragraph }
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    website { Faker::Internet.url }
+    session_id { Faker::Internet.uuid }
     approved { false }
   end
 end

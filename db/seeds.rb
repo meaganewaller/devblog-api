@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'faker'
+require "faker"
 
 Category.delete_all
 GuestbookEntry.delete_all

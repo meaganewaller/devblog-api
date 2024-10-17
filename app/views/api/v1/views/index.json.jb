@@ -2,7 +2,6 @@
 
 counted_views = @views.group(:viewable_type, :viewable_slug).count
 
-
 counted_views.map do |(viewable_type, viewable_slug), count|
   render partial: "view", locals: {viewable_type:, viewable_slug:, count:}
 end

@@ -6,13 +6,13 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::CreateContactEntry do
   describe '.call' do
-    it 'creates a Notion page' do
+    it 'creates a Notion page', vcr: false do
       params = {
         'name' => 'John Doe',
         'email' => 'john@example.com',
         'subject' => 'Hello',
         'message' => 'Hello, World!'
-      }
+      }.with_indifferent_access
 
       expect_any_instance_of(Notion::Client).to receive(:create_page).with(
         parent: { database_id: ENV['NOTION_CONTACT_FORM_DATABASE_ID'] },
