@@ -11,7 +11,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Do not eager load code on boot.
-  config.eager_load = false
+  config.eager_load = true
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -37,7 +37,7 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = {host: "http://localhost", port: 5000}
+  config.action_mailer.default_url_options = {host: "http://localhost", port: 3000}
 
   config.action_mailer.perform_caching = false
 
@@ -63,9 +63,9 @@ Rails.application.configure do
     Bullet.rails_logger = true
   end
 
-  config.hosts << "localhost:5173"
-  config.hosts << "lvh.me:5000"
-
+  # config.hosts << "localhost:5173"
+  # config.hosts << "lvh.me:3000"
+  #
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

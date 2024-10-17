@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :posts, only: %i[index show]
       resources :categories, only: %i[index show]
+      resources :talks, only: %i[index show]
       resources :guestbook_entries, only: %i[index create destroy], path: :guestbook
       resources :views, only: %i[index create]
       post "contact", to: "contact#create"

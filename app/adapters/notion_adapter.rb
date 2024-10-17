@@ -8,7 +8,8 @@ class NotionAdapter
   # @return [Hash] the IDs of the Notion databases
   DATABASE_IDS = {
     blog: ENV["NOTION_BLOG_DATABASE_ID"],
-    category: ENV["NOTION_CATEGORY_DATABASE_ID"]
+    category: ENV["NOTION_CATEGORY_DATABASE_ID"],
+    talk: ENV["NOTION_TALK_DATABASE_ID"],
   }.freeze
 
   class << self
@@ -24,6 +25,13 @@ class NotionAdapter
     # @return [Array] an array of transformed posts
     def fetch_posts
       new.fetch_posts
+    end
+
+    # Service method to fetch talks from the Notion database.
+    #
+    # @return [Array] an array of transformed talks
+    def fetch_talks
+      new.fetch_talks
     end
   end
 
@@ -57,7 +65,31 @@ class NotionAdapter
     end
   end
 
+  # Fetches talks from the Notion database.
+  # @return [Array] an array of transformed talks
+  def fetch_talks
+    fetch_records(
+      DATABASE_IDS[:talk],
+      nil,
+      talk_sorts
+    ).map do |talk|
+      return nil unless talk
+
+      TalkTransformer.transform(client, talk)
+    end
+  end
+
   private
+
+  # @return [Array] an array of talk sorts
+  def talk_sorts
+    [
+      {
+        property: "Date",
+        direction: "descending"
+      }
+    ]
+  end
 
   # @return [Array] an array of blog post sorts
   def blog_post_sorts

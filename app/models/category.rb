@@ -22,6 +22,7 @@
 class Category < ApplicationRecord
   extend FriendlyId
   has_many :posts
+  has_many :talks
 
   validates :title, presence: true
   validates :notion_id, presence: true

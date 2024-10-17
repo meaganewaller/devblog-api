@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+{
+  talks: @talks.map do |talk|
+    render partial: "talk", locals: {talk:}
+  end,
+  pagy: @pagy_metadata
+}
+

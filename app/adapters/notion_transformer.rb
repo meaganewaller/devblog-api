@@ -9,6 +9,7 @@ class NotionTransformer
     cover_image: "Cover Image",
     date: "Publication Date",
     last_edited_time: "Last edited time",
+    created_time: "Created time",
     meta_description: "Meta Description",
     published: "Published",
     summary: "Description",

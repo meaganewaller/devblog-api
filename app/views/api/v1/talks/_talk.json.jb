@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+json = {
+  comment_count: talk.comment_count,
+  content: talk.content,
+  image: talk.image_url,
+  description: talk.description,
+  meta_description: talk.meta_description,
+  notion_created_at: talk.notion_created_at,
+  notion_updated_at: talk.notion_updated_at,
+  date: talk.date,
+  slug: talk.to_param,
+  tags: talk.tags,
+  title: talk.title,
+  views: talk.views_count
+}
+
+json[:category] = {}
+if talk.category
+  json[:category][:id] = talk.category_id
+  json[:category][:slug] = talk.category.slug
+  json[:category][:description] = talk.category.description
+  json[:category][:cover_image] = talk.category.cover_image
+  json[:category][:title] = talk.category.title
+end
+
+json
